@@ -25,6 +25,8 @@ exports.create = function(req, res) {
   Score.create(req.body, function(err, score) {
     if(err) { return handleError(res, err); }
     return res.json(201, score);
+
+
   });
 };
 
