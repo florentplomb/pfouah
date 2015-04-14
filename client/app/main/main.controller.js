@@ -24,4 +24,11 @@ angular.module('transmedApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
+
+    $scope.stats = function(){
+      $http.get('/api/scores').success(function(scores){
+        $scope.scores = scores;
+        socket.syncUpdates('score', $scope.scores);
+      });
+    }
   });
