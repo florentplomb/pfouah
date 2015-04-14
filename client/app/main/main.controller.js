@@ -2,6 +2,8 @@
 
 angular.module('transmedApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
+
+  // --- Code exemple 
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -25,10 +27,9 @@ angular.module('transmedApp')
       socket.unsyncUpdates('thing');
     });
 
-    $scope.stats = function(){
-      $http.get('/api/scores').success(function(scores){
-        $scope.scores = scores;
-        socket.syncUpdates('score', $scope.scores);
-      });
-    }
+// --- Mon code
+    $http.get('/api/scores').success(function(scores){
+      $scope.scores = scores;
+      socket.syncUpdates('score', $scope.scores);
+    });
   });
