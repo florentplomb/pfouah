@@ -19,6 +19,7 @@ if(config.seedDB) { require('./config/seed'); }
 
 // Setup server
 var app = express();
+app.use(favicon(__dirname + '/public/favicon.ico'));
 var server = require('http').createServer(app);
 var socketio = require('socket.io')(server, {
   serveClient: (config.env === 'production') ? false : true,
@@ -27,7 +28,7 @@ var socketio = require('socket.io')(server, {
 require('./config/socketio')(socketio);
 require('./config/express')(app);
 require('./routes')(app);
-app.use(favicon(__dirname + '/public/favicon.ico'));
+
 // Start server
 server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
