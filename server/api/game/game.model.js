@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var GameSchema = new Schema({
   name: String,
-  highScore:Number,
+  highScore:{ type: Number, default: 0 },
   createdOn: { type: Date, default: Date.now },
   updatedOn: { type: Date, default: Date.now }
 });

@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
+//var authTypes = ['kiou'];
 
 
 var UserSchema = new Schema({
@@ -12,11 +13,23 @@ var UserSchema = new Schema({
   },
   hashedPassword: String,
 
-  scores: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Score'
-  }],
+  hsTrash: {
+    type: Number,
+    default: 0
+  },
+  hsWash: {
+    type: Number,
+    default: 0
+  },
+  hsFlash: {
+    type: Number,
+    default: 0
+  },
 
+    totalScore: {
+    type: Number,
+    default: 0
+  },
   createdOn: {
     type: Date,
     default: Date.now
@@ -31,9 +44,9 @@ var UserSchema = new Schema({
   },
 });
 
-// /**
-//  * Virtuals
-//  */
+/**
+ * Virtuals
+ */
 // UserSchema
 //   .virtual('password')
 //   .set(function(password) {
@@ -85,20 +98,20 @@ var UserSchema = new Schema({
 //     return hashedPassword.length;
 //   }, 'Password cannot be blank');
 
-// // Validate email is not taken
-// UserSchema
-//   .path('email')
-//   .validate(function(value, respond) {
-//     var self = this;
-//     this.constructor.findOne({email: value}, function(err, user) {
-//       if(err) throw err;
-//       if(user) {
-//         if(self.id === user.id) return respond(true);
-//         return respond(false);
-//       }
-//       respond(true);
-//     });
-// }, 'The specified email address is already in use.');
+// Validate email is not taken
+UserSchema
+  .path('email')
+  .validate(function(value, respond) {
+    var self = this;
+    this.constructor.findOne({email: value}, function(err, user) {
+      if(err) throw err;
+      if(user) {
+        if(self.id === user.id) return respond(true);
+        return respond(false);
+      }
+      respond(true);
+    });
+}, 'The specified email address is already in use.');
 
 // var validatePresenceOf = function(value) {
 //   return value && value.length;
