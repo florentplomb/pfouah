@@ -1,0 +1,17 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+	<h1>photowall</h1>
+
+	<div deckgrid class="deckgrid" source="photos" ng-repeat="photo in photos">
+	    <div class="img-box">
+	        <img class="img-wall img-rounded" data-ng-src="{{photo.src}}">
+	        <aside class="content-over">
+	        	<p class="label label-primary label-as-badge">{{photo.cpt}} likes</p>
+	        	<button type="button" ng-click="likePlayer(photo)" class="btn btn-primary">+</button>
+	        	<button type="button" ng-click="dislikePlayer(photo)" class="btn btn-primary">-</button>
+	        </aside>
+	    </div>
+	</div>
+</div>
+

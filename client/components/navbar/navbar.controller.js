@@ -5,6 +5,12 @@ angular.module('transmedApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },{
+      'title': 'Stats',
+      'link': '/stats'
+    }, {
+      'title': 'Photowall',
+      'link': '/photowall'
     }];
 
     $scope.isCollapsed = true;
