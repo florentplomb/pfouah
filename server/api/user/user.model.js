@@ -66,14 +66,6 @@ UserSchema
     };
   });
 
-//Public profile information
-UserSchema
-  .virtual('hsTotal')
-  .get(function() {
-    return {
-      'hsTotal': this.hsTrash+this.hsFlash+this.hsWash
-    };
-  });
 
 // // Non-sensitive info we'll be putting in the token
 // UserSchema

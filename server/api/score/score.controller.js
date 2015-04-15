@@ -18,7 +18,6 @@ exports.index = function(req, res) {
 // Get a single score
 exports.show = function(req, res) {
   Score.findById(req.params.id, function(err, score) {
-
     if (err) {
       return handleError(res, err);
     }
@@ -32,10 +31,10 @@ exports.show = function(req, res) {
 // Creates a new score in the DB.
 
 exports.create = function(req, res) {
-  Score.create(req.body, function(err, score) {
-    if (err) {
-      return handleError(res, err);
-    }
+  // Score.create(req.body, function(err, score) {
+  //   if (err) {
+  //     return handleError(res, err);
+  //   }
      Game.findOne({name:req.body.gameName}, function(err, game) {
       if (err) {
         return handleError(res, err);
@@ -68,7 +67,7 @@ exports.create = function(req, res) {
           case "Trash":
             if (req.body.pts > player.hsTrash) {
               player.hsTrash = req.body.pts
-
+              player.totalHs=player.hsWash+player.hsFlash+player.hsTrash;
               player.save(function(err, playerSaved) {
                  if (err) {
             return handleError(res, err);
@@ -83,6 +82,7 @@ exports.create = function(req, res) {
           case "Wash":
             if (req.body.pts > player.hsWash) {
               player.hsWash = req.body.pts
+               player.totalHs=player.hsWash+player.hsFlash+player.hsTrash;
               player.save(function(err, playerSaved) {
                  if (err) {
             return handleError(res, err);
@@ -96,6 +96,7 @@ exports.create = function(req, res) {
           case "Flash":
             if (req.body.pts > player.hsFlash) {
               player.hsFlash = req.body.pts
+               player.totalHs=player.hsWash+player.hsFlash+player.hsTrash;
               player.save(function(err, playerSaved) {
                  if (err) {
             return handleError(res, err);
@@ -112,9 +113,7 @@ exports.create = function(req, res) {
        });
 
      });
-
-  });
-
+  // });
 };
 
 // Updates an existing score in the DB.

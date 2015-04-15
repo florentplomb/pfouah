@@ -86,7 +86,6 @@ exports.show = function(req, res, next) {
     if (err) return next(err);
     if (!user) return res.send("User doesn't exist");
     user.totalHs=user.hsWash+user.hsFlash+user.hsTrash;
-    console.log(user.hsTotal);
          user.save(function(err,userSaved) {
         if (err) return validationError(res, err);
          res.json(userSaved);
