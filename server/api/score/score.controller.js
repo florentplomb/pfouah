@@ -18,6 +18,7 @@ exports.index = function(req, res) {
 // Get a single score
 exports.show = function(req, res) {
   Score.findById(req.params.id, function(err, score) {
+    console.log("hey");
     if (err) {
       return handleError(res, err);
     }
@@ -31,16 +32,17 @@ exports.show = function(req, res) {
 // Creates a new score in the DB.
 
 exports.create = function(req, res) {
-  Score.create(req.body, function(err, score) {
-    if (err) {
-      return handleError(res, err);
-    }
+ Score.create(req.body, function(err, score) {
+if (err) {
+  return handleError(res, err);
+}
 
 
     Game.findById(req.body.game, function(err, game) {
       if (err) {
         return handleError(res, err);
       }
+       console.log("hoooo");
       if (!game) {
         return res.send(404);
       }
@@ -60,7 +62,6 @@ exports.create = function(req, res) {
           }
 
         });
-
 
         switch (gameName) {
           case "Trash":
@@ -95,11 +96,10 @@ exports.create = function(req, res) {
             }
             break;
 
-
         }
       });
     });
-  });
+ });
 };
 
 // Updates an existing score in the DB.
