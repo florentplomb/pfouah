@@ -29,7 +29,7 @@ exports.show = function(req, res) {
 
 // Creates a new image in the DB.
 exports.create = function(req, res) {
-  if (!req.body.img) {res.json("json invalid");};
+  if (!req.body.img) {res.json("json invalid");}
 
   Image.create(req.body, function(err, a) {
     if (err) {

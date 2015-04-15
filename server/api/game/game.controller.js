@@ -36,7 +36,7 @@ exports.rank = function(req, res) {
 
   if (req.query.limit) {
     lim = req.query.limit;
-  };
+  }
   Game.findById(req.params.id, function(err, game) {
     if (err) {
       return handleError(res, err);
@@ -44,9 +44,9 @@ exports.rank = function(req, res) {
     if (!game) {
       return res.send("game dosen't exist");
     }
-    if (game.name == "Trash") {
+    if (game.name === "Trash") {
       srt = 'hsTrash';
-    }else if(game.name == "Flash") {
+    }else if(game.name === "Flash") {
       srt = 'hsFlash'
     }else{
       srt = "hsWash";

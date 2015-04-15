@@ -146,3 +146,6 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+function handleError(res, err) {
+  return res.send(500, err);
+}
