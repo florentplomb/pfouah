@@ -32,28 +32,30 @@ exports.show = function(req, res) {
 // Creates a new score in the DB.
 
 exports.create = function(req, res) {
- Score.create(req.body, function(err, score) {
-if (err) {
-  return handleError(res, err);
-}
-
-
-    Game.findById(req.body.game, function(err, game) {
+  Score.create(req.body, function(err, score) {
+    if (err) {
+      return handleError(res, err);
+    }
+     Game.findById(req.body.game, function(err, game) {
       if (err) {
         return handleError(res, err);
       }
-       console.log("hoooo");
-      if (!game) {
-        return res.send(404);
+        if (!game) {
+        return handleError(res, "game doesn't exist");
+
       }
+
       var gameName = game.name;
-      console.log("jeux: " + game);
+
 
       Player.findById(req.body.player, function(err, player) {
         if (err) {
           return handleError(res, err);
         }
-        console.log(player);
+             if (!player) {
+        return handleError(res, "player doesn't exist");
+      }
+
         var scoretot = player.totalScore;
         player.totalScore = scoretot + parseInt(req.body.pts);
         player.save(function(err, playerSaved) {
@@ -68,6 +70,9 @@ if (err) {
             if (req.body.pts > player.hsTrash) {
               player.hsTrash = req.body.pts
               player.save(function(err, playerSaved) {
+                 if (err) {
+            return handleError(res, err);
+          }
                 res.json(playerSaved);
               });
             } else {
@@ -79,6 +84,9 @@ if (err) {
             if (req.body.pts > player.hsWash) {
               player.hsWash = req.body.pts
               player.save(function(err, playerSaved) {
+                 if (err) {
+            return handleError(res, err);
+          }
                 res.json(playerSaved);
               });
             } else {
@@ -89,6 +97,9 @@ if (err) {
             if (req.body.pts > player.hsFlash) {
               player.hsFlash = req.body.pts
               player.save(function(err, playerSaved) {
+                 if (err) {
+            return handleError(res, err);
+          }
                 res.json(playerSaved);
               });
             } else {
@@ -97,9 +108,13 @@ if (err) {
             break;
 
         }
-      });
-    });
- });
+
+       });
+
+     });
+
+  });
+
 };
 
 // Updates an existing score in the DB.
