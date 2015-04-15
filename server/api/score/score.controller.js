@@ -35,23 +35,25 @@ exports.create = function(req, res) {
     if (err) {
       return handleError(res, err);
     }
-
-
-    Game.findById(req.body.game, function(err, game) {
+     Game.findById(req.body.game, function(err, game) {
       if (err) {
         return handleError(res, err);
       }
-      if (!game) {
-        return res.send(404);
+        if (!game) {
+        return handleError(res, "game doesn't exist");
       }
+
       var gameName = game.name;
-      console.log("jeux: " + game);
+
 
       Player.findById(req.body.player, function(err, player) {
         if (err) {
           return handleError(res, err);
         }
-        console.log(player);
+             if (!player) {
+        return handleError(res, "player doesn't exist");
+      }
+
         var scoretot = player.totalScore;
         player.totalScore = scoretot + parseInt(req.body.pts);
         player.save(function(err, playerSaved) {
@@ -61,12 +63,14 @@ exports.create = function(req, res) {
 
         });
 
-
         switch (gameName) {
           case "Trash":
             if (req.body.pts > player.hsTrash) {
               player.hsTrash = req.body.pts
               player.save(function(err, playerSaved) {
+                 if (err) {
+            return handleError(res, err);
+          }
                 res.json(playerSaved);
               });
             } else {
@@ -78,6 +82,9 @@ exports.create = function(req, res) {
             if (req.body.pts > player.hsWash) {
               player.hsWash = req.body.pts
               player.save(function(err, playerSaved) {
+                 if (err) {
+            return handleError(res, err);
+          }
                 res.json(playerSaved);
               });
             } else {
@@ -88,6 +95,9 @@ exports.create = function(req, res) {
             if (req.body.pts > player.hsFlash) {
               player.hsFlash = req.body.pts
               player.save(function(err, playerSaved) {
+                 if (err) {
+            return handleError(res, err);
+          }
                 res.json(playerSaved);
               });
             } else {
@@ -97,8 +107,10 @@ exports.create = function(req, res) {
 
 
         }
-      });
-    });
+       });
+
+     });
+
   });
 };
 
