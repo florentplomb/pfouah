@@ -18,7 +18,7 @@ exports.index = function(req, res) {
 // Get a single score
 exports.show = function(req, res) {
   Score.findById(req.params.id, function(err, score) {
-    console.log("hey");
+
     if (err) {
       return handleError(res, err);
     }
@@ -36,7 +36,7 @@ exports.create = function(req, res) {
     if (err) {
       return handleError(res, err);
     }
-     Game.findById(req.body.game, function(err, game) {
+     Game.findOne({name:req.body.gameName}, function(err, game) {
       if (err) {
         return handleError(res, err);
       }
@@ -46,7 +46,6 @@ exports.create = function(req, res) {
       }
 
       var gameName = game.name;
-
 
       Player.findById(req.body.player, function(err, player) {
         if (err) {
@@ -69,6 +68,7 @@ exports.create = function(req, res) {
           case "Trash":
             if (req.body.pts > player.hsTrash) {
               player.hsTrash = req.body.pts
+
               player.save(function(err, playerSaved) {
                  if (err) {
             return handleError(res, err);

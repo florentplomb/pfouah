@@ -15,27 +15,19 @@ var UserSchema = new Schema({
 
   imageUrl: String,
 
-  like: Number,
+    like: {
+    type: Number,
+    default: 0
+  },
 
   hashedPassword: String,
 
-  hsTrash: {
-    type: Number,
-    default: 0
-  },
-  hsWash: {
-    type: Number,
-    default: 0
-  },
-  hsFlash: {
-    type: Number,
-    default: 0
-  },
+  hsTrash: {type: Number,default: 0},
+  hsWash: {type: Number,default: 0},
+  hsFlash: {type: Number,default: 0},
+  totalHs : {type: Number,default: 0},
+  totalScore: {type: Number,default: 0},
 
-  totalScore: {
-    type: Number,
-    default: 0
-  },
   createdOn: {
     type: Date,
     default: Date.now
@@ -64,15 +56,24 @@ var UserSchema = new Schema({
 //     return this._password;
 //   });
 
-// // Public profile information
-// UserSchema
-//   .virtual('profile')
-//   .get(function() {
-//     return {
-//       'name': this.name,
-//       'role': this.role
-//     };
-//   });
+//Public profile information
+UserSchema
+  .virtual('profile')
+  .get(function() {
+    return {
+      'name': this.name,
+      'role': this.role
+    };
+  });
+
+//Public profile information
+UserSchema
+  .virtual('hsTotal')
+  .get(function() {
+    return {
+      'hsTotal': this.hsTrash+this.hsFlash+this.hsWash
+    };
+  });
 
 // // Non-sensitive info we'll be putting in the token
 // UserSchema

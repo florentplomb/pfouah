@@ -14,8 +14,8 @@ var validationError = function(res, err) {
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  User.find({}, '-salt -hashedPassword', function (err, users) {
-    if(err) return res.send(500, err);
+  User.find({}, '-salt -hashedPassword', function(err, users) {
+    if (err) return res.send(500, err);
     res.json(200, users);
   });
 };
@@ -23,27 +23,75 @@ exports.index = function(req, res) {
 /**
  * Creates a new user
  */
-exports.create = function (req, res, next) {
+exports.create = function(req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
+    var token = jwt.sign({
+      _id: user._id
+    }, config.secrets.session, {
+      expiresInMinutes: 60 * 5
+    });
+    res.json({
+      user:user,
+      token: token
+    });
   });
+};
+
+exports.like = function(req, res, next) {
+  var userId = req.params.id;
+  User.findById(userId, function(err, player) {
+    if (err) return next(err);
+    if (!player) return res.send("User doesn't exist");
+    if (!req.body.like) return res.send("like in json doesn't exist");
+
+    switch (req.body.like) {
+      case 1:
+        player.like = player.like+1
+        player.save(function(err, playerSaved) {
+          if (err) {
+            return handleError(res, err);
+          }
+          res.json(playerSaved.email + ": +1 => like = " + playerSaved.like);
+        });
+        break;
+
+      case -1:
+        player.like = player.like-1
+        player.save(function(err, playerSaved) {
+          if (err) {
+            return handleError(res, err);
+          }
+          res.json(playerSaved.email + ": -1 => like = " + playerSaved.like);
+        });
+        break;
+
+         default:
+        res.json("like value is wrong. Value = 1 for + or 0 for -");
+
+    }
+  });
+
 };
 
 /**
  * Get a single user
  */
-exports.show = function (req, res, next) {
+exports.show = function(req, res, next) {
   var userId = req.params.id;
-
-  User.findById(userId, function (err, user) {
+  User.findById(userId, function(err, user) {
     if (err) return next(err);
-    if (!user) return res.send(401);
-    res.json(user.profile);
+    if (!user) return res.send("User doesn't exist");
+    user.totalHs=user.hsWash+user.hsFlash+user.hsTrash;
+    console.log(user.hsTotal);
+         user.save(function(err,userSaved) {
+        if (err) return validationError(res, err);
+         res.json(userSaved);
+      });
+
   });
 };
 
@@ -53,7 +101,7 @@ exports.show = function (req, res, next) {
  */
 exports.destroy = function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
-    if(err) return res.send(500, err);
+    if (err) return res.send(500, err);
     return res.send(204);
   });
 };
@@ -66,8 +114,8 @@ exports.changePassword = function(req, res, next) {
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
-  User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass)) {
+  User.findById(userId, function(err, user) {
+    if (user.authenticate(oldPass)) {
       user.password = newPass;
       user.save(function(err) {
         if (err) return validationError(res, err);
