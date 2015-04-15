@@ -19,6 +19,24 @@ exports.index = function(req, res) {
 
 // Get a single game
 exports.show = function(req, res) {
+
+   Game.findById(req.params.id, function (err, game) {
+    if(err) { return handleError(res, err); }
+    if (!game) {
+      return res.send(404);
+    }
+    return res.json(game);
+  });
+
+
+};
+exports.rank = function(req, res) {
+  var lim = 100;
+  var srt = "";
+
+  if (req.query.limit) {
+    lim = req.query.limit;
+  };
   Game.findById(req.params.id, function(err, game) {
     if (err) {
       return handleError(res, err);
@@ -26,26 +44,24 @@ exports.show = function(req, res) {
     if (!game) {
       return res.send("game dosen't exist");
     }
-    // Find First 10 News Items
-    // Player.find({
-    //     deal_id: player._id // Search Filters
-    //   }, ['email'], // Columns to Return
-    //   {
-    //     skip: 0, // Starting Row
-    //     limit: 10, // Ending Row
-    //     sort: {
-    //       date_added: -1 //Sort by Date Added DESC
-    //     }
-    //   }
-    // );
-Player
-.find()
-.sort('hsTrash')
-.select('name occupation')
-.exec(players);
+    if (game.name == "Trash") {
+      srt = 'hsTrash';
+    }else if(game.name == "Flash") {
+      srt = 'hsFlash'
+    }else{
+      srt = "hsWash";
+    }
 
+    Player
+      .find()
+      .sort({
+        srt : -1
+      })
+      .limit(lim)
+      .exec(function(err, players) {
 
-    res.json(player);
+        return res.json(players);
+      });
   });
 };
 
@@ -54,7 +70,9 @@ Player
 // Creates a new game in the DB.
 exports.create = function(req, res) {
 
-  if (!req.body.name) {return res.json("json invalide");}
+  if (!req.body.name) {
+    return res.json("json invalide");
+  }
 
   Game.create(req.body, function(err, game) {
     if (err) return validationError(res, err);
