@@ -7,26 +7,41 @@ var crypto = require('crypto');
 
 
 var UserSchema = new Schema({
+
   email: {
     type: String,
     lowercase: true
   },
   pseudo: String,
+  hashedPassword: String,
+
 
   imageUrl: String,
-
-    like: {
+  like: {
     type: Number,
     default: 0
   },
 
-  hashedPassword: String,
-
-  hsTrash: {type: Number,default: 0},
-  hsWash: {type: Number,default: 0},
-  hsFlash: {type: Number,default: 0},
-  totalHs : {type: Number,default: 0},
-  totalScore: {type: Number,default: 0},
+  hsTrash: {
+    type: Number,
+    default: 0
+  },
+  hsWash: {
+    type: Number,
+    default: 0
+  },
+  hsFlash: {
+    type: Number,
+    default: 0
+  },
+  totalHs: {
+    type: Number,
+    default: 0
+  },
+  totalScore: {
+    type: Number,
+    default: 0
+  },
 
   createdOn: {
     type: Date,
@@ -45,26 +60,33 @@ var UserSchema = new Schema({
 /**
  * Virtuals
  */
-// UserSchema
-//   .virtual('password')
-//   .set(function(password) {
-//     this._password = password;
-//     this.salt = this.makeSalt();
-//     this.hashedPassword = this.encryptPassword(password);
-//   })
-//   .get(function() {
-//     return this._password;
-//   });
+ UserSchema
+ .virtual('password')
+ .set(function(password) {
+  this._password = password;
+  this.salt = this.makeSalt();
+  this.hashedPassword = this.encryptPassword(password);
+})
+ .get(function() {
+  return this._password;
+});
 
 //Public profile information
 UserSchema
-  .virtual('profile')
-  .get(function() {
-    return {
-      'name': this.name,
-      'role': this.role
-    };
-  });
+.virtual('profile')
+.get(function() {
+  return {
+    'id': this.id,
+    'email': this.email,
+    'pseudo': this.pseudo,
+    'role': this.role,
+    "hsTrash": this.hsTrash,
+    "hsWash": this.hsWash,
+    "hsFlash": this.hsFlash,
+    "totalHs": this.totalHs,
+    "totalScore": this.totalScore
+  };
+});
 
 
 // // Non-sensitive info we'll be putting in the token
@@ -83,35 +105,35 @@ UserSchema
 
 //Validate empty email
 UserSchema
-  .path('email')
-  .validate(function(email) {
-    //
-    return email.length;
-  }, 'Email cannot be blank');
+.path('email')
+.validate(function(email) {
+        //
+        return email.length;
+      }, 'Email cannot be blank');
 
 // Validate empty password
 UserSchema
-  .path('hashedPassword')
-  .validate(function(hashedPassword) {
-    return hashedPassword.length;
-  }, 'Password cannot be blank');
+.path('hashedPassword')
+.validate(function(hashedPassword) {
+  return hashedPassword.length;
+}, 'Password cannot be blank');
 
 //Validate email is not taken
 UserSchema
-  .path('email')
-  .validate(function(value, respond) {
-    var self = this;
-    this.constructor.findOne({
-      email: value
-    }, function(err, user) {
-      if (err) throw err;
-      if (user) {
-        if (self.id === user.id) return respond(true);
-        return respond(false);
-      }
-      respond(true);
-    });
-  }, 'The specified email address is already in use.');
+.path('email')
+.validate(function(value, respond) {
+  var self = this;
+  this.constructor.findOne({
+    email: value
+  }, function(err, user) {
+    if (err) throw err;
+    if (user) {
+      if (self.id === user.id) return respond(true);
+      return respond(false);
+    }
+    respond(true);
+  });
+}, 'The specified email address is already in use.');
 
 var validatePresenceOf = function(value) {
   return value && value.length;

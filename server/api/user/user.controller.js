@@ -13,6 +13,8 @@ var validationError = function(res, err) {
  * Get list of users
  * restriction: 'admin'
  */
+
+
 exports.index = function(req, res) {
   User.find({}, '-salt -hashedPassword', function(err, users) {
     if (err) return res.send(500, err);
@@ -26,7 +28,7 @@ exports.index = function(req, res) {
 exports.create = function(req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
-  newUser.role = 'user';
+  newUser.role = req.body.role;
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
     var token = jwt.sign({
@@ -35,7 +37,7 @@ exports.create = function(req, res, next) {
       expiresInMinutes: 60 * 5
     });
     res.json({
-      user:user,
+      user:user.profile,
       token: token
     });
   });
@@ -82,13 +84,13 @@ exports.like = function(req, res, next) {
  */
 exports.show = function(req, res, next) {
   var userId = req.params.id;
-  User.findById(userId, function(err, user) {
+  User.findById(userId,'-hashedPassword', function(err, user) {
     if (err) return next(err);
     if (!user) return res.send("User doesn't exist");
     user.totalHs=user.hsWash+user.hsFlash+user.hsTrash;
          user.save(function(err,userSaved) {
-        if (err) return validationError(res, err);
-         res.json(userSaved);
+       if (err) return validationError(res, err);
+        return res.json(userSaved.profile);
       });
 
   });

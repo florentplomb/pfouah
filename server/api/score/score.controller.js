@@ -35,84 +35,86 @@ exports.create = function(req, res) {
   //   if (err) {
   //     return handleError(res, err);
   //   }
-     Game.findOne({name:req.body.gameName}, function(err, game) {
+  Game.findOne({
+    name: req.body.gameName
+  }, function(err, game) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!game) {
+      return handleError(res, "game doesn't exist");
+
+    }
+
+    var gameName = game.name;
+
+    Player.findById(req.body.player, function(err, player) {
       if (err) {
         return handleError(res, err);
       }
-        if (!game) {
-        return handleError(res, "game doesn't exist");
-
-      }
-
-      var gameName = game.name;
-
-      Player.findById(req.body.player, function(err, player) {
-        if (err) {
-          return handleError(res, err);
-        }
-             if (!player) {
+      if (!player) {
         return handleError(res, "player doesn't exist");
       }
 
-        var scoretot = player.totalScore;
-        player.totalScore = scoretot + parseInt(req.body.pts);
-        player.save(function(err, playerSaved) {
-          if (err) {
-            return handleError(res, err);
-          }
-
-        });
-
-        switch (gameName) {
-          case "Trash":
-            if (req.body.pts > player.hsTrash) {
-              player.hsTrash = req.body.pts
-              player.totalHs=player.hsWash+player.hsFlash+player.hsTrash;
-              player.save(function(err, playerSaved) {
-                 if (err) {
-            return handleError(res, err);
-          }
-                res.json(playerSaved);
-              });
-            } else {
-              res.json(player);
-            }
-
-            break;
-          case "Wash":
-            if (req.body.pts > player.hsWash) {
-              player.hsWash = req.body.pts
-               player.totalHs=player.hsWash+player.hsFlash+player.hsTrash;
-              player.save(function(err, playerSaved) {
-                 if (err) {
-            return handleError(res, err);
-          }
-                res.json(playerSaved);
-              });
-            } else {
-              res.json(player);
-            }
-            break;
-          case "Flash":
-            if (req.body.pts > player.hsFlash) {
-              player.hsFlash = req.body.pts
-               player.totalHs=player.hsWash+player.hsFlash+player.hsTrash;
-              player.save(function(err, playerSaved) {
-                 if (err) {
-            return handleError(res, err);
-          }
-                res.json(playerSaved);
-              });
-            } else {
-              res.json(player);
-            }
-            break;
-
+      var scoretot = player.totalScore;
+      player.totalScore = scoretot + parseInt(req.body.pts);
+      player.save(function(err, playerSaved) {
+        if (err) {
+          return handleError(res, err);
         }
 
-       });
+      });
 
-     });
+      switch (gameName) {
+        case "Trash":
+          if (req.body.pts > player.hsTrash) {
+            player.hsTrash = req.body.pts
+            player.totalHs = player.hsWash + player.hsFlash + player.hsTrash;
+            player.save(function(err, playerSaved) {
+              if (err) {
+                return handleError(res, err);
+              }
+              return res.json(playerSaved.profile);
+            });
+          } else {
+            res.json(player.profile);
+          }
+
+          break;
+        case "Wash":
+          if (req.body.pts > player.hsWash) {
+            player.hsWash = req.body.pts
+            player.totalHs = player.hsWash + player.hsFlash + player.hsTrash;
+            player.save(function(err, playerSaved) {
+              if (err) {
+                return handleError(res, err);
+              }
+             return res.json(playerSaved.profile);
+            });
+          } else {
+            return res.json(player.profile);
+          }
+          break;
+        case "Flash":
+          if (req.body.pts > player.hsFlash) {
+            player.hsFlash = req.body.pts
+            player.totalHs = player.hsWash + player.hsFlash + player.hsTrash;
+            player.save(function(err, playerSaved) {
+              if (err) {
+                return handleError(res, err);
+              }
+              return res.json(playerSaved.profile);
+            });
+          } else {
+            return res.json(player.profile);
+          }
+          break;
+
+      }
+
+    });
+
+  });
   // });
 };
 

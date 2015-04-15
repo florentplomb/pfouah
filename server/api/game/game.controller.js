@@ -60,7 +60,7 @@ exports.rank = function(req, res) {
       .limit(lim)
       .exec(function(err, players) {
 
-        return res.json(players);
+        return res.json(players.profile);
       });
   });
 };
