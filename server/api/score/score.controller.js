@@ -31,10 +31,10 @@ exports.show = function(req, res) {
 // Creates a new score in the DB.
 
 exports.create = function(req, res) {
-  // Score.create(req.body, function(err, score) {
-  //   if (err) {
-  //     return handleError(res, err);
-  //   }
+  Score.create(req.body, function(err, score) {
+    if (err) {
+      return handleError(res, err);
+    }
   Game.findOne({
     name: req.body.gameName
   }, function(err, game) {
@@ -43,8 +43,15 @@ exports.create = function(req, res) {
     }
     if (!game) {
       return handleError(res, "game doesn't exist");
-
     }
+    var gameScore = game.totalScore
+    game.totalScore = req.body.pts + gameScore
+          game.save(function(err, gameSaved) {
+        if (err) {
+          return handleError(res, err);
+        }
+
+      });
 
     var gameName = game.name;
 
@@ -115,7 +122,7 @@ exports.create = function(req, res) {
     });
 
   });
-  // });
+  });
 };
 
 // Updates an existing score in the DB.

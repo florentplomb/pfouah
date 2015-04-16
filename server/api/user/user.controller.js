@@ -27,8 +27,6 @@ exports.index = function(req, res) {
  */
 exports.create = function(req, res, next) {
   var newUser = new User(req.body);
-  newUser.provider = 'local';
-  newUser.role = req.body.role;
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
     var token = jwt.sign({

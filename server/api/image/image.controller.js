@@ -29,7 +29,9 @@ exports.show = function(req, res) {
 
 // Creates a new image in the DB.
 exports.create = function(req, res) {
-  if (!req.body.img) {res.json("json invalid");}
+ // if (!req.body.img) {res.json("json invalid");}
+
+var imagePath = "imageTest/flower.png"
 
   Image.create(req.body, function(err, a) {
     if (err) {
@@ -38,7 +40,7 @@ exports.create = function(req, res) {
     if (!a) {
       res.json("image not created");
     }
-    a.data = fs.readFileSync(String(req.body.img));
+    a.data = fs.readFileSync(String(imagePath));
     a.contentType = 'image/jpg';
     a.save(function(err, aSaved) {
       if (err) {

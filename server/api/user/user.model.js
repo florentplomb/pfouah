@@ -5,7 +5,6 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 //var authTypes = ['kiou'];
 
-
 var UserSchema = new Schema({
 
   email: {
@@ -51,7 +50,7 @@ var UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  role: {
+  roles: {
     type: String,
     default: 'user'
   },
