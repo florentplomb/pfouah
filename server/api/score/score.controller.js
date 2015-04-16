@@ -45,7 +45,7 @@ exports.create = function(req, res) {
       return handleError(res, "game doesn't exist");
     }
     var gameScore = game.totalScore
-    game.totalScore = req.body.pts + gameScore
+    game.totalScore = parseInt(req.body.pts) + gameScore;
           game.save(function(err, gameSaved) {
         if (err) {
           return handleError(res, err);

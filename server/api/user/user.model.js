@@ -9,14 +9,14 @@ var UserSchema = new Schema({
 
   email: {
     type: String,
-    lowercase: true
+    lowercase: true,
+    required: true
   },
-  pseudo: String,
-  hashedPassword: String,
+  pseudo: {type: String, required: true},
 
+  hashedPassword: {type: String, required: true},
 
   imgUrl: String,
-
   like: {
     type: Number,
     default: 0

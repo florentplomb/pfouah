@@ -20,15 +20,13 @@ exports.index = function(req, res) {
 // Get a single game
 exports.show = function(req, res) {
 
-   Game.findById(req.params.id, function (err, game) {
+   Game.find({name:req.params.name}, function (err, game) {
     if(err) { return handleError(res, err); }
     if (!game) {
       return res.send(404);
     }
     return res.json(game);
   });
-
-
 };
 exports.rank = function(req, res) {
   var lim = 100;

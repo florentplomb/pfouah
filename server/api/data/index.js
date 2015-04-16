@@ -7,7 +7,8 @@ var auth = require('../../auth/auth.service');
 var router = express.Router();
 
 
-router.post('/',auth.isAuthenticated(),auth.hasRole('admin'),controller.create);
+router.post('/data',controller.createData);
+router.post('/score',auth.isAuthenticated(),auth.hasRole('admin'),controller.createScore);
 
 
 module.exports = router;
