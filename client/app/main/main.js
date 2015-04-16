@@ -8,14 +8,24 @@ angular.module('transmedApp')
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
       })
-      .state('stats', {
-      	url: '/stats',
-      	templateUrl: 'app/stats/stats.html',
-      	controller: 'StatsCtrl'
+      .state('rankings', {
+      	url: '/ranking',
+      	templateUrl: 'app/ranking/ranking.html',
+      	controller: 'RankingCtrl'
       })
       .state('photowall',{
         url: '/photowall',
         templateUrl: 'app/photowall/photowall.html',
         controller: 'WallCtrl'
+      })
+      .state('partner', {
+        url: '/partner',
+        templateUrl: 'app/partner/partner.html',
+        controller: 'PartnerCtrl'
+      })
+      .state('feed', {
+        url: '/feed',
+        templateUrl: 'app/feed/feed.html',
+        controller: 'FeedCtrl'
       });
   });

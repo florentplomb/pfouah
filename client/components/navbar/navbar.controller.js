@@ -6,11 +6,17 @@ angular.module('transmedApp')
       'title': 'Home',
       'link': '/'
     },{
-      'title': 'Stats',
-      'link': '/stats'
+      'title': 'Rankings',
+      'link': '/ranking'
     }, {
       'title': 'Photowall',
       'link': '/photowall'
+    },{
+      'title': 'Feeds',
+      'link': '/feed'
+    },{
+      'title': 'Partners',
+      'link': '/partner'
     }];
 
     $scope.isCollapsed = true;
