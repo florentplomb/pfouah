@@ -25,7 +25,7 @@ function isAuthenticated() {
 
           var userId = req.headers['x-user-id'];
 
-    if (userId != undefined) {
+    if (userId !== undefined) {
       User.findById(userId, function (err, user) {
         if (err || user === null) {
           res.status(401).end();
@@ -75,12 +75,12 @@ function hasRole(roleRequired) {
 
     var userId = req.headers['x-user-id'];
 
-    if (userId != undefined) {
+    if (userId !== undefined) {
       User.findById(userId, function (err, user) {
         if (err || user === null) {
           res.status(401).end();
         }
-        else if (user.roles == roleRequired) {
+        else if (user.roles === roleRequired) {
           req.user = user;
           next();
         }

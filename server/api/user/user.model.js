@@ -59,16 +59,16 @@ var UserSchema = new Schema({
 /**
  * Virtuals
  */
- UserSchema
- .virtual('password')
- .set(function(password) {
-  this._password = password;
-  this.salt = this.makeSalt();
-  this.hashedPassword = this.encryptPassword(password);
-})
- .get(function() {
-  return this._password;
-});
+//  UserSchema
+//  .virtual('password')
+//  .set(function(password) {
+//   this._password = password;
+//   this.salt = this.makeSalt();
+//   this.hashedPassword = this.encryptPassword(password);
+// })
+//  .get(function() {
+//   return this._password;
+// });
 
 //Public profile information
 UserSchema
