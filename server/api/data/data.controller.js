@@ -22,23 +22,23 @@ exports.create = function(req, res) {
 
 
 
-  Player.find({}).remove(function() {
-    Player.create({
-      email: "Mat@mat.com",
-      pseudo: "Mat",
-      hashedPassword: "1234"
-    }, {
-      email: "Flo@flo.com",
-      pseudo: "Flo",
-      hashedPassword: "1234"
-    }, {
-      email: "Ro@Ro.com",
-      pseudo: "Ro",
-      hashedPassword: "1234"
-    }
-    );
+  // Player.find({}).remove(function() {
+  //   Player.create({
+  //     email: "Mat@mat.com",
+  //     pseudo: "Mat",
+  //     hashedPassword: "1234"
+  //   }, {
+  //     email: "Flo@flo.com",
+  //     pseudo: "Flo",
+  //     hashedPassword: "1234"
+  //   }, {
+  //     email: "Ro@Ro.com",
+  //     pseudo: "Ro",
+  //     hashedPassword: "1234"
+  //   }
+  //   );
 
-  });
+  // });
 
 
 
