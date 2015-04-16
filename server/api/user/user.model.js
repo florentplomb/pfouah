@@ -15,7 +15,8 @@ var UserSchema = new Schema({
   hashedPassword: String,
 
 
-  imageUrl: String,
+  imgUrl: String,
+
   like: {
     type: Number,
     default: 0
