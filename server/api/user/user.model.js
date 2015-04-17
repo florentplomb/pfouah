@@ -14,32 +14,16 @@ var UserSchema = new Schema({
   },
   pseudo: {type: String, required: true},
   hashedPassword: {type: String, required: true},
-  imgUrl: String,
+  imgUrl: {
+    type: String,
+    default: "imgUsers/poisson.jpg"
+  },
   like: {
     type: Number,
     default: 0
   },
 
-  hsTrash: {
-    type: Number,
-    default: 0
-  },
-  hsWash: {
-    type: Number,
-    default: 0
-  },
-  hsFlash: {
-    type: Number,
-    default: 0
-  },
-  totalHs: {
-    type: Number,
-    default: 0
-  },
-  totalScore: {
-    type: Number,
-    default: 0
-  },
+  scores: [ { type: Schema.Types.ObjectId, ref: 'Score' } ],
 
   createdOn: {
     type: Date,
@@ -77,11 +61,8 @@ UserSchema
     'id': this.id,
     'email': this.email,
     'pseudo': this.pseudo,
-    "hsTrash": this.hsTrash,
-    "hsWash": this.hsWash,
-    "hsFlash": this.hsFlash,
-    "totalHs": this.totalHs,
-    "totalScore": this.totalScore
+    'like' : this.like,
+    'scores' : this.scores
   };
 });
 

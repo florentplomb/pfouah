@@ -33,7 +33,6 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   if (!req.body.pts) return res.send(400, "need pseudo");
   if (!req.body.gameName) return res.send(400, "need gameName");
-
   Game.findOne({
     name: req.body.gameName
   }, function(err, game) {
@@ -51,14 +50,18 @@ exports.create = function(req, res) {
       if (!player) {
         return handleError(res, "player doesn't exist");
       }
-
       var newScore = new Score();
       newScore.pts = parseInt(req.body.pts);
       newScore.gameName = req.body.gameName;
       newScore.player = req.headers['x-user-id'];
       newScore.save(function(err, score) {
         if (err) return validationError(res, err);
-        return res.json(score);
+        player.scores.push(score.id);
+        player.save(function(err, player) {
+          if (err) return validationError(res, err);
+          return res.json(score);
+        });
+
       });
 
     });

@@ -18,10 +18,15 @@ var validationError = function(res, err) {
 
 
 exports.index = function(req, res) {
-  User.find({}, '-salt -hashedPassword', function(err, users) {
-    if (err) return res.send(500, err);
-    res.json(200, users);
-  });
+
+  User.find()
+    .select('-salt -hashedPassword')
+    .populate('scores')
+    .exec(function(err, users) {
+      if (err) return res.send(500, err);
+      return res.json(200, users);
+    })
+
 };
 
 /**
@@ -50,8 +55,87 @@ exports.create = function(req, res, next) {
   });
 };
 
-
 exports.score = function(req, res, next) {
+  var usersScore = [];
+  User.find()
+    .populate('scores')
+    .exec(function(err, users) {
+      if (users.length === 0) {
+
+        res.status(422).json({
+          message: 'pas de users dans la bd'
+        }).end();
+
+      } else {
+
+        for (var i = 0; i < users.length; i++) {
+          var scores = users[i].scores
+          var scoreTot = 0;
+          var hsTrash = 0;
+          var hsFlash = 0;
+          var hsWash = 0;
+          var totalHs = 0;
+          var tab = {};
+          var user = {};
+
+
+          for (var y = 0; y < scores.length; y++) {
+
+            scoreTot = scores[y].pts + scoreTot;
+
+            if (scores[y].gameName === "trash") {
+
+              if (scores[y].pts > hsTrash) {
+                hsTrash = scores[y].pts;
+              };
+
+            }
+            if (scores[y].gameName === "flash") {
+
+              if (scores[y].pts > hsFlash) {
+                hsFlash = scores[y].pts;
+              };
+
+            }
+            if (scores[y].gameName === "wash") {
+
+              if (scores[y].pts > hsWash) {
+                hsWash = scores[y].pts;
+              };
+
+            }
+
+          }
+          totalHs = hsWash + hsTrash + hsFlash;
+          tab = {
+            "scoreTot": scoreTot,
+            "hsWash": hsWash,
+            "hsFlash": hsFlash,
+            "hsTrash": hsTrash,
+            "totalHs": totalHs
+          };
+          user.id = users[i].id;
+          user.pseudo = users[i].pseudo;
+          user.email = users[i].email;
+          user.imgUrl = users[i].imgUrl;
+          user.like = users[i].like;
+          user.scores = tab;
+
+          usersScore.push(user);
+
+        }
+
+        return res.json(usersScore);
+      }
+
+
+
+    })
+
+
+};
+
+exports.userScore = function(req, res, next) {
 
   var scoreTot = 0;
   var hsTrash = 0;
@@ -188,16 +272,13 @@ exports.login = function(req, res, next) {
  */
 exports.show = function(req, res, next) {
   var userId = req.params.id;
-  User.findById(userId, '-hashedPassword', function(err, user) {
-    if (err) return next(err);
-    if (!user) return res.send("User doesn't exist");
-    user.totalHs = user.hsWash + user.hsFlash + user.hsTrash;
-    user.save(function(err, userSaved) {
-      if (err) return validationError(res, err);
-      return res.json(userSaved);
-    });
-
-  });
+  User.findById(userId)
+    .select('-hashedPassword')
+    .populate('scores')
+    .exec(function(err, user) {
+      if (err) return res.send(500, err);
+      return res.json(200, user.profile);
+    })
 };
 
 /**
@@ -242,7 +323,7 @@ exports.me = function(req, res, next) {
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
-    res.json(user);
+    res.json(user.profile);
   });
 };
 

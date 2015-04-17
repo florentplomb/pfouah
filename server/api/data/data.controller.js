@@ -12,6 +12,8 @@ function randomInt(low, high) {
   // Creates a new data in the DB.
 exports.createData = function(req, res) {
 
+
+
   Game.find({}).remove(function() {
     Game.create({
       name: 'trash',
