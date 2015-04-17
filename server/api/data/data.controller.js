@@ -45,62 +45,62 @@ return res.json("Data populate ok!");
   });
 
 
-
-
 };
 
 exports.createScore = function(req, res) {
 
 
-  Player.find({}, '-hashedPassword', function(err, player) {
-    if (err) return res.send(500, err);
 
-    console.log(player)
 
-    Score.find({}).remove(function() {
-      Score.create({
-        pts: randomInt(1, 100),
-        player: player[0].id,
-        gameName: "Trash"
-      }, {
-        pts: randomInt(1, 100),
-        player: player[1].id,
-        gameName: "Flash"
-      }, {
-        pts: randomInt(1, 100),
-        player: player[2].id,
-        gameName: "Wash"
-      }, {
-        pts: randomInt(1, 100),
-        player: player[0].id,
-        gameName: "Trash"
-      }, {
-        pts: randomInt(1, 100),
-        player: player[1].id,
-        gameName: "Wash"
-      }, {
-        pts: randomInt(1, 100),
-        player: player[2].id,
-        gameName: "Flash"
-      }, {
-        pts: randomInt(1, 100),
-        player: player[0].id,
-        gameName: "Trash"
-      }, {
-        pts: randomInt(1, 100),
-        player: player[1].id,
-        gameName: "Wash"
-      }, {
-        pts: randomInt(1, 100),
-        player: player[2].id,
-        gameName: "Flash"
-      });
+  // Player.find({}, '-hashedPassword', function(err, player) {
+  //   if (err) return res.send(500, err);
 
-        return res.json("Score populate ok!");
+  //   console.log(player)
 
-    });
+  //   Score.find({}).remove(function() {
+  //     Score.create({
+  //       pts: randomInt(1, 100),
+  //       player: player[0].id,
+  //       gameName: "Trash"
+  //     }, {
+  //       pts: randomInt(1, 100),
+  //       player: player[1].id,
+  //       gameName: "Flash"
+  //     }, {
+  //       pts: randomInt(1, 100),
+  //       player: player[2].id,
+  //       gameName: "Wash"
+  //     }, {
+  //       pts: randomInt(1, 100),
+  //       player: player[0].id,
+  //       gameName: "Trash"
+  //     }, {
+  //       pts: randomInt(1, 100),
+  //       player: player[1].id,
+  //       gameName: "Wash"
+  //     }, {
+  //       pts: randomInt(1, 100),
+  //       player: player[2].id,
+  //       gameName: "Flash"
+  //     }, {
+  //       pts: randomInt(1, 100),
+  //       player: player[0].id,
+  //       gameName: "Trash"
+  //     }, {
+  //       pts: randomInt(1, 100),
+  //       player: player[1].id,
+  //       gameName: "Wash"
+  //     }, {
+  //       pts: randomInt(1, 100),
+  //       player: player[2].id,
+  //       gameName: "Flash"
+  //     });
 
-  });
+  //       return res.json("Score populate ok!");
+
+  //   });
+
+  // });
 
 };
 

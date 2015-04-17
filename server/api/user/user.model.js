@@ -13,9 +13,7 @@ var UserSchema = new Schema({
     required: true
   },
   pseudo: {type: String, required: true},
-
   hashedPassword: {type: String, required: true},
-
   imgUrl: String,
   like: {
     type: Number,
@@ -133,7 +131,24 @@ UserSchema
     }
     respond(true);
   });
-}, 'The specified email address is already in use.');
+}, 'The specified email  is already in use.');
+
+//Validate pseudo is not taken
+UserSchema
+.path('pseudo')
+.validate(function(value, respond) {
+  var self = this;
+  this.constructor.findOne({
+    pseudo: value
+  }, function(err, user) {
+    if (err) throw err;
+    if (user) {
+      if (self.id === user.id) return respond(true);
+      return respond(false);
+    }
+    respond(true);
+  });
+}, 'The specified pseudo is already in use.');
 
 var validatePresenceOf = function(value) {
   return value && value.length;

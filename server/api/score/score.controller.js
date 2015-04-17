@@ -73,7 +73,7 @@ exports.create = function(req, res) {
       });
 
       switch (gameName) {
-        case "Trash":
+        case "trash":
           if (req.body.pts > player.hsTrash) {
             player.hsTrash = req.body.pts
             player.totalHs = player.hsWash + player.hsFlash + player.hsTrash;
@@ -88,7 +88,7 @@ exports.create = function(req, res) {
           }
 
           break;
-        case "Wash":
+        case "wash":
           if (req.body.pts > player.hsWash) {
             player.hsWash = req.body.pts
             player.totalHs = player.hsWash + player.hsFlash + player.hsTrash;
@@ -102,7 +102,7 @@ exports.create = function(req, res) {
             return res.json(player.profile);
           }
           break;
-        case "Flash":
+        case "flash":
           if (req.body.pts > player.hsFlash) {
             player.hsFlash = req.body.pts
             player.totalHs = player.hsWash + player.hsFlash + player.hsTrash;

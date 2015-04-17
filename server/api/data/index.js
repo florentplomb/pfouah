@@ -8,7 +8,7 @@ var router = express.Router();
 
 
 router.post('/data',controller.createData);
-router.post('/score',auth.isAuthenticated(),auth.hasRole('admin'),controller.createScore);
+
 
 
 module.exports = router;

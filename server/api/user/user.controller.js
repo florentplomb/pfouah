@@ -26,17 +26,24 @@ exports.index = function(req, res) {
  * Creates a new user
  */
 exports.create = function(req, res, next) {
-  var newUser = new User(req.body);
+  if (!req.body.email) return res.send("Need email");
+  if (!req.body.pseudo) return res.send("Need pseudo");
+  if (!req.body.hashedPassword) return res.send("Need password");
+
+  var newUser = new User();
+  newUser.email = req.body.email;
+  newUser.pseudo = req.body.pseudo;
+  newUser.hashedPassword = req.body.hashedPassword;
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({
-      _id: user._id
-    }, config.secrets.session, {
-      expiresInMinutes: 60 * 5
-    });
+    // var token = jwt.sign({
+    //   _id: user._id
+    // }, config.secrets.session, {
+    //   expiresInMinutes: 60 * 5
+    // });
     res.json({
-      user:user.profile,
-      token: token
+      user: user.profile,
+      // token: token
     });
   });
 };
@@ -50,7 +57,7 @@ exports.like = function(req, res, next) {
 
     switch (req.body.like) {
       case 1:
-        player.like = player.like+1
+        player.like = player.like + 1
         player.save(function(err, playerSaved) {
           if (err) {
             return handleError(res, err);
@@ -60,7 +67,7 @@ exports.like = function(req, res, next) {
         break;
 
       case -1:
-        player.like = player.like-1
+        player.like = player.like - 1
         player.save(function(err, playerSaved) {
           if (err) {
             return handleError(res, err);
@@ -69,7 +76,7 @@ exports.like = function(req, res, next) {
         });
         break;
 
-         default:
+      default:
         res.json("like value is wrong. Value = 1 for + or 0 for -");
 
     }
@@ -77,19 +84,48 @@ exports.like = function(req, res, next) {
 
 };
 
+exports.login = function(req, res, next) {
+
+  if (!req.body.pseudo) return res.send(500, "need pseudo");
+  if (!req.body.hashedPassword) return res.send(500, "need password");
+
+  User
+    .find()
+    .and({
+      pseudo: req.body.pseudo
+    })
+    .and({
+      hashedPassword: req.body.hashedPassword
+    })
+    .exec(function(err, userFound) {
+      console.log("ici" + userFound);
+      if (userFound.length == 0) {
+
+        res.status(422).json({
+          message: 'wrong pseudo and password'
+        }).end();
+
+      } else {
+
+        return res.json(userFound[0].profile);
+
+      }
+    });
+};
+
 /**
  * Get a single user
  */
 exports.show = function(req, res, next) {
   var userId = req.params.id;
-  User.findById(userId,'-hashedPassword', function(err, user) {
+  User.findById(userId, '-hashedPassword', function(err, user) {
     if (err) return next(err);
     if (!user) return res.send("User doesn't exist");
-    user.totalHs=user.hsWash+user.hsFlash+user.hsTrash;
-         user.save(function(err,userSaved) {
-       if (err) return validationError(res, err);
-        return res.json(userSaved.profile);
-      });
+    user.totalHs = user.hsWash + user.hsFlash + user.hsTrash;
+    user.save(function(err, userSaved) {
+      if (err) return validationError(res, err);
+      return res.json(userSaved);
+    });
 
   });
 };
@@ -146,6 +182,7 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
 function handleError(res, err) {
   return res.send(500, err);
 }
