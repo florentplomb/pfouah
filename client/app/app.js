@@ -6,7 +6,8 @@ angular.module('transmedApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngDialog'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
