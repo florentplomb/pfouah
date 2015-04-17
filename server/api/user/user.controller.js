@@ -77,8 +77,6 @@ exports.score = function(req, res, next) {
           var totalHs = 0;
           var tab = {};
           var user = {};
-
-
           for (var y = 0; y < scores.length; y++) {
 
             scoreTot = scores[y].pts + scoreTot;
@@ -137,66 +135,109 @@ exports.score = function(req, res, next) {
 
 exports.userScore = function(req, res, next) {
 
-  var scoreTot = 0;
-  var hsTrash = 0;
-  var hsFlash = 0;
-  var hsWash = 0;
-  var totalHs = 0;
 
-  Score.find()
-    .and({
-      player: req.params.id
-    })
-    .exec(function(err, scores) {
-      if (err) {
-        return next(err);
-      }
-      if (scores === null) {
-        return res.json({
-          code: 204,
-          message: "Score is Empty"
+  var usersScore = [];
+  var usr = {}
+  User.find()
+    .populate('scores')
+    .exec(function(err, users) {
+      if (users.length === 0) {
+
+        res.status(422).json({
+          message: 'pas de users dans la bd'
         }).end();
+
+      } else {
+
+        for (var i = 0; i < users.length; i++) {
+          var scores = users[i].scores
+          var scoreTot = 0;
+          var usr = {};
+
+          for (var y = 0; y < scores.length; y++) {
+
+            scoreTot = scores[y].pts + scoreTot;
+
+          }
+
+          console.log(users[i].pseudo);
+          usr.pseudo = users[i].pseudo;
+          usr.pts = scoreTot;
+          usersScore.push(usr);
+
+           }
+      usersScore.sort(function(a,b) { return parseInt(a.pts) - parseInt(b.pts) } );
+      usersScore.reverse();
+
+        return res.json(usersScore);
+
+
       }
 
-      for (var i = 0; i < scores.length; i++) {
-        scoreTot = scores[i].pts + scoreTot;
 
-        if (scores[i].gameName === "trash") {
-
-          if (scores[i].pts > hsTrash) {
-            hsTrash = scores[i].pts;
-          };
-
-        }
-        if (scores[i].gameName === "flash") {
-
-          if (scores[i].pts > hsFlash) {
-            hsFlash = scores[i].pts;
-          };
-
-        }
-        if (scores[i].gameName === "wash") {
-
-          if (scores[i].pts > hsWash) {
-            hsWash = scores[i].pts;
-          };
-
-        }
-      }
-
-      totalHs = hsWash + hsTrash + hsFlash;
-      var tab = {
-        "scoreTot": scoreTot,
-        "hsWash": hsWash,
-        "hsFlash": hsFlash,
-        "hsTrash": hsTrash,
-        "totalHs": totalHs
-      };
-
-      return res.json(tab);
+    })
 
 
-    });
+  // var scoreTot = 0;
+  // var hsTrash = 0;
+  // var hsFlash = 0;
+  // var hsWash = 0;
+  // var totalHs = 0;
+
+  // Score.find()
+  //   .and({
+  //     player: req.params.id
+  //   })
+  //   .exec(function(err, scores) {
+  //     if (err) {
+  //       return next(err);
+  //     }
+  //     if (scores === null) {
+  //       return res.json({
+  //         code: 204,
+  //         message: "Score is Empty"
+  //       }).end();
+  //     }
+
+  //     for (var i = 0; i < scores.length; i++) {
+  //       scoreTot = scores[i].pts + scoreTot;
+
+  //       if (scores[i].gameName === "trash") {
+
+  //         if (scores[i].pts > hsTrash) {
+  //           hsTrash = scores[i].pts;
+  //         };
+
+  //       }
+  //       if (scores[i].gameName === "flash") {
+
+  //         if (scores[i].pts > hsFlash) {
+  //           hsFlash = scores[i].pts;
+  //         };
+
+  //       }
+  //       if (scores[i].gameName === "wash") {
+
+  //         if (scores[i].pts > hsWash) {
+  //           hsWash = scores[i].pts;
+  //         };
+
+  //       }
+  //     }
+
+  //     totalHs = hsWash + hsTrash + hsFlash;
+  //     var tab = {
+  //       "scoreTot": scoreTot,
+  //       "hsWash": hsWash,
+  //       "hsFlash": hsFlash,
+  //       "hsTrash": hsTrash,
+  //       "totalHs": totalHs
+  //     };
+
+  //     return res.json(tab);
+
+
+  //   });
 
 
 
