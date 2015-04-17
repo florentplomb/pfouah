@@ -1,8 +1,18 @@
 <div class="ngdialog-message">
 	<h4>[Question]</h4>
-	<form id="answer-form">
-		<input type="text" placeholder="your answer ..." ng-model="answer">
+	<p>{{feedback}}</p>
+	<form name="myForm">
+		<label>
+		   Your answer : 
+		   <input type="text" name="answer" ng-model="answer"
+		   ng-minlength="3" ng-maxlength="10">
+		</label>
+		<div role="alert">
+		  <span class="error" ng-show="myForm.answer.$error.maxlength">
+		    Too long!</span>
+		</div>
 	</form>
+
 </div>
 
 <div class="ngdialog-buttons">

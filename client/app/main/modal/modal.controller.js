@@ -29,5 +29,6 @@ angular.module('transmedApp')
 
   	$scope.submitForm = function (answer){
   		$log.debug(answer);
+  		$scope.feedback = 'answer succesfully sent !';
   	}
 });

@@ -9,6 +9,13 @@ angular.module('transmedApp', [
   'ui.bootstrap',
   'ngDialog'
 ])
+
+  .config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+  ])
+
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
