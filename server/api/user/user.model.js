@@ -77,7 +77,6 @@ UserSchema
     'id': this.id,
     'email': this.email,
     'pseudo': this.pseudo,
-    'role': this.role,
     "hsTrash": this.hsTrash,
     "hsWash": this.hsWash,
     "hsFlash": this.hsFlash,

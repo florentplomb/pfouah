@@ -31,10 +31,9 @@ exports.show = function(req, res) {
 // Creates a new score in the DB.
 
 exports.create = function(req, res) {
-  Score.create(req.body, function(err, score) {
-    if (err) {
-      return handleError(res, err);
-    }
+  if (!req.body.pts) return res.send(400, "need pseudo");
+  if (!req.body.gameName) return res.send(400, "need gameName");
+
   Game.findOne({
     name: req.body.gameName
   }, function(err, game) {
@@ -44,18 +43,8 @@ exports.create = function(req, res) {
     if (!game) {
       return handleError(res, "game doesn't exist");
     }
-    var gameScore = game.totalScore
-    game.totalScore = parseInt(req.body.pts) + gameScore;
-          game.save(function(err, gameSaved) {
-        if (err) {
-          return handleError(res, err);
-        }
 
-      });
-
-    var gameName = game.name;
-
-    Player.findById(req.body.player, function(err, player) {
+    Player.findById(req.headers['x-user-id'], function(err, player) {
       if (err) {
         return handleError(res, err);
       }
@@ -63,66 +52,19 @@ exports.create = function(req, res) {
         return handleError(res, "player doesn't exist");
       }
 
-      var scoretot = player.totalScore;
-      player.totalScore = scoretot + parseInt(req.body.pts);
-      player.save(function(err, playerSaved) {
-        if (err) {
-          return handleError(res, err);
-        }
-
+      var newScore = new Score();
+      newScore.pts = parseInt(req.body.pts);
+      newScore.gameName = req.body.gameName;
+      newScore.player = req.headers['x-user-id'];
+      newScore.save(function(err, score) {
+        if (err) return validationError(res, err);
+        return res.json(score);
       });
-
-      switch (gameName) {
-        case "trash":
-          if (req.body.pts > player.hsTrash) {
-            player.hsTrash = req.body.pts
-            player.totalHs = player.hsWash + player.hsFlash + player.hsTrash;
-            player.save(function(err, playerSaved) {
-              if (err) {
-                return handleError(res, err);
-              }
-              return res.json(playerSaved.profile);
-            });
-          } else {
-            res.json(player.profile);
-          }
-
-          break;
-        case "wash":
-          if (req.body.pts > player.hsWash) {
-            player.hsWash = req.body.pts
-            player.totalHs = player.hsWash + player.hsFlash + player.hsTrash;
-            player.save(function(err, playerSaved) {
-              if (err) {
-                return handleError(res, err);
-              }
-             return res.json(playerSaved.profile);
-            });
-          } else {
-            return res.json(player.profile);
-          }
-          break;
-        case "flash":
-          if (req.body.pts > player.hsFlash) {
-            player.hsFlash = req.body.pts
-            player.totalHs = player.hsWash + player.hsFlash + player.hsTrash;
-            player.save(function(err, playerSaved) {
-              if (err) {
-                return handleError(res, err);
-              }
-              return res.json(playerSaved.profile);
-            });
-          } else {
-            return res.json(player.profile);
-          }
-          break;
-
-      }
 
     });
 
   });
-  });
+
 };
 
 // Updates an existing score in the DB.

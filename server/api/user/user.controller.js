@@ -1,9 +1,11 @@
 'use strict';
 
 var User = require('./user.model');
+var Score = require('../score/score.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('underscore');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -48,6 +50,74 @@ exports.create = function(req, res, next) {
   });
 };
 
+
+exports.score = function(req, res, next) {
+
+  var scoreTot = 0;
+  var hsTrash = 0;
+  var hsFlash = 0;
+  var hsWash = 0;
+  var totalHs = 0;
+
+  Score.find()
+    .and({
+      player: req.params.id
+    })
+    .exec(function(err, scores) {
+      if (err) {
+        return next(err);
+      }
+      if (scores === null) {
+        return res.json({
+          code: 204,
+          message: "Score is Empty"
+        }).end();
+      }
+
+      for (var i = 0; i < scores.length; i++) {
+        scoreTot = scores[i].pts + scoreTot;
+
+        if (scores[i].gameName === "trash") {
+
+          if (scores[i].pts > hsTrash) {
+            hsTrash = scores[i].pts;
+          };
+
+        }
+        if (scores[i].gameName === "flash") {
+
+          if (scores[i].pts > hsFlash) {
+            hsFlash = scores[i].pts;
+          };
+
+        }
+        if (scores[i].gameName === "wash") {
+
+          if (scores[i].pts > hsWash) {
+            hsWash = scores[i].pts;
+          };
+
+        }
+      }
+
+      totalHs = hsWash + hsTrash + hsFlash;
+      var tab = {
+        "scoreTot": scoreTot,
+        "hsWash": hsWash,
+        "hsFlash": hsFlash,
+        "hsTrash": hsTrash,
+        "totalHs": totalHs
+      };
+
+      return res.json(tab);
+
+
+    });
+
+
+
+};
+
 exports.like = function(req, res, next) {
   var userId = req.params.id;
   User.findById(userId, function(err, player) {
@@ -86,8 +156,8 @@ exports.like = function(req, res, next) {
 
 exports.login = function(req, res, next) {
 
-  if (!req.body.pseudo) return res.send(500, "need pseudo");
-  if (!req.body.hashedPassword) return res.send(500, "need password");
+  if (!req.body.pseudo) return res.send(400, "need pseudo");
+  if (!req.body.hashedPassword) return res.send(400, "need password");
 
   User
     .find()
