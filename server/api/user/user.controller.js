@@ -99,7 +99,7 @@ exports.login = function(req, res, next) {
     })
     .exec(function(err, userFound) {
       console.log("ici" + userFound);
-      if (userFound.length == 0) {
+      if (userFound.length === 0) {
 
         res.status(422).json({
           message: 'wrong pseudo and password'
