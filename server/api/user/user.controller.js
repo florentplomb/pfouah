@@ -146,6 +146,66 @@ exports.score = function(req, res, next) {
 exports.userScore = function(req, res, next) {
 
 
+
+
+
+  var scoreTot = 0;
+  var hsTrash = 0;
+  var hsFlash = 0;
+  var hsWash = 0;
+  var totalHs = 0;
+
+  Score.find()
+    .and({
+      player: req.params.id
+    })
+    .exec(function(err, scores) {
+      if (err) {
+        return next(err);
+      }
+      if (scores === null) {
+        return res.json({
+          code: 204,
+          message: "Score is Empty"
+        }).end();
+      }
+
+      for (var i = 0; i < scores.length; i++) {
+        scoreTot = scores[i].pts + scoreTot;
+
+        if (scores[i].gameName === "trash") {
+
+          if (scores[i].pts > hsTrash) {
+            hsTrash = scores[i].pts;
+          };
+
+        }
+        if (scores[i].gameName === "flash") {
+
+          if (scores[i].pts > hsFlash) {
+            hsFlash = scores[i].pts;
+          };
+
+        }
+        if (scores[i].gameName === "wash") {
+
+          if (scores[i].pts > hsWash) {
+            hsWash = scores[i].pts;
+          };
+
+        }
+      }
+
+      totalHs = hsWash + hsTrash + hsFlash;
+      var tab = {
+        "scoreTot": scoreTot,
+        "hsWash": hsWash,
+        "hsFlash": hsFlash,
+        "hsTrash": hsTrash,
+        "totalHs": totalHs
+      };
+
+
   var usersScore = [];
   var usr = {}
   User.find()
@@ -160,17 +220,17 @@ exports.userScore = function(req, res, next) {
       } else {
 
         for (var i = 0; i < users.length; i++) {
-          var scores = users[i].scores
-          var scoreTot = 0;
+          var scs = users[i].scores
+          var scsTot = 0;
           var usr = {};
 
-          for (var y = 0; y < scores.length; y++) {
+          for (var y = 0; y < scs.length; y++) {
 
-            scoreTot = scores[y].pts + scoreTot;
+            scsTot = scs[y].pts + scsTot;
 
           }
           usr.id = users[i].id;
-          usr.pts = scoreTot;
+          usr.pts = scsTot;
           usersScore.push(usr);
         }
         usersScore.sort(function(a, b) {
@@ -179,7 +239,10 @@ exports.userScore = function(req, res, next) {
         usersScore.reverse();
         var index = functiontofindIndexByKeyValue(usersScore, "id", req.params.id);
         index++;
-        return res.json(index);
+
+        tab.rank = index;
+
+        return res.json(tab);
 
       }
 
@@ -187,66 +250,9 @@ exports.userScore = function(req, res, next) {
     })
 
 
-  // var scoreTot = 0;
-  // var hsTrash = 0;
-  // var hsFlash = 0;
-  // var hsWash = 0;
-  // var totalHs = 0;
-
-  // Score.find()
-  //   .and({
-  //     player: req.params.id
-  //   })
-  //   .exec(function(err, scores) {
-  //     if (err) {
-  //       return next(err);
-  //     }
-  //     if (scores === null) {
-  //       return res.json({
-  //         code: 204,
-  //         message: "Score is Empty"
-  //       }).end();
-  //     }
-
-  //     for (var i = 0; i < scores.length; i++) {
-  //       scoreTot = scores[i].pts + scoreTot;
-
-  //       if (scores[i].gameName === "trash") {
-
-  //         if (scores[i].pts > hsTrash) {
-  //           hsTrash = scores[i].pts;
-  //         };
-
-  //       }
-  //       if (scores[i].gameName === "flash") {
-
-  //         if (scores[i].pts > hsFlash) {
-  //           hsFlash = scores[i].pts;
-  //         };
-
-  //       }
-  //       if (scores[i].gameName === "wash") {
-
-  //         if (scores[i].pts > hsWash) {
-  //           hsWash = scores[i].pts;
-  //         };
-
-  //       }
-  //     }
-
-  //     totalHs = hsWash + hsTrash + hsFlash;
-  //     var tab = {
-  //       "scoreTot": scoreTot,
-  //       "hsWash": hsWash,
-  //       "hsFlash": hsFlash,
-  //       "hsTrash": hsTrash,
-  //       "totalHs": totalHs
-  //     };
-
-  //     return res.json(tab);
 
 
-  //   });
+    });
 
 
 
