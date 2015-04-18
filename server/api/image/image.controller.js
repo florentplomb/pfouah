@@ -5,6 +5,10 @@ var Image = require('./image.model');
 var Player = require('../user/user.model')
 var fs = require('fs');
 
+var validationError = function(res, err) {
+  return res.json(422, err);
+};
+
 // Get list of images
 exports.index = function(req, res) {
   Image.find(function(err, images) {
