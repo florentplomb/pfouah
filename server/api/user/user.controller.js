@@ -132,6 +132,16 @@ exports.score = function(req, res, next) {
 
 
 };
+        function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
+
+          for (var i = 0; i < arraytosearch.length; i++) {
+
+            if (arraytosearch[i][key] == valuetosearch) {
+              return i;
+            }
+          }
+          return null;
+        };
 
 exports.userScore = function(req, res, next) {
 
@@ -159,18 +169,17 @@ exports.userScore = function(req, res, next) {
             scoreTot = scores[y].pts + scoreTot;
 
           }
-
-          console.log(users[i].pseudo);
-          usr.pseudo = users[i].pseudo;
+          usr.id = users[i].id;
           usr.pts = scoreTot;
           usersScore.push(usr);
-
-           }
-      usersScore.sort(function(a,b) { return parseInt(a.pts) - parseInt(b.pts) } );
-      usersScore.reverse();
-
-        return res.json(usersScore);
-
+        }
+        usersScore.sort(function(a, b) {
+          return parseInt(a.pts) - parseInt(b.pts)
+        });
+        usersScore.reverse();
+        var index = functiontofindIndexByKeyValue(usersScore, "id", req.params.id);
+        index++;
+        return res.json(index);
 
       }
 
