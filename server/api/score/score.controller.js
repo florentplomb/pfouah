@@ -5,6 +5,15 @@ var Score = require('./score.model');
 var Player = require('../user/user.model');
 var Game = require('../game/game.model');
 
+function handleError(res, err) {
+  return res.send(500, err);
+}
+
+var validationError = function(res, err) {
+  return res.json(422, err);
+};
+
+
 // Get list of scores
 exports.index = function(req, res) {
   Score.find(function(err, scores) {

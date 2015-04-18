@@ -6,6 +6,15 @@ var Player = require('../user/user.model');
 var Game = require('../game/game.model');
 var Score = require('../score/score.model');
 
+function handleError(res, err) {
+  return res.send(500, err);
+}
+
+var validationError = function(res, err) {
+  return res.json(422, err);
+};
+
+
 function randomInt(low, high) {
   return Math.floor(Math.random() * (high - low) + low);
 }
@@ -127,6 +136,3 @@ exports.createScore = function(req, res) {
 
 
 
-function handleError(res, err) {
-  return res.send(500, err);
-}

@@ -85,21 +85,21 @@ exports.score = function(req, res, next) {
 
               if (scores[y].pts > hsTrash) {
                 hsTrash = scores[y].pts;
-              };
+              }
 
             }
             if (scores[y].gameName === "flash") {
 
               if (scores[y].pts > hsFlash) {
                 hsFlash = scores[y].pts;
-              };
+              }
 
             }
             if (scores[y].gameName === "wash") {
 
               if (scores[y].pts > hsWash) {
                 hsWash = scores[y].pts;
-              };
+              }
 
             }
 
@@ -136,12 +136,12 @@ exports.score = function(req, res, next) {
 
           for (var i = 0; i < arraytosearch.length; i++) {
 
-            if (arraytosearch[i][key] == valuetosearch) {
+            if (arraytosearch[i][key] === valuetosearch) {
               return i;
             }
           }
           return null;
-        };
+        }
 
 exports.userScore = function(req, res, next) {
 
@@ -177,22 +177,21 @@ exports.userScore = function(req, res, next) {
 
           if (scores[i].pts > hsTrash) {
             hsTrash = scores[i].pts;
-          };
+          }
 
         }
         if (scores[i].gameName === "flash") {
 
           if (scores[i].pts > hsFlash) {
             hsFlash = scores[i].pts;
-          };
+          }
 
         }
         if (scores[i].gameName === "wash") {
 
           if (scores[i].pts > hsWash) {
             hsWash = scores[i].pts;
-          };
-
+          }
         }
       }
 
