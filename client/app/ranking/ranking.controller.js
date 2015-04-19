@@ -3,12 +3,9 @@
 angular.module('transmedApp')
 	.controller('RankingCtrl', function ($scope, $http, socket, $log, StaticService){
 
-		var datas = [];
-
 		StaticService.getUsers(
 			function(data){
 				$scope.datas = data;
-				datas = data;
 			},
 			function(error){
 				$scope.error = error;
@@ -16,16 +13,15 @@ angular.module('transmedApp')
 		);
 
 		$scope.tabs = [
-			{'title' : 'Scores totaux', 'id': '1'},
-			{'title' : 'Best Scores : cummulés', 'id': '2'},
-			{'title' : 'Best Scores : Wash', 'id': '3'},
-			{'title' : 'Best Scores : trash', 'id': '4'},
-			{'title' : 'Best Scores : flash', 'id': '5'}
+			{'title' : 'Totaux', 'id': '1'},
+			{'title' : 'Cummulés', 'id': '2'},
+			{'title' : 'Wash', 'id': '3'},
+			{'title' : 'Trash', 'id': '4'},
+			{'title' : 'Flash', 'id': '5'}
 		];
 
-		$scope.content = [];
-
 		$scope.activeTab = $scope.tabs[0].id;
+		$scope.predicate = '';
 
 		$scope.showTab = function (currentTab){
 			$scope.activeTab = currentTab;

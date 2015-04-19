@@ -662,7 +662,17 @@
         "roles": "user",
         "updatedOn": "2015-04-18T21:52:06.204Z",
         "createdOn": "2015-04-18T21:52:06.204Z",
-        "scores": [],
+        "scores": [
+            {
+                "_id": "5532d0ca1cefa5110057b24f",
+                "gameName": "flash",
+                "player": "5532d0b11cefa5110057b222",
+                "pts": 27,
+                "__v": 0,
+                "updatedOn": "2015-04-18T21:46:50.821Z",
+                "createdOn": "2015-04-18T21:46:50.821Z"
+            }
+        ],
         "like": 0,
         "imgUrl": "imgUsers/poisson.jpg"
     },
