@@ -1,20 +1,104 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
-	<table class="table table-striped">
-		<tr>
-			<th>Joueur</th>
-			<th>Scores cummulés</th>
-			<th>Meilleurs scores cummulés</th>
-			<th>Avatar</th>
-		</tr>
-	   	<tr>
-	       	<td class="">player</td>
-	       	<td class="">100 pts</td>
-	       	<td class="">100 pts</td>
-	       	<td class=""></td>
-		</tr>
-	</table>
-</div>
 
-<pre>{{res}}</pre>
+	<div class="btn btn-primary" ng-repeat="tab in tabs" ng-click="showTab(tab.id)">{{tab.id}}</div>
+
+
+
+	<!-- 1 : Tab score totaux -->
+	<div class="tab-score-total" ng-show="activeTab == 1">
+
+		<h3>Scores totaux</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Joueur</th>
+				<th>Scores totaux</th>
+				<th>Avatar</th>
+			</tr>
+		   	<tr>
+		       	<td class="">player</td>
+		       	<td class="">100 pts</td>
+		       	<td class=""></td>
+			</tr>
+		</table>
+	
+	</div>
+
+	<!-- 2 : Tab best scores cummulés -->
+	<div class="tab-best-cumul" ng-show="activeTab == 2">
+		
+		<h3>Best Scores : cummulés</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Joueur</th>
+				<th>Best Scores : 3 games</th>
+				<th>Avatar</th>
+			</tr>
+		   	<tr>
+		       	<td class="">player</td>
+		       	<td class="">100 pts</td>
+		       	<td class=""></td>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- 3 : Tab best scores wash -->
+	<div class="tab-best-wash" ng-show="activeTab == 3">
+		
+		<h3>Best Scores : Wash</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Joueur</th>
+				<th>Wash</th>
+				<th>Avatar</th>
+			</tr>
+		   	<tr>
+		       	<td class="">player</td>
+		       	<td class="">100 pts</td>
+		       	<td class=""></td>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- 4 : Tab best scores trash -->
+	<div class="tab-best-trash" ng-show="activeTab == 4">
+		
+		<h3>Best Scores : Trash</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Joueur</th>
+				<th>Trash</th>
+				<th>Avatar</th>
+			</tr>
+		   	<tr>
+		       	<td class="">player</td>
+		       	<td class="">100 pts</td>
+		       	<td class=""></td>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- 5 : Tab best scores flash -->
+	<div class="tab-best-flash" ng-show="activeTab == 5">
+
+		<h3>Best Scores : Flash</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Joueur</th>
+				<th>Flash</th>
+				<th>Avatar</th>
+			</tr>
+		   	<tr>
+		       	<td class="">player</td>
+		       	<td class="">100 pts</td>
+		       	<td class=""></td>
+			</tr>
+		</table>
+
+	</div>
+
+</div>
