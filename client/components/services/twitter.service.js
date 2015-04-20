@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('transmedApp')
-	.factory('FeedService', function($http){
+	.factory('TweetService', function($http, TwitterUrl){
 		return{
 			getTweet : function(callback, errorCallback){
 				$http({
-					method: '',
-					url: ''
+					method: 'GET',
+					url: TwitterUrl + 'statuses/user_timeline.json?screen_name=eve_status&count=15'
 				}).success(function (data){
 					callback(data);
 				}).error(function (data){

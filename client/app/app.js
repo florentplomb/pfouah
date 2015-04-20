@@ -10,6 +10,9 @@ angular.module('transmedApp', [
   'ngDialog'
 ])
 
+  .constant('TwitterUrl', 'https://api.twitter.com/1.1/')
+  .constant('ApiUrl', 'http://pfouah2015.herokuapp.com/')
+
   .config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];

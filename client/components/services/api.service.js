@@ -3,12 +3,12 @@
 // http://pfouah2015.herokuapp.com/api/users
 
 angular.module('transmedApp')
-	.factory('ApiService', function($http){
+	.factory('ApiService', function($http, ApiUrl){
 		return{
 			getUsers : function(callback, errorCallback){
 				$http({
 					method: 'GET',
-					url: 'http://pfouah2015.herokuapp.com/api/users'
+					url: ApiUrl + 'api/users'
 				}).success(function (data){
 					callback(data);
 				}).error(function (data){
