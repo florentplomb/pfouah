@@ -14,9 +14,9 @@ var UserSchema = new Schema({
   },
   pseudo: {type: String, required: true},
   hashedPassword: {type: String, required: true},
-  imgUrl: {
+  imgId: {
     type: String,
-    default: "imgUsers/poisson.jpg"
+    default: ""
   },
   like: {
     type: Number,
@@ -62,6 +62,7 @@ UserSchema
     'email': this.email,
     'pseudo': this.pseudo,
     'like' : this.like,
+    'imgId' : this.imgId,
     'scores' : this.scores
   };
 });

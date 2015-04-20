@@ -35,11 +35,13 @@ exports.index = function(req, res) {
 exports.create = function(req, res, next) {
   if (!req.body.email) return res.send("Need email");
   if (!req.body.pseudo) return res.send("Need pseudo");
-  if (!req.body.hashedPassword) return res.send("Need password");
+  if (!req.body.hashedPassword) return res.send("Need hashedPassword");
+    if (!req.body.imgId) return res.send("Need imgId");
 
   var newUser = new User();
   newUser.email = req.body.email;
   newUser.pseudo = req.body.pseudo;
+  newUser.imgId = req.body.imgId;
   newUser.hashedPassword = req.body.hashedPassword;
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
@@ -240,9 +242,6 @@ function scoreUsersData(req, res, next, callback) {
             tab.rank = index;
             callback(tab);
             //return res.json(tab);
-
-
-
           }
 
 
