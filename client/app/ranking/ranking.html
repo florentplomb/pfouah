@@ -4,122 +4,36 @@
 
 	<div class="btn btn-primary btn-ranking" ng-repeat="tab in tabs" ng-click="showTab(tab.id)">{{tab.title}}</div>
 
-
-
-	<!-- 1 : Tab score totaux -->
-	<div class="tab-score-total" ng-show="activeTab == 1">
-
 		<hr/>
-		<h3>Scores totaux</h3>
+		<h3>Tableau des scores</h3>
 		<!--<pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>-->
-		
+
 		<table class="table table-striped">
 			<tr>
 				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
 				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
-				<th><a ng-click="predicate = 'scores[0].pts'; reverse=!reverse">Scores totaux</a></th>
+				<th ng-show="activeTab == 1"><a ng-click="predicate = 'scores.scoreTot'; reverse=!reverse">Total</a></th>
+				<th ng-show="activeTab == 2"><a ng-click="predicate = 'scores.totalHs'; reverse=!reverse">Cumul</a></th>
+				<th ng-show="activeTab == 3"><a ng-click="predicate = 'scores.hsWash'; reverse=!reverse">Wash</a></th>
+				<th ng-show="activeTab == 4"><a ng-click="predicate = 'scores.hsTrash'; reverse=!reverse">Trash</a></th>
+				<th ng-show="activeTab == 5"><a ng-click="predicate = 'scores.hsFlash'; reverse=!reverse">Flash</a></th>
 				<th>Avatars</th>
 			</tr>
 		   	<tr ng-repeat="player in datas | orderBy:predicate:reverse">
-		   		<td class="">0</td>
+		   		<!-- position : juste one at time -->
+		   		<td class="" ng-show="activeTab == 1">pos1</td>
+		   		<td class="" ng-show="activeTab == 2">pos2</td>
+		   		<td class="" ng-show="activeTab == 3">pos3</td>
+		   		<td class="" ng-show="activeTab == 4">pos4</td>
+		   		<td class="" ng-show="activeTab == 5">pos5</td>
+
 		       	<td class="">{{player.pseudo}}</td>
-		       	<td class="">{{player.scores[0].pts}} pts</td>
+		       	<td class="" ng-show="activeTab == 1">{{player.scores.scoreTot}} pts</td>
+		       	<td class="" ng-show="activeTab == 2">{{player.scores.totalHs}} pts</td>
+		       	<td class="" ng-show="activeTab == 3">{{player.scores.hsWash}} pts</td>
+		       	<td class="" ng-show="activeTab == 4">{{player.scores.hsTrash}} pts</td>
+		       	<td class="" ng-show="activeTab == 5">{{player.scores.hsFlash}} pts</td>
 		       	<td class=""><img ng-src="#"></td>
 			</tr>
 		</table>
-
-	</div>
-
-	<!-- 2 : Tab best scores cummulés -->
-	<div class="tab-best-cumul" ng-show="activeTab == 2">
-		
-		<hr/>
-		<h3>Best Scores : cumulés</h3>
-
-		<table class="table table-striped">
-			<tr>
-				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
-				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
-				<th>Best scores cumulées</th>
-				<th>Avatars</th>
-			</tr>
-		   	<tr ng-repeat="player in datas">
-		   		<td class="">0</td>
-		       	<td class="">{{player.pseudo}}</td>
-		       	<td class="">{{player.scores[0].pts}} pts</td>
-		       	<td class=""><img ng-src="#"></td>
-			</tr>
-		</table>
-
-	</div>
-
-	<!-- 3 : Tab best scores wash -->
-	<div class="tab-best-wash" ng-show="activeTab == 3">
-		
-		<hr/>
-		<h3>Best Scores : Wash</h3>
-
-		<table class="table table-striped">
-			<tr>
-				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
-				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
-				<th>Wash</th>
-				<th>Avatars</th>
-			</tr>
-		   	<tr ng-repeat="player in datas">
-		   		<td class="">0</td>
-		       	<td class="">{{player.pseudo}}</td>
-		       	<td class="">{{player.scores[0].pts}} pts</td>
-		       	<td class=""><img ng-src="#"></td>
-			</tr>
-		</table>
-
-	</div>
-
-	<!-- 4 : Tab best scores trash -->
-	<div class="tab-best-trash" ng-show="activeTab == 4">
-		
-		<hr/>
-		<h3>Best Scores : Trash</h3>
-		
-		<table class="table table-striped">
-			<tr>
-				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
-				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
-				<th>Trash</th>
-				<th>Avatars</th>
-			</tr>
-		   	<tr ng-repeat="player in datas">
-		   		<td class="">0</td>
-		       	<td class="">{{player.pseudo}}</td>
-		       	<td class="">{{player.scores[0].pts}} pts</td>
-		       	<td class=""><img ng-src="#"></td>
-			</tr>
-		</table>
-
-	</div>
-
-	<!-- 5 : Tab best scores flash -->
-	<div class="tab-best-flash" ng-show="activeTab == 5">
-
-		<hr/>
-		<h3>Best Scores : Flash</h3>
-		
-		<table class="table table-striped">
-			<tr>
-				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
-				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
-				<th>Flash</th>
-				<th>Avatars</th>
-			</tr>
-		   	<tr ng-repeat="player in datas">
-		   		<td class="">0</td>
-		       	<td class="">{{player.pseudo}}</td>
-		       	<td class="">{{player.scores[0].pts}} pts</td>
-		       	<td class=""><img ng-src="#"></td>
-			</tr>
-		</table>
-
-	</div>
-
 </div>

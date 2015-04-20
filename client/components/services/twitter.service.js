@@ -3,10 +3,11 @@
 angular.module('transmedApp')
 	.factory('TweetService', function($http, TwitterUrl){
 		return{
-			getTweet : function(callback, errorCallback){
+			getTweets : function(callback, errorCallback){
 				$http({
 					method: 'GET',
-					url: TwitterUrl + 'statuses/user_timeline.json?screen_name=eve_status&count=15'
+					// https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi&count=2
+					url: TwitterUrl + 'statuses/user_timeline.json?screen_name=eve_status&count=2'
 				}).success(function (data){
 					callback(data);
 				}).error(function (data){

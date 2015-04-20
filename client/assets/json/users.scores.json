@@ -1,0 +1,240 @@
+[
+    {
+        "id": "5532d1ae1cefa5110057b28b",
+        "pseudo": "test",
+        "email": "test",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 879,
+            "hsWash": 93,
+            "hsFlash": 94,
+            "hsTrash": 49,
+            "totalHs": 236
+        }
+    },
+    {
+        "id": "5532d1b51cefa5110057b28c",
+        "pseudo": "test2",
+        "email": "test2",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 669,
+            "hsWash": 80,
+            "hsFlash": 81,
+            "hsTrash": 97,
+            "totalHs": 258
+        }
+    },
+    {
+        "id": "5532d0b11cefa5110057b224",
+        "pseudo": "Lau",
+        "email": "lau@lau.com",
+        "imgUrl": "imgUsers/5532d0b11cefa5110057b224.png",
+        "like": 0,
+        "scores": {
+            "scoreTot": 1938,
+            "hsWash": 87,
+            "hsFlash": 92,
+            "hsTrash": 97,
+            "totalHs": 276
+        }
+    },
+    {
+        "id": "5532d1c01cefa5110057b28f",
+        "pseudo": "test234",
+        "email": "test1",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 752,
+            "hsWash": 56,
+            "hsFlash": 64,
+            "hsTrash": 75,
+            "totalHs": 195
+        }
+    },
+    {
+        "id": "5532d2061cefa5110057b2f4",
+        "pseudo": "oias",
+        "email": "hoi",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 327,
+            "hsWash": 69,
+            "hsFlash": 25,
+            "hsTrash": 98,
+            "totalHs": 192
+        }
+    },
+    {
+        "id": "5534a56f584cc911009e0c99",
+        "pseudo": "test12",
+        "email": "test233232",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 534,
+            "hsWash": 15,
+            "hsFlash": 92,
+            "hsTrash": 81,
+            "totalHs": 188
+        }
+    },
+    {
+        "id": "5534b638584cc911009e0cad",
+        "pseudo": "teadsst",
+        "email": "tesasdt",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 76,
+            "hsWash": 46,
+            "hsFlash": 13,
+            "hsTrash": 14,
+            "totalHs": 73
+        }
+    },
+    {
+        "id": "5534df6689475d110009fc4a",
+        "pseudo": "tesasdsadat",
+        "email": "teasdsast",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 0,
+            "hsWash": 0,
+            "hsFlash": 0,
+            "hsTrash": 0,
+            "totalHs": 0
+        }
+    },
+    {
+        "id": "5534e0d589475d110009fc4c",
+        "pseudo": "dasd",
+        "email": "email@das.com",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 0,
+            "hsWash": 0,
+            "hsFlash": 0,
+            "hsTrash": 0,
+            "totalHs": 0
+        }
+    },
+    {
+        "id": "5534e0ed89475d110009fc4d",
+        "pseudo": "das",
+        "email": "dsa@das.com",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 0,
+            "hsWash": 0,
+            "hsFlash": 0,
+            "hsTrash": 0,
+            "totalHs": 0
+        }
+    },
+    {
+        "id": "5534e483fe11b411003793b0",
+        "pseudo": "Matthieu",
+        "email": "matthieu.harbich@gmail.com",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 0,
+            "hsWash": 0,
+            "hsFlash": 0,
+            "hsTrash": 0,
+            "totalHs": 0
+        }
+    },
+    {
+        "id": "5532d0b11cefa5110057b222",
+        "pseudo": "Ro",
+        "email": "ro@ro.com",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 1751,
+            "hsWash": 85,
+            "hsFlash": 94,
+            "hsTrash": 80,
+            "totalHs": 259
+        }
+    },
+    {
+        "id": "5532d0b11cefa5110057b220",
+        "pseudo": "Mat",
+        "email": "mat@mat.com",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 1765,
+            "hsWash": 97,
+            "hsFlash": 97,
+            "hsTrash": 97,
+            "totalHs": 291
+        }
+    },
+    {
+        "id": "5532d0b11cefa5110057b225",
+        "pseudo": "Cle",
+        "email": "cle@cle.com",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 1288,
+            "hsWash": 64,
+            "hsFlash": 99,
+            "hsTrash": 95,
+            "totalHs": 258
+        }
+    },
+    {
+        "id": "5532d0b11cefa5110057b221",
+        "pseudo": "Flo",
+        "email": "flo@flo.com",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 1235,
+            "hsWash": 96,
+            "hsFlash": 83,
+            "hsTrash": 69,
+            "totalHs": 248
+        }
+    },
+    {
+        "id": "5532d0b11cefa5110057b223",
+        "pseudo": "Chri",
+        "email": "chri@chri.com",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 1594,
+            "hsWash": 95,
+            "hsFlash": 99,
+            "hsTrash": 89,
+            "totalHs": 283
+        }
+    },
+    {
+        "id": "5532d0b11cefa5110057b226",
+        "pseudo": "Cha",
+        "email": "cha@cha.com",
+        "imgUrl": "imgUsers/poisson.jpg",
+        "like": 0,
+        "scores": {
+            "scoreTot": 1597,
+            "hsWash": 80,
+            "hsFlash": 99,
+            "hsTrash": 96,
+            "totalHs": 275
+        }
+    }
+]
