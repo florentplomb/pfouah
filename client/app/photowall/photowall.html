@@ -4,9 +4,9 @@
 	<h1>photowall</h1>
 	<p>Like or dislike your friends !</p>
 
-	<div deckgrid class="deckgrid" source="photos" ng-repeat="photo in photos">
+	<div deckgrid class="deckgrid" source="photos" ng-repeat="photo in datas">
 	    <div class="img-box">
-	        <img class="img-wall img-rounded" data-ng-src="{{photo.src}}">
+	        <img class="img-wall img-rounded" data-ng-src="{{photo.imgUrl}}">
 	        <aside class="content-over">
 	        	<!-- bouton dislike -->
 	        	<div type="button" ng-click="likePlayer(photo)" class="btn btn-primary btn-as-badge">
@@ -18,7 +18,7 @@
 	        	</div>
 
 	        	<!-- compteur de like -->
-	        	<p class="p-cpt label label-primary label-as-badge">{{photo.cpt}} likes</p>
+	        	<p class="p-cpt label label-primary label-as-badge">{{photo.like}} likes</p>
 	        </aside>
 	    </div>
 	</div>

@@ -15,11 +15,13 @@
 		
 		<table class="table table-striped">
 			<tr>
+				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
 				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
 				<th><a ng-click="predicate = 'scores[0].pts'; reverse=!reverse">Scores totaux</a></th>
-				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Avatars</a></th>
+				<th>Avatars</th>
 			</tr>
 		   	<tr ng-repeat="player in datas | orderBy:predicate:reverse">
+		   		<td class="">0</td>
 		       	<td class="">{{player.pseudo}}</td>
 		       	<td class="">{{player.scores[0].pts}} pts</td>
 		       	<td class=""><img ng-src="#"></td>
@@ -32,15 +34,17 @@
 	<div class="tab-best-cumul" ng-show="activeTab == 2">
 		
 		<hr/>
-		<h3>Best Scores : cummulés</h3>
+		<h3>Best Scores : cumulés</h3>
 
 		<table class="table table-striped">
 			<tr>
-				<th>Joueurs</th>
-				<th>Best Scores : 3 games</th>
+				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
+				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
+				<th>Best scores cumulées</th>
 				<th>Avatars</th>
 			</tr>
 		   	<tr ng-repeat="player in datas">
+		   		<td class="">0</td>
 		       	<td class="">{{player.pseudo}}</td>
 		       	<td class="">{{player.scores[0].pts}} pts</td>
 		       	<td class=""><img ng-src="#"></td>
@@ -57,11 +61,13 @@
 
 		<table class="table table-striped">
 			<tr>
-				<th>Joueurs</th>
+				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
+				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
 				<th>Wash</th>
 				<th>Avatars</th>
 			</tr>
 		   	<tr ng-repeat="player in datas">
+		   		<td class="">0</td>
 		       	<td class="">{{player.pseudo}}</td>
 		       	<td class="">{{player.scores[0].pts}} pts</td>
 		       	<td class=""><img ng-src="#"></td>
@@ -78,11 +84,13 @@
 		
 		<table class="table table-striped">
 			<tr>
-				<th>Joueurs</th>
+				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
+				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
 				<th>Trash</th>
 				<th>Avatars</th>
 			</tr>
 		   	<tr ng-repeat="player in datas">
+		   		<td class="">0</td>
 		       	<td class="">{{player.pseudo}}</td>
 		       	<td class="">{{player.scores[0].pts}} pts</td>
 		       	<td class=""><img ng-src="#"></td>
@@ -99,11 +107,13 @@
 		
 		<table class="table table-striped">
 			<tr>
-				<th>Joueurs</th>
+				<th><a ng-click="predicate = 'position'; reverse=!reverse">Position</a></th>
+				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
 				<th>Flash</th>
 				<th>Avatars</th>
 			</tr>
 		   	<tr ng-repeat="player in datas">
+		   		<td class="">0</td>
 		       	<td class="">{{player.pseudo}}</td>
 		       	<td class="">{{player.scores[0].pts}} pts</td>
 		       	<td class=""><img ng-src="#"></td>

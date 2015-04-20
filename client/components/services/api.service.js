@@ -3,7 +3,7 @@
 // http://pfouah2015.herokuapp.com/api/users
 
 angular.module('transmedApp')
-	.factory('RankingService', function($http){
+	.factory('ApiService', function($http){
 		return{
 			getUsers : function(callback, errorCallback){
 				$http({

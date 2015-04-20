@@ -1,32 +1,32 @@
 'use strict';
 
 angular.module('transmedApp')
-	.controller('WallCtrl', function ($scope, $http, socket, $log){
-		$scope.photos = [
-		    {'id': 'p1', 'title': 'A nice day!', 'src': "http://lorempixel.com/300/300/", 'cpt': '0'},
-		    {'id': 'p2', 'title': 'Puh!', 'src': "http://lorempixel.com/300/300/sports", 'cpt': '10'},
-		    {'id': 'p3', 'title': 'What a club!', 'src': "http://lorempixel.com/300/300/nightlife", 'cpt': '5'},
-		    {'id': 'p1', 'title': 'A nice day!', 'src': "http://lorempixel.com/300/300/", 'cpt': '0'},
-		    {'id': 'p2', 'title': 'Puh!', 'src': "http://lorempixel.com/300/300/sports", 'cpt': '10'},
-		    {'id': 'p3', 'title': 'What a club!', 'src': "http://lorempixel.com/300/300/nightlife", 'cpt': '5'},
-		    {'id': 'p1', 'title': 'A nice day!', 'src': "http://lorempixel.com/300/300/", 'cpt': '0'},
-		    {'id': 'p2', 'title': 'Puh!', 'src': "http://lorempixel.com/300/300/sports", 'cpt': '10'},
-		    {'id': 'p3', 'title': 'What a club!', 'src': "http://lorempixel.com/300/300/nightlife", 'cpt': '5'},
-		    {'id': 'p1', 'title': 'A nice day!', 'src': "http://lorempixel.com/300/300/", 'cpt': '0'},
-		    {'id': 'p2', 'title': 'Puh!', 'src': "http://lorempixel.com/300/300/sports", 'cpt': '10'},
-		    {'id': 'p3', 'title': 'What a club!', 'src': "http://lorempixel.com/300/300/nightlife", 'cpt': '5'}
-		];
+	.controller('WallCtrl', function ($scope, $http, socket, $log, StaticService){
+
+		StaticService.getUsers(
+			function(data){
+				$scope.datas = data;
+
+				for (var i = $scope.datas.length - 1; i >= 0; i--) {
+					$scope.datas[i].imgUrl = 'http://pfouah2015.herokuapp.com/' + data[i].imgUrl;
+					$log.debug($scope.datas[i].imgUrl);
+				};
+			},
+			function(error){
+				$scope.error = error;
+			}
+		);
 
 
 		$scope.likePlayer = function(photo){
-			photo.cpt ++;
+			photo.like ++;
 			//$log.debug(photo); 
 		}
 
 		$scope.dislikePlayer = function(photo){
-			photo.cpt--;
-			if(photo.cpt <= 0){
-				photo.cpt = 0;
+			photo.like--;
+			if(photo.like <= 0){
+				photo.like = 0;
 			}
 		}
 	});
