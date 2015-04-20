@@ -348,9 +348,11 @@ exports.login = function(req, res, next) {
         }).end();
 
       } else {
+          var userId = userFound[0].id;
+        req.params.id =  userId
         var usrScore = {};
         var callback = function(tab) {
-          var userId = userFound[0].id;
+
           User.findById(userId)
             .select('-hashedPassword -scores')
             .exec(function(err, user) {
@@ -362,8 +364,6 @@ exports.login = function(req, res, next) {
 
         }
         scoreUsersData(req, res, next,callback);
-
-
       }
     });
 };
