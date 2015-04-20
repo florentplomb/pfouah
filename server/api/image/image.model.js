@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
 
 var ImageSchema = new Schema({
   data: Buffer,
-  contentType: String
+  contentType: String,
+  like: Number
 });
 
 module.exports = mongoose.model('Image', ImageSchema);

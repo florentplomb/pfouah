@@ -6,6 +6,7 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var _ = require('underscore');
+//var bcrypt = require('bcrypt');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -38,11 +39,15 @@ exports.create = function(req, res, next) {
   if (!req.body.hashedPassword) return res.send("Need hashedPassword");
     if (!req.body.imgId) return res.send("Need imgId");
 
+
+
+
+
   var newUser = new User();
   newUser.email = req.body.email;
   newUser.pseudo = req.body.pseudo;
   newUser.imgId = req.body.imgId;
-  newUser.hashedPassword = req.body.hashedPassword;
+  newUser.hashedPassword = bcrypt.hashSync(req.body.hashedPassword, 8);
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
     // var token = jwt.sign({
