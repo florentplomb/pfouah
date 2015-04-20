@@ -16,6 +16,10 @@ angular.module('transmedApp', [
     }
   ])
 
+  .config(['$resourceProvider',function($resourceProvider) {
+    $resourceProvider.defaults.stripTrailingSlashes = false;
+  }])
+
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
