@@ -5,13 +5,29 @@ angular.module('transmedApp')
 
 		StaticService.getScores (
 			function(data){
-				$scope.datas = data;
 
-				// TODO trier et assigner valeur à position
+				var tri =
+				data.sort(function(a, b){
+					// add these proprieties to each object sorted
+					a.positions = [{
+						'scoreTot' : '',
+						'totalHs' : '',
+						'hsWash' : '',
+						'hsTrash' : '',
+						'hsFlash' : ''
+					}];
+					return a.scores.scoreTot-b.scores.scoreTot
+				});
+
+				for (var i = tri.length; i >= 0; i--) {
+					$log.debug(tri[i]);
+				};
 
 				// Default sort options
 				$scope.predicate = $scope.tabs[0].predicate;
 				$scope.reverse = $scope.tabs[0].reverse;
+
+				$scope.datas = data;
 			},
 			function(error){
 				$scope.error = error;

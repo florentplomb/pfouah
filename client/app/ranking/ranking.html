@@ -21,11 +21,11 @@
 			</tr>
 		   	<tr ng-repeat="player in datas | orderBy:predicate:reverse">
 		   		<!-- position : juste one at time -->
-		   		<td class="" ng-show="activeTab == 1">pos1</td>
-		   		<td class="" ng-show="activeTab == 2">pos2</td>
-		   		<td class="" ng-show="activeTab == 3">pos3</td>
-		   		<td class="" ng-show="activeTab == 4">pos4</td>
-		   		<td class="" ng-show="activeTab == 5">pos5</td>
+		   		<td class="" ng-show="activeTab == 1">{{player.positions.scoreTot}}</td>
+		   		<td class="" ng-show="activeTab == 2">{{player.positions.totalHs}}</td>
+		   		<td class="" ng-show="activeTab == 3">{{player.positions.hsWash}}</td>
+		   		<td class="" ng-show="activeTab == 4">{{player.positions.hsTrash}}</td>
+		   		<td class="" ng-show="activeTab == 5">{{player.positions.hsFlash}}</td>
 
 		       	<td class="">{{player.pseudo}}</td>
 		       	<td class="" ng-show="activeTab == 1">{{player.scores.scoreTot}} pts</td>
