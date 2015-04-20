@@ -42,7 +42,6 @@ exports.create = function(req, res) {
   }
 
 
-
     var newImg = new Image();
       var imgBuf = new Buffer(req.body.imgBase64, 'base64');
         newImg.data = imgBuf;
