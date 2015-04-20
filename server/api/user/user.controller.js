@@ -132,21 +132,19 @@ exports.score = function(req, res, next) {
 
 
 };
-        function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 
-          for (var i = 0; i < arraytosearch.length; i++) {
+function functiontofindIndexByKeyValue(arraytosearch, key, valuetosearch) {
 
-            if (arraytosearch[i][key] === valuetosearch) {
-              return i;
-            }
-          }
-          return null;
-        }
+  for (var i = 0; i < arraytosearch.length; i++) {
 
-exports.userScore = function(req, res, next) {
+    if (arraytosearch[i][key] === valuetosearch) {
+      return i;
+    }
+  }
+  return null;
+}
 
-
-
+function scoreUsersData(req, res, next, callback) {
 
 
   var scoreTot = 0;
@@ -205,50 +203,50 @@ exports.userScore = function(req, res, next) {
       };
 
 
-  var usersScore = [];
-  var usr = {}
-  User.find()
-    .populate('scores')
-    .exec(function(err, users) {
-      if (users.length === 0) {
+      var usersScore = [];
+      var usr = {}
+      User.find()
+        .populate('scores')
+        .exec(function(err, users) {
+          if (users.length === 0) {
 
-        res.status(422).json({
-          message: 'pas de users dans la bd'
-        }).end();
+            res.status(422).json({
+              message: 'pas de users dans la bd'
+            }).end();
 
-      } else {
+          } else {
 
-        for (var i = 0; i < users.length; i++) {
-          var scs = users[i].scores
-          var scsTot = 0;
-          var usr = {};
+            for (var i = 0; i < users.length; i++) {
+              var scs = users[i].scores
+              var scsTot = 0;
+              var usr = {};
 
-          for (var y = 0; y < scs.length; y++) {
+              for (var y = 0; y < scs.length; y++) {
 
-            scsTot = scs[y].pts + scsTot;
+                scsTot = scs[y].pts + scsTot;
+
+              }
+              usr.id = users[i].id;
+              usr.pts = scsTot;
+              usersScore.push(usr);
+            }
+            usersScore.sort(function(a, b) {
+              return parseInt(a.pts) - parseInt(b.pts)
+            });
+            usersScore.reverse();
+            var index = functiontofindIndexByKeyValue(usersScore, "id", req.params.id);
+            index++;
+
+            tab.rank = index;
+            callback(tab);
+            //return res.json(tab);
+
+
 
           }
-          usr.id = users[i].id;
-          usr.pts = scsTot;
-          usersScore.push(usr);
-        }
-        usersScore.sort(function(a, b) {
-          return parseInt(a.pts) - parseInt(b.pts)
-        });
-        usersScore.reverse();
-        var index = functiontofindIndexByKeyValue(usersScore, "id", req.params.id);
-        index++;
-
-        tab.rank = index;
-
-        return res.json(tab);
-
-      }
 
 
-    })
-
-
+        })
 
 
     });
@@ -256,6 +254,41 @@ exports.userScore = function(req, res, next) {
 
 
 };
+
+
+exports.userScore = function(req, res, next) {
+
+  var userId = req.params.id;
+  User.findById(userId, function(err, player) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!player) {
+      return res.json("user undefined");
+    }
+    scoreUsersData(req, res, next, callback);
+  })
+
+  var usrScore = {};
+  var callback = function(tab) {
+
+    var userId = req.params.id;
+    User.findById(userId)
+      .select('-hashedPassword -scores')
+      .exec(function(err, user) {
+        if (err) return res.send(500, err);
+        usrScore.user = user;
+        usrScore.scores = tab;
+        return res.json(200, usrScore);
+      })
+
+  }
+
+  //funcition de get tab ()
+
+
+
+}
 
 exports.like = function(req, res, next) {
   var userId = req.params.id;
@@ -300,14 +333,14 @@ exports.login = function(req, res, next) {
 
   User
     .find()
-    .and({
+
+  .and({
       pseudo: req.body.pseudo
     })
     .and({
       hashedPassword: req.body.hashedPassword
     })
     .exec(function(err, userFound) {
-      console.log("ici" + userFound);
       if (userFound.length === 0) {
 
         res.status(422).json({
@@ -315,8 +348,21 @@ exports.login = function(req, res, next) {
         }).end();
 
       } else {
+        var usrScore = {};
+        var callback = function(tab) {
+          var userId = userFound[0].id;
+          User.findById(userId)
+            .select('-hashedPassword -scores')
+            .exec(function(err, user) {
+              if (err) return res.send(500, err);
+              usrScore.user = user;
+              usrScore.scores = tab;
+              return res.json(200, usrScore);
+            })
 
-        return res.json(userFound[0].profile);
+        }
+        scoreUsersData(req, res, next,callback);
+
 
       }
     });
