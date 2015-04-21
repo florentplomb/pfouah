@@ -5,8 +5,8 @@
 	<div class="btn btn-primary btn-ranking" ng-repeat="tab in tabs" ng-click="showTab(tab.id)">{{tab.title}}</div>
 
 		<hr/>
-		<h3>Tableau des scores</h3>
-		<pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>
+		<h3 ng-show="activeTab == 1">Tableau des scores</h3>
+		<!--<pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>-->
 
 		<table class="table table-striped">
 			<tr>
