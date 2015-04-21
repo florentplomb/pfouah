@@ -18,6 +18,9 @@ var UserSchema = new Schema({
 
   imgId: { type: Schema.Types.ObjectId, ref: 'Image' },
 
+   salt: {
+    type: Number
+  },
   like: {
     type: Number,
     default: 0
@@ -39,19 +42,7 @@ var UserSchema = new Schema({
   },
 });
 
-/**
- * Virtuals
- */
-//  UserSchema
-//  .virtual('password')
-//  .set(function(password) {
-//   this._password = password;
-//   this.salt = this.makeSalt();
-//   this.hashedPassword = this.encryptPassword(password);
-// })
-//  .get(function() {
-//   return this._password;
-// });
+
 
 //Public profile information
 UserSchema
@@ -63,24 +54,14 @@ UserSchema
     'pseudo': this.pseudo,
     'like' : this.like,
     'imgId' : this.imgId,
-    'scores' : this.scores
+    'salt' : this.salt,
+     'scores' : this.scores
+
   };
 });
 
 
-// // Non-sensitive info we'll be putting in the token
-// UserSchema
-//   .virtual('token')
-//   .get(function() {
-//     return {
-//       '_id': this._id,
-//       'role': this.role
-//     };
-//   });
 
-/**
- * Validations
- */
 
 //Validate empty email
 UserSchema

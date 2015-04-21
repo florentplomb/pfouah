@@ -13,6 +13,10 @@ var validationError = function(res, err) {
   return res.json(422, err);
 };
 
+function getRandomInt() {
+  return Math.random() * (9999999999 - 99999) + 9999;
+}
+
 /**
  * Get list of users
  * restriction: 'admin'
@@ -27,6 +31,10 @@ exports.index = function(req, res) {
     .exec(function(err, users) {
       if (err) return res.send(500, err);
       return res.json(200, users);
+
+      if (users.length === 0) return res.status(400).json({
+        message: 'users empty'
+      }).end();
     })
 
 };
@@ -48,14 +56,12 @@ exports.create = function(req, res, next) {
     message: 'need imgId'
   }).end();
 
-
-
   var newUser = new User();
   newUser.email = req.body.email;
   newUser.pseudo = req.body.pseudo;
   newUser.imgId = req.body.imgId;
-  newUser.salt =
-    newUser.hashedPassword = bcrypt.hashSync(req.body.hashedPassword, 8);
+  newUser.salt = getRandomInt();
+  newUser.hashedPassword = bcrypt.hashSync(req.body.hashedPassword, 8);
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
     // var token = jwt.sign({
@@ -64,8 +70,8 @@ exports.create = function(req, res, next) {
     //   expiresInMinutes: 60 * 5
     // });
     res.json({
-      user: user.profile,
-      // token: token
+      user: user.profile
+        // token: token
     });
   });
 };
@@ -306,8 +312,12 @@ exports.userScore = function(req, res, next) {
 
 exports.login = function(req, res, next) {
 
-  if (!req.body.pseudo) return res.send(400, "need pseudo");
-  if (!req.body.hashedPassword) return res.send(400, "need password");
+  if (!req.body.pseudo) return res.status(400).json({
+    message: 'need pseudo'
+  }).end();
+  if (!req.body.hashedPassword) return res.status(400).json({
+    message: 'need password'
+  }).end();
 
   User
     .find()
@@ -315,49 +325,43 @@ exports.login = function(req, res, next) {
       pseudo: req.body.pseudo
     })
     .exec(function(err, userFound) {
-        if (userFound.length === 0) {
-          res.status(422).json({
-            message: 'wrong pseudo'
+      if (userFound.length === 0) {
+        res.status(422).json({
+          message: 'wrong pseudo'
+        }).end();
+      }
+
+      bcrypt.compare(req.body.hashedPassword, userFound[0].hashedPassword, function(err, isMatch) {
+        if (err) {
+          return res.status(422).json({
+            message: 'wrong password'
           }).end();
         }
 
+        if (!isMatch) {
+          return res.status(422).json({
+            message: 'wrong password'
+          }).end();
+        }
 
-//  function comparePassword (password, userPassword, callback) {
-//   console.log(isPasswordMatch);
-//     bcrypt.compare(req.body.hashedPassword, userFound[0].hashedPassword, function(err, isPasswordMatch) {
-//          console.log(isPasswordMatch);
-
-//         if (err) return callback(err);
-//         else {
-
-//             }
-//         // return callback(null, isPasswordMatch); }
-
-//     });
-// };
-
-// console.log(comparePassword);
-
+        var userId = userFound[0].id;
+        req.params.id = userId;
+        var usrScore = {};
+        var callback = function(tab) {
+          User.findById(userId)
+            .select('-hashedPassword -scores')
+            .exec(function(err, user) {
+              if (err) return res.send(500, err);
+              usrScore.user = user;
+              usrScore.scores = tab;
+              return res.json(200, usrScore);
+            })
+        }
+        scoreUsersData(req, res, next, callback);
 
 
+      });
 
-
-
-
-      var userId = userFound[0].id;
-      req.params.id = userId;
-      var usrScore = {};
-      var callback = function(tab) {
-        User.findById(userId)
-          .select('-hashedPassword -scores')
-          .exec(function(err, user) {
-            if (err) return res.send(500, err);
-            usrScore.user = user;
-            usrScore.scores = tab;
-            return res.json(200, usrScore);
-          })
-      }
-      scoreUsersData(req, res, next, callback);
     });
 };
 
@@ -370,6 +374,9 @@ exports.show = function(req, res, next) {
     .select('-hashedPassword')
     .populate('scores')
     .exec(function(err, user) {
+      if (!user) return res.status(400).json({
+    message: 'user undefined'
+  }).end();
       if (err) return res.send(500, err);
       return res.json(200, user.profile);
     })

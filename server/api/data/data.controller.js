@@ -62,32 +62,39 @@ exports.createData = function(req, res) {
       email: "Mat@mat.com",
       pseudo: "Mat",
       roles: "admin",
+      salt : random(999999,999),
       hashedPassword: "comem"
     }, {
       email: "Flo@flo.com",
       pseudo: "Flo",
       roles: "admin",
+      salt : random(999999,999),
       hashedPassword: "comem"
     }, {
       email: "Ro@Ro.com",
       pseudo: "Ro",
       roles: "admin",
+      salt : random(999999,999),
       hashedPassword: "comem"
     }, {
       email: "Chri@Chri.com",
       pseudo: "Chri",
+      salt : random(999999,999),
       hashedPassword: "comem"
     }, {
       email: "Lau@lau.com",
       pseudo: "Lau",
+      salt : random(999999,999),
       hashedPassword: "comem"
     }, {
       email: "Cle@Cle.com",
       pseudo: "Cle",
+      salt : random(999999,999),
       hashedPassword: "comem"
     }, {
       email: "Cha@Cha.com",
       pseudo: "Cha",
+      salt : random(999999,999),
       hashedPassword: "comem"
     });
 
