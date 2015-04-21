@@ -14,11 +14,17 @@ angular.module('transmedApp', [
   .constant('TwitterUrl', 'https://api.twitter.com/1.1/')
   .constant('ApiUrl', 'http://pfouah2015.herokuapp.com/')
 
+  .config(function (localStorageServiceProvider) {
+    localStorageServiceProvider
+      .setPrefix('pfouah')
+      .setStorageType('localStorage')
+      .setNotify(true, true)
+  })
+
   .config(['$httpProvider', function($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    }
-  ])
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  }])
 
   .config(['$resourceProvider',function($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
