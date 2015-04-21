@@ -1,8 +1,24 @@
 'use strict';
 
 angular.module('transmedApp')
-	.controller('WallCtrl', function ($scope, $http, socket, $log, StaticService){
+	.controller('WallCtrl', function ($scope, $http, socket, $log, StaticService, localStorageService){
+		$scope.error = '';
+		$scope.res = '';
 
+		// Local storage functions
+	  	function addItem(key, val) {
+	   		return localStorageService.set(key, val);
+	  	}
+
+	   	function getItem(key) {
+	   		return localStorageService.get(key);
+	  	}
+
+	  	function removeItem(key) {
+   			return localStorageService.remove(key);
+  		}
+
+	  	// Page loading
 		StaticService.getUsers(
 			function(data){
 				$scope.datas = data;
@@ -17,16 +33,29 @@ angular.module('transmedApp')
 			}
 		);
 
-
 		$scope.likePlayer = function(photo){
-			photo.like ++;
-			//$log.debug(photo); 
+			$scope.res = getItem(photo._id);
+
+			if($scope.res == null){
+				addItem(photo._id, photo._id);
+				photo.like ++;
+				$scope.error = 'vote comptabilisé !!!';
+				// Update DB
+			}else{
+				$scope.error = 'Vous avez déjà voté pour cette image auparavant!';
+			}
 		}
 
 		$scope.dislikePlayer = function(photo){
-			photo.like--;
-			if(photo.like <= 0){
-				photo.like = 0;
+			$scope.res = getItem(photo._id);
+
+			if($scope.res == null){
+				addItem(photo._id, photo._id);
+				photo.like--;
+				$scope.error = 'vote comptabilisé !!!';
+				// Update DB
+			}else{
+				$scope.error = 'Vous avez déjà voté pour cette image auparavant!';
 			}
 		}
 	});
