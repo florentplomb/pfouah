@@ -6,28 +6,56 @@ angular.module('transmedApp')
 		StaticService.getScores (
 			function(data){
 
-				var tri =
-				data.sort(function(a, b){
-					// add these proprieties to each object sorted
-					a.positions = [{
-						'scoreTot' : '',
-						'totalHs' : '',
-						'hsWash' : '',
-						'hsTrash' : '',
-						'hsFlash' : ''
-					}];
-					return a.scores.scoreTot-b.scores.scoreTot
-				});
-
-				for (var i = tri.length; i >= 0; i--) {
-					$log.debug(tri[i]);
+				var positions = [];
+				for (var i = data.length; i >= 0; i--) {
+					positions.push(i);
 				};
 
-				// Default sort options
-				$scope.predicate = $scope.tabs[0].predicate;
-				$scope.reverse = $scope.tabs[0].reverse;
+				// Tri par scores totaux
+				data.sort(function(a, b){
+					return a.scores.scoreTot-b.scores.scoreTot;
+				});
+				for (var i = data.length - 1; i >= 0; i--) {
+					data[i].posTot = positions[i];
+				};	
+
+				// Tri par scores cumulés
+				data.sort(function(a, b){
+					return a.scores.totalHs-b.scores.totalHs;
+				});
+				for (var i = data.length - 1; i >= 0; i--) {
+					data[i].posCumul = positions[i];
+				};	
+
+				// Tri par scores wash
+				data.sort(function(a, b){
+					return a.scores.hsWash-b.scores.hsWash;
+				});
+				for (var i = data.length - 1; i >= 0; i--) {
+					data[i].posWash = positions[i];
+				};
+
+				// Tri par scores wash
+				data.sort(function(a, b){
+					return a.scores.hsFlash-b.scores.hsFlash;
+				});
+				for (var i = data.length - 1; i >= 0; i--) {
+					data[i].posFlash = positions[i];
+				};	
+
+				// Tri par scores trash
+				data.sort(function(a, b){
+					return a.scores.hsTrash-b.scores.hsTrash;
+				});
+				for (var i = data.length - 1; i >= 0; i--) {
+					data[i].posTrash = positions[i];
+				};
 
 				$scope.datas = data;
+
+				// Default sort options
+				$scope.predicate = 'posTot';
+				$scope.reverse = 'false';
 			},
 			function(error){
 				$scope.error = error;
@@ -35,11 +63,11 @@ angular.module('transmedApp')
 		);
 
 		$scope.tabs = [
-			{'title' : 'Totaux', 'id': '1', 'predicate' : 'scores.scoreTot', 'reverse' : '-reverse'},
-			{'title' : 'Cummulés', 'id': '2', 'predicate' : 'scores.totalHs', 'reverse' : '-reverse'},
-			{'title' : 'Wash', 'id': '3', 'predicate' : 'scores.hsWash', 'reverse' : '-reverse'},
-			{'title' : 'Trash', 'id': '4', 'predicate' : 'scores.hsTrash', 'reverse' : '-reverse'},
-			{'title' : 'Flash', 'id': '5', 'predicate' : 'scores.hsFlash', 'reverse' : '-reverse'}
+			{'title' : 'Totaux', 'id': '1', 'predicate' : 'posTot', 'reverse' : 'false'},
+			{'title' : 'Cummulés', 'id': '2', 'predicate' : 'posCumul', 'reverse' : '-reverse'},
+			{'title' : 'Wash', 'id': '3', 'predicate' : 'posWash', 'reverse' : '-reverse'},
+			{'title' : 'Trash', 'id': '4', 'predicate' : 'posTrash', 'reverse' : '-reverse'},
+			{'title' : 'Flash', 'id': '5', 'predicate' : 'posFlash', 'reverse' : '-reverse'}
 		];
 
 		$scope.activeTab = $scope.tabs[0].id;
