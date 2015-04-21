@@ -7,7 +7,8 @@ angular.module('transmedApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'ngDialog'
+  'ngDialog',
+  'LocalStorageModule'
 ])
 
   .constant('TwitterUrl', 'https://api.twitter.com/1.1/')
