@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
+var bcrypt = require('bcryptjs');
 //var authTypes = ['kiou'];
 
 var UserSchema = new Schema({
@@ -14,10 +15,9 @@ var UserSchema = new Schema({
   },
   pseudo: {type: String, required: true},
   hashedPassword: {type: String, required: true},
-  imgId: {
-    type: String,
-    default: ""
-  },
+
+  imgId: { type: Schema.Types.ObjectId, ref: 'Image' },
+
   like: {
     type: Number,
     default: 0

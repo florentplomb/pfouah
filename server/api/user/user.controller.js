@@ -6,6 +6,7 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var _ = require('underscore');
+var bcrypt = require('bcryptjs');
 //var bcrypt = require('bcrypt');
 
 var validationError = function(res, err) {
@@ -34,12 +35,18 @@ exports.index = function(req, res) {
  * Creates a new user
  */
 exports.create = function(req, res, next) {
-  if (!req.body.email) return res.send("Need email");
-  if (!req.body.pseudo) return res.send("Need pseudo");
-  if (!req.body.hashedPassword) return res.send("Need hashedPassword");
-    if (!req.body.imgId) return res.send("Need imgId");
-
-
+  if (!req.body.email) return res.status(400).json({
+    message: 'need email'
+  }).end();
+  if (!req.body.pseudo) return res.status(400).json({
+    message: 'need pseudo'
+  }).end();
+  if (!req.body.hashedPassword) return res.status(400).json({
+    message: 'need password'
+  }).end();
+  if (!req.body.imgId) return res.status(400).json({
+    message: 'need imgId'
+  }).end();
 
 
 
@@ -47,7 +54,8 @@ exports.create = function(req, res, next) {
   newUser.email = req.body.email;
   newUser.pseudo = req.body.pseudo;
   newUser.imgId = req.body.imgId;
-  newUser.hashedPassword = bcrypt.hashSync(req.body.hashedPassword, 8);
+  newUser.salt =
+    newUser.hashedPassword = bcrypt.hashSync(req.body.hashedPassword, 8);
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
     // var token = jwt.sign({
@@ -257,7 +265,7 @@ function scoreUsersData(req, res, next, callback) {
 
 
 
-};
+}
 
 
 exports.userScore = function(req, res, next) {
@@ -294,41 +302,7 @@ exports.userScore = function(req, res, next) {
 
 }
 
-exports.like = function(req, res, next) {
-  var userId = req.params.id;
-  User.findById(userId, function(err, player) {
-    if (err) return next(err);
-    if (!player) return res.send("User doesn't exist");
-    if (!req.body.like) return res.send("like in json doesn't exist");
 
-    switch (req.body.like) {
-      case 1:
-        player.like = player.like + 1
-        player.save(function(err, playerSaved) {
-          if (err) {
-            return handleError(res, err);
-          }
-          res.json(playerSaved.email + ": +1 => like = " + playerSaved.like);
-        });
-        break;
-
-      case -1:
-        player.like = player.like - 1
-        player.save(function(err, playerSaved) {
-          if (err) {
-            return handleError(res, err);
-          }
-          res.json(playerSaved.email + ": -1 => like = " + playerSaved.like);
-        });
-        break;
-
-      default:
-        res.json("like value is wrong. Value = 1 for + or 0 for -");
-
-    }
-  });
-
-};
 
 exports.login = function(req, res, next) {
 
@@ -337,38 +311,56 @@ exports.login = function(req, res, next) {
 
   User
     .find()
-
-  .and({
+    .and({
       pseudo: req.body.pseudo
     })
-    .and({
-      hashedPassword: req.body.hashedPassword
-    })
     .exec(function(err, userFound) {
-      if (userFound.length === 0) {
-
-        res.status(422).json({
-          message: 'wrong pseudo and password'
-        }).end();
-
-      } else {
-          var userId = userFound[0].id;
-        req.params.id =  userId
-        var usrScore = {};
-        var callback = function(tab) {
-
-          User.findById(userId)
-            .select('-hashedPassword -scores')
-            .exec(function(err, user) {
-              if (err) return res.send(500, err);
-              usrScore.user = user;
-              usrScore.scores = tab;
-              return res.json(200, usrScore);
-            })
-
+        if (userFound.length === 0) {
+          res.status(422).json({
+            message: 'wrong pseudo'
+          }).end();
         }
-        scoreUsersData(req, res, next,callback);
+
+      bcrypt.compare(req.body.hashedPassword, userFound[0].hashedPassword, function(err, isMatch) {
+        if (err) {
+          return res.status(422).json({
+            message: 'wrong password'
+          }).end();
+        }
+
+          if (!isMatch) {
+          return res.status(422).json({
+            message: 'wrong password'
+          }).end();
+        }
+
+             var userId = userFound[0].id;
+      req.params.id = userId;
+      var usrScore = {};
+      var callback = function(tab) {
+        User.findById(userId)
+          .select('-hashedPassword -scores')
+          .exec(function(err, user) {
+            if (err) return res.send(500, err);
+            usrScore.user = user;
+            usrScore.scores = tab;
+            return res.json(200, usrScore);
+          })
       }
+      scoreUsersData(req, res, next, callback);
+
+
+
+
+      });
+
+
+
+
+
+
+
+
     });
 };
 

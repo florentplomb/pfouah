@@ -9,6 +9,28 @@ var validationError = function(res, err) {
   return res.json(422, err);
 };
 
+// Add like
+exports.like = function(req, res, next) {
+  Image.findById(req.params.id, function(err, image) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!image) {
+      return res.send(404);
+    }
+
+    image.like = image.like + 1;
+    image.save(function(err, img) {
+      if (err) return validationError(res, err);
+      return res.json(img.id);
+
+    });
+  });
+
+
+
+};
+
 // Get list of images
 exports.index = function(req, res) {
   Image.find(function(err, images) {
@@ -42,15 +64,15 @@ exports.create = function(req, res) {
   }
 
 
-    var newImg = new Image();
-      var imgBuf = new Buffer(req.body.imgBase64, 'base64');
-        newImg.data = imgBuf;
-        newImg.contentType = "image/png";
-        newImg.save(function(err, img) {
-          if (err) return validationError(res, err);
-         return res.json(img.id);
+  var newImg = new Image();
+  var imgBuf = new Buffer(req.body.imgBase64, 'base64');
+  newImg.data = imgBuf;
+  newImg.contentType = "image/png";
+  newImg.save(function(err, img) {
+    if (err) return validationError(res, err);
+    return res.json(img.id);
 
- });
+  });
 
 }
 
