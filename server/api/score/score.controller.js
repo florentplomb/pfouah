@@ -40,8 +40,16 @@ exports.show = function(req, res) {
 // Creates a new score in the DB.
 
 exports.create = function(req, res) {
-  if (!req.body.pts) return res.send(400, "need pseudo");
-  if (!req.body.gameName) return res.send(400, "need gameName");
+
+  if (!req.body.pts) return res.status(400).json({
+    message: 'need points'
+  }).end();
+
+  if (req.body.pts > 700) return res.status(400).json({
+    message: 'points too high'
+  }).end();
+
+  if (!req.body.gameName) return res.send(400, "need game");
   Game.findOne({
     name: req.body.gameName
   }, function(err, game) {

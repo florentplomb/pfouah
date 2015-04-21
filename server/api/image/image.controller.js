@@ -9,27 +9,6 @@ var validationError = function(res, err) {
   return res.json(422, err);
 };
 
-// Add like
-exports.like = function(req, res, next) {
-  Image.findById(req.params.id, function(err, image) {
-    if (err) {
-      return handleError(res, err);
-    }
-    if (!image) {
-      return res.send(404);
-    }
-
-    image.like = image.like + 1;
-    image.save(function(err, img) {
-      if (err) return validationError(res, err);
-      return res.json(img.id);
-
-    });
-  });
-
-
-
-};
 
 // Get list of images
 exports.index = function(req, res) {
@@ -38,6 +17,53 @@ exports.index = function(req, res) {
       return handleError(res, err);
     }
     return res.json(200, images);
+  });
+};
+
+
+exports.liked = function(req, res) {
+
+  if (!req.body.like) return res.status(400).json({
+    message: 'need like'
+  }).end();
+
+  if (!req.body.check) return res.status(400).json({
+    message: 'need check'
+  }).end();
+
+
+
+  Image.findById(req.params.id, function(err, image) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!image) {
+      return handleError(res, err);
+    }
+
+    for (var i = 0; i < image.likeBy.length; i++) {
+
+      if (image.likeBy[i] === req.body.check) {
+        return res.status(400).json({
+          message: 'Vote already set'
+        }).end();
+      }
+    }
+
+    if (req.body.like === "p") {
+      image.like = image.like + 1;
+    } else if (req.body.like === "n") {
+      image.like = image.like - 1;
+    } else {
+       return res.status(400).json({
+          message: 'like invalide'
+        }).end();
+    }
+    image.likeBy.push(req.body.check);
+    image.save(function(err, img) {
+      if (err) return validationError(res, err);
+      return res.json(img.like);
+    });
   });
 };
 
@@ -58,11 +84,9 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
 
 
-
   if (!req.body.imgBase64) {
     return res.json("json invalid");
   }
-
 
   var newImg = new Image();
   var imgBuf = new Buffer(req.body.imgBase64, 'base64');

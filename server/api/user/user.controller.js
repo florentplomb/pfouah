@@ -30,11 +30,12 @@ exports.index = function(req, res) {
     .populate('scores')
     .exec(function(err, users) {
       if (err) return res.send(500, err);
-      return res.json(200, users);
-
-      if (users.length === 0) return res.status(400).json({
+       if (users.length === 0) return res.status(400).json({
         message: 'users empty'
       }).end();
+      return res.json(200, users);
+
+
     })
 
 };
@@ -302,7 +303,6 @@ exports.userScore = function(req, res, next) {
 
   }
 
-  //funcition de get tab ()
 
 
 
@@ -343,13 +343,12 @@ exports.login = function(req, res, next) {
             message: 'wrong password'
           }).end();
         }
-
         var userId = userFound[0].id;
         req.params.id = userId;
         var usrScore = {};
         var callback = function(tab) {
           User.findById(userId)
-            .select('-hashedPassword -scores')
+            .select('-hashedPassword -scores -salt')
             .exec(function(err, user) {
               if (err) return res.send(500, err);
               usrScore.user = user;

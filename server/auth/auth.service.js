@@ -23,6 +23,8 @@ function isAuthenticated() {
 
   .use(function(req, res, next) {
 
+    console.log(req.headers['salt']);
+
     if (!req.headers['salt']) return res.status(400).json({
       message: 'header wrong'
     }).end();
@@ -87,16 +89,8 @@ function hasRole(roleRequired) {
 /**
  * Set token cookie directly for oAuth strategies
  */
-function setTokenCookie(req, res) {
-  if (!req.user) return res.json(404, {
-    message: 'Something went wrong, please try again.'
-  });
-  var token = signToken(req.user._id, req.user.role);
-  res.cookie('token', JSON.stringify(token));
-  res.redirect('/');
-}
+
 
 exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
 
-exports.setTokenCookie = setTokenCookie;

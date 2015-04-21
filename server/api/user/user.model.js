@@ -21,10 +21,7 @@ var UserSchema = new Schema({
    salt: {
     type: Number
   },
-  like: {
-    type: Number,
-    default: 0
-  },
+
 
   scores: [ { type: Schema.Types.ObjectId, ref: 'Score' } ],
 
@@ -55,7 +52,7 @@ UserSchema
     'like' : this.like,
     'imgId' : this.imgId,
     'salt' : this.salt,
-     'scores' : this.scores
+    'scores' : this.scores
 
   };
 });
