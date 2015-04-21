@@ -52,10 +52,11 @@ angular.module('transmedApp')
 				};
 
 				$scope.datas = data;
+				$log.debug($scope.datas);
 
 				// Default sort options
 				$scope.predicate = 'posTot';
-				$scope.reverse = 'false';
+				$scope.reverse = '';
 			},
 			function(error){
 				$scope.error = error;
@@ -63,11 +64,11 @@ angular.module('transmedApp')
 		);
 
 		$scope.tabs = [
-			{'title' : 'Totaux', 'id': '1', 'predicate' : 'posTot', 'reverse' : 'false'},
-			{'title' : 'Cummulés', 'id': '2', 'predicate' : 'posCumul', 'reverse' : '-reverse'},
-			{'title' : 'Wash', 'id': '3', 'predicate' : 'posWash', 'reverse' : '-reverse'},
-			{'title' : 'Trash', 'id': '4', 'predicate' : 'posTrash', 'reverse' : '-reverse'},
-			{'title' : 'Flash', 'id': '5', 'predicate' : 'posFlash', 'reverse' : '-reverse'}
+			{'title' : 'Totaux', 'id': '1', 'predicate' : 'posTot', 'reverse' : ''},
+			{'title' : 'Cummulés', 'id': '2', 'predicate' : 'posCumul', 'reverse' : ''},
+			{'title' : 'Wash', 'id': '3', 'predicate' : 'posWash', 'reverse' : ''},
+			{'title' : 'Trash', 'id': '4', 'predicate' : 'posTrash', 'reverse' : ''},
+			{'title' : 'Flash', 'id': '5', 'predicate' : 'posFlash', 'reverse' : ''}
 		];
 
 		$scope.activeTab = $scope.tabs[0].id;
