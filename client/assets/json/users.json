@@ -144,7 +144,7 @@
                 "createdOn": "2015-04-18T21:51:07.030Z"
             }
         ],
-        "like": 0,
+        "like": 2,
         "imgUrl": "imgUsers/poisson.jpg"
     },
     {
@@ -256,7 +256,7 @@
                 "createdOn": "2015-04-18T21:51:07.047Z"
             }
         ],
-        "like": 0,
+        "like": -2,
         "imgUrl": "imgUsers/poisson.jpg"
     },
     {
@@ -539,7 +539,7 @@
                 "createdOn": "2015-04-18T21:51:07.058Z"
             }
         ],
-        "like": 0,
+        "like": 5,
         "imgUrl": "imgUsers/5532d0b11cefa5110057b224.png"
     },
     {
@@ -651,7 +651,7 @@
                 "createdOn": "2015-04-18T21:51:07.058Z"
             }
         ],
-        "like": 0,
+        "like": -5,
         "imgUrl": "imgUsers/poisson.jpg"
     },
     {
@@ -673,7 +673,7 @@
                 "createdOn": "2015-04-18T21:46:50.821Z"
             }
         ],
-        "like": 0,
+        "like": -1,
         "imgUrl": "imgUsers/poisson.jpg"
     },
     {

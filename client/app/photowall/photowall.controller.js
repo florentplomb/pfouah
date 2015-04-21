@@ -14,6 +14,10 @@ angular.module('transmedApp')
 	   		return localStorageService.get(key);
 	  	}
 
+	  	$scope.getItem = function(key) {
+	  		return localStorageService.get(key);
+	  	}
+
 	  	function removeItem(key) {
    			return localStorageService.remove(key);
   		}
