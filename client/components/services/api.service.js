@@ -40,6 +40,16 @@ angular.module('transmedApp')
 				}).error(function (data){
 					errorCallback(data);
 				});
+			},
+			getUsers : function(callback, errorCallback){
+				$http({
+					method: 'GET',
+					url: 'assets/json/users.json'
+				}).success(function (data){
+					callback(data);
+				}).error(function (data){
+					errorCallback(data);
+				});				
 			}
 		}
 	});
