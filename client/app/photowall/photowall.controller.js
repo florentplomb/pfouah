@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('transmedApp')
-	.controller('WallCtrl', function ($scope, $http, socket, $log, StaticService, localStorageService){
+	.controller('WallCtrl', function ($scope, $http, $log, StaticService, localStorageService){
 		$scope.error = '';
 		$scope.res = '';
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('transmedApp')
-	.controller('RankingCtrl', function ($scope, $http, socket, $log, StaticService){
+	.controller('RankingCtrl', function ($scope, $http, $log, StaticService){
 
 		StaticService.getScores (
 			function(data){

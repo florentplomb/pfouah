@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('transmedApp')
-	.controller('FeedCtrl', function ($scope, $http, socket, $log, TweetService){
+	.controller('FeedCtrl', function ($scope, $http, $log, TweetService){
 
 		TweetService.getTweets(
 			function(data){

@@ -14,18 +14,18 @@ angular.module('transmedApp')
 				}).error(function (data){
 					errorCallback(data);
 				});
+			},
+		
+			getUsers : function(callback, errorCallback){
+				$http({
+					method: 'GET',
+					url: ApiUrl + 'api/users'
+				}).success(function (data){
+					callback(data);
+				}).error(function (data){
+					errorCallback(data);
+				});				
 			}
-		},
-
-		getUsers : function(callback, errorCallback){
-			$http({
-				method: 'GET',
-				url: ApiUrl + 'api/users';
-			}).success(function (data){
-				callback(data);
-			}).error(function (data){
-				errorCallback(data);
-			});				
 		}
 	})
 
