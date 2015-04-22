@@ -26,8 +26,7 @@ function getRandomInt() {
 exports.index = function(req, res) {
 
   User.find()
-    .select('-salt -hashedPassword')
-    .populate('scores')
+    .select('-salt -hashedPassword -scores')
     .exec(function(err, users) {
       if (err) return res.send(500, err);
        if (users.length === 0) return res.status(400).json({
@@ -80,7 +79,7 @@ exports.create = function(req, res, next) {
 exports.score = function(req, res, next) {
   var usersScore = [];
   User.find()
-    .select('-salt -hashedPassword')
+    .select('-salt -hashedPassword ')
     .populate('scores')
     .exec(function(err, users) {
       if (users.length === 0) {
