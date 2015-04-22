@@ -41,6 +41,18 @@ angular.module('transmedApp')
 					errorCallback(data);
 				});
 			},
+
+			postUser:function(user, callback, errorCallback){
+				$http({
+					method: 'PUT',
+					url: 'assets/json/users.scores.json'
+				}).success(function(data){
+					callback(data);
+				}).error(function(data){
+					errorCallback(data);
+				});
+			},
+
 			getUsers : function(callback, errorCallback){
 				$http({
 					method: 'GET',

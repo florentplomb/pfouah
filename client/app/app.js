@@ -10,6 +10,16 @@ angular.module('transmedApp', [
   'LocalStorageModule'
 ])
 
+.filter("toArray", function(){
+    return function(obj) {
+        var result = [];
+        angular.forEach(obj, function(val, key) {
+            result.push(val);
+        });
+        return result;
+    };
+})
+
   .constant('TwitterUrl', 'https://api.twitter.com/1.1/')
   .constant('ApiUrl', 'http://pfouah2015.herokuapp.com/')
 

@@ -1,35 +1,165 @@
+
+@desktop: "only screen and (min-width: 960px) and (max-width: 1199px)";
+@tablet:  "only screen and (min-width: 720px) and (max-width: 959px)";
+
+@nbrPhotosGrand: 10%;
+@nbrPhotosMoyenGrand: 20%;
+@nbrPhotosMoyen: 25%;
+@nbrPhotosMoyenPetit: 33.3333333333334%;
+@nbrPhotosPetit: 50%;
+
+
+
 .img-box{
 	display: block;
 	float: left;
-	margin: 5px;
+	width:10%;
+}
+
+
+
+.container{
+	width:100%;
+	padding:0;
 }
 
 .content-over{
+	width: 100%;
 	position: relative;
-	bottom: 40px;
-	left: 15px;
+	bottom: 30px;
 	color: white;
 }
 
 .img-wall, .img-box{
-	width: 200px;
-	height: 200px;
+	width:100%;
+	margin-bottom: -30px;
 
 	/* unused */
 	min-width: 100px;
-	max-width: 250px;
-	min-height: 100px;
-	max-height: 250px;
+	// max-width: 400px;
+	// min-height: 100px;
+	max-height: 800px;
 }
 
-.label-as-badge {
-    border-radius: 0.85em;
+.like{
+	background-color: #8FCFFF;
+	// background-image:url('../assets/images/like.png');
+	// background-repeat: none;
+	// background-repeat: no-repeat;
+	// background-size: 20px;
 }
 
-.btn-as-badge{
-	border-radius: 1.1em !important;
+.dislike{
+	background-color: #FF7E70;
 }
 
-.p-cpt{
-	margin-left: 30px;
+.likesContainer{
+	position: absolute;
+	font-size: 2em;
+	color:white;
+}
+
+.button{
+	opacity: 0.3;
+	height:60px;
+	width:50%;
+	&:hover{
+		opacity: 0.8;
+		cursor:pointer;
+	}
+	float:left;
+	margin:0;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 60px;
+	font-size: 1.5em;
+}
+
+
+
+// .label-as-badge {
+//     border-radius: 0.85em;
+// }
+
+// .btn-as-badge{
+// 	border-radius: 1.1em !important;
+// }
+
+// .p-cpt{
+// 	margin-left: 30px;
+// }
+
+/* Portrait iphone 4 and 4s*/ 
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+	.deckgrid{
+			width: @nbrPhotosPetit;
+			float:left;
+		}
+
+}
+
+/* Portrait  iphone 5 et 5s*/
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+	.deckgrid{
+			width: @nbrPhotosPetit;
+			float:left;
+		}
+}
+
+
+/* Portrait and Landscape galxy s4*/
+@media screen 
+  and (device-width: 320px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 3) {
+	.deckgrid{
+			width: @nbrPhotosPetit;
+			float:left;
+		}
+	
+}
+
+@media screen and (max-width : 500px) {
+		.deckgrid{
+			width: @nbrPhotosPetit;
+			float:left;
+		}
+}
+
+@media screen and (min-width : 500px) and (max-width : 700px) {
+		.deckgrid{
+			width: @nbrPhotosMoyenPetit;
+			float:left;
+		}
+}
+
+@media screen and (min-width : 700px) and (max-width : 1000px) {
+		.deckgrid{
+			width: @nbrPhotosMoyen;
+			float:left;
+		}
+}
+
+@media screen and (min-width : 1000px) and (max-width : 1900px) {
+		.deckgrid{
+			width: @nbrPhotosMoyenGrand;
+			float:left;
+		}
+}
+
+@media only screen and (min-width : 1900px){
+		.deckgrid{
+			width: @nbrPhotosGrand;
+			float:left;
+		}
 }

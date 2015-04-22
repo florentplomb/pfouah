@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('transmedApp')
-	.controller('WallCtrl', function ($scope, $http, $log, StaticService, localStorageService){
+	.controller('WallCtrl', function ($scope, $http, $log, StaticService, ApiService, localStorageService){
 		$scope.error = '';
 		$scope.res = '';
 
@@ -23,7 +23,7 @@ angular.module('transmedApp')
   		}
 
 	  	// Page loading
-		StaticService.getUsers(
+		ApiService.getUsers(
 			function(data){
 				$scope.datas = data;
 
