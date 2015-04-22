@@ -38,18 +38,13 @@ angular.module('transmedApp')
 
   		$log.debug(answer);
 
-  		// answer control
-  		if (answer.length <= 2 || answer.length >= 140) {
+  		// answer control double check -> normally Angular prevents the answer to be posted
+  		if (answer.length < 1 || answer.length >= 140) {
   			answer = undefined;
+  			$scope.feedback = 'Il n\'y a rien à envoyer.';
   		};
 
-  		if (answer != undefined) {
-  			$log.debug('if');
-  			$scope.feedback = 'Réponse envoyée avec succès !';
-  		}else{
-  			$log.debug('else');
-  			$scope.feedback = 'Il n\'y a rien à envoyer.';
-  		}
+  		ngDialog.close();
   	}
 
 });

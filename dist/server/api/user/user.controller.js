@@ -64,14 +64,8 @@ exports.create = function(req, res, next) {
   newUser.hashedPassword = bcrypt.hashSync(req.body.hashedPassword, 8);
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    // var token = jwt.sign({
-    //   _id: user._id
-    // }, config.secrets.session, {
-    //   expiresInMinutes: 60 * 5
-    // });
     res.json({
       user: user.profile
-        // token: token
     });
   });
 };
@@ -183,7 +177,7 @@ function scoreUsersData(req, res, next, callback) {
       if (err) {
         return next(err);
       }
-      if (scores === null) {
+      if (scores.length === 0) {
         return res.json({
           code: 204,
           message: "Score is Empty"
@@ -293,7 +287,7 @@ exports.userScore = function(req, res, next) {
 
     var userId = req.params.id;
     User.findById(userId)
-      .select('-hashedPassword -scores')
+      .select('-hashedPassword -salt -scores')
       .exec(function(err, user) {
         if (err) return res.send(500, err);
         usrScore.user = user;
@@ -348,7 +342,7 @@ exports.login = function(req, res, next) {
         var usrScore = {};
         var callback = function(tab) {
           User.findById(userId)
-            .select('-hashedPassword -scores -salt')
+            .select('-hashedPassword -scores ')
             .exec(function(err, user) {
               if (err) return res.send(500, err);
               usrScore.user = user;
