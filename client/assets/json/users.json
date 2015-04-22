@@ -1,0 +1,155 @@
+[
+    {
+        "_id": "5536c2a9ff29490300269a8a",
+        "imgId": "5536c29cff29490300269a89",
+        "pseudo": "test",
+        "email": "test",
+        "__v": 4,
+        "roles": "user",
+        "updatedOn": "2015-04-21T21:35:37.927Z",
+        "createdOn": "2015-04-21T21:35:37.925Z",
+        "scores": [
+            {
+                "_id": "5536c3c5ff29490300269a8b",
+                "player": "5536c2a9ff29490300269a8a",
+                "gameName": "trash",
+                "pts": 123,
+                "__v": 0,
+                "updatedOn": "2015-04-21T21:40:21.417Z",
+                "createdOn": "2015-04-21T21:40:21.417Z"
+            },
+            {
+                "_id": "5536c49eff29490300269a8c",
+                "player": "5536c2a9ff29490300269a8a",
+                "gameName": "flash",
+                "pts": 123,
+                "__v": 0,
+                "updatedOn": "2015-04-21T21:43:58.106Z",
+                "createdOn": "2015-04-21T21:43:58.106Z"
+            },
+            {
+                "_id": "5537576aca33340300f42b2c",
+                "player": "5536c2a9ff29490300269a8a",
+                "gameName": "trash",
+                "pts": 123,
+                "__v": 0,
+                "updatedOn": "2015-04-22T08:10:18.778Z",
+                "createdOn": "2015-04-22T08:10:18.778Z"
+            },
+            {
+                "_id": "55375cf2ca33340300f42b2e",
+                "player": "5536c2a9ff29490300269a8a",
+                "gameName": "trash",
+                "pts": 123,
+                "__v": 0,
+                "updatedOn": "2015-04-22T08:33:54.923Z",
+                "createdOn": "2015-04-22T08:33:54.923Z"
+            }
+        ]
+    },
+    {
+        "_id": "553747e478b7aa0300b0b56a",
+        "imgId": "5532da73f2e8e1fc04335f0d",
+        "pseudo": "Charly",
+        "email": "charly@gmail.com",
+        "__v": 0,
+        "roles": "user",
+        "updatedOn": "2015-04-22T07:04:04.576Z",
+        "createdOn": "2015-04-22T07:04:04.574Z",
+        "scores": []
+    },
+    {
+        "_id": "55374a1778b7aa0300b0b56b",
+        "imgId": "5532da73f2e8e1fc04335f0d",
+        "pseudo": "Romain",
+        "email": "cerantolo@ce",
+        "__v": 0,
+        "roles": "user",
+        "updatedOn": "2015-04-22T07:13:27.546Z",
+        "createdOn": "2015-04-22T07:13:27.546Z",
+        "scores": []
+    },
+    {
+        "_id": "55374a5c78b7aa0300b0b56c",
+        "imgId": "5532da73f2e8e1fc04335f0d",
+        "pseudo": "Laurent",
+        "email": "laurent@lau",
+        "__v": 3,
+        "roles": "user",
+        "updatedOn": "2015-04-22T07:14:36.117Z",
+        "createdOn": "2015-04-22T07:14:36.117Z",
+        "scores": [
+            {
+                "_id": "55374aab78b7aa0300b0b56d",
+                "player": "55374a5c78b7aa0300b0b56c",
+                "gameName": "trash",
+                "pts": 123,
+                "__v": 0,
+                "updatedOn": "2015-04-22T07:15:55.474Z",
+                "createdOn": "2015-04-22T07:15:55.474Z"
+            },
+            {
+                "_id": "55374af978b7aa0300b0b56e",
+                "player": "55374a5c78b7aa0300b0b56c",
+                "gameName": "trash",
+                "pts": 123,
+                "__v": 0,
+                "updatedOn": "2015-04-22T07:17:13.351Z",
+                "createdOn": "2015-04-22T07:17:13.351Z"
+            },
+            {
+                "_id": "55374b2478b7aa0300b0b56f",
+                "player": "55374a5c78b7aa0300b0b56c",
+                "gameName": "trash",
+                "pts": 124,
+                "__v": 0,
+                "updatedOn": "2015-04-22T07:17:56.640Z",
+                "createdOn": "2015-04-22T07:17:56.640Z"
+            }
+        ]
+    },
+    {
+        "_id": "553753c078b7aa0300b0b571",
+        "imgId": "5532da73f2e8e1fc04335f0d",
+        "pseudo": "charles",
+        "email": "charles@gjs",
+        "__v": 0,
+        "roles": "user",
+        "updatedOn": "2015-04-22T07:54:40.432Z",
+        "createdOn": "2015-04-22T07:54:40.431Z",
+        "scores": []
+    },
+    {
+        "_id": "5537561dca33340300f42b2b",
+        "imgId": "5532da73f2e8e1fc04335f0d",
+        "pseudo": "charly",
+        "email": "chalry@asd.com",
+        "__v": 0,
+        "roles": "user",
+        "updatedOn": "2015-04-22T08:04:45.320Z",
+        "createdOn": "2015-04-22T08:04:45.305Z",
+        "scores": []
+    },
+    {
+        "_id": "55375a6cca33340300f42b2d",
+        "imgId": "5532da73f2e8e1fc04335f0d",
+        "pseudo": "Christian",
+        "email": "chris@chris",
+        "__v": 0,
+        "roles": "user",
+        "updatedOn": "2015-04-22T08:23:08.165Z",
+        "createdOn": "2015-04-22T08:23:08.165Z",
+        "scores": []
+    },
+    {
+        "_id": "55375f18ca33340300f42b2f",
+        "imgId": "5532da73f2e8e1fc04335f0d",
+        "pseudo": "Manu",
+        "email": "manu@manu",
+        "__v": 0,
+        "roles": "user",
+        "updatedOn": "2015-04-22T08:43:04.974Z",
+        "createdOn": "2015-04-22T08:43:04.974Z",
+        "scores": []
+    }
+]
