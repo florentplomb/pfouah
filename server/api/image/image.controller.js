@@ -16,12 +16,14 @@ function handleError(res, err) {
 
 // Get list of images
 exports.index = function(req, res) {
-  Image.find(function(err, images) {
+  Image.find()
+  .select('-data')
+  .exec(function(err, images) {
     if (err) {
       return handleError(res, err);
     }
     return res.json(200, images);
-  });
+  })
 };
 
 

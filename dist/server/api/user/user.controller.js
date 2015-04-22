@@ -177,7 +177,7 @@ function scoreUsersData(req, res, next, callback) {
       if (err) {
         return next(err);
       }
-      if (scores === null) {
+      if (scores.length === 0) {
         return res.json({
           code: 204,
           message: "Score is Empty"
@@ -287,7 +287,7 @@ exports.userScore = function(req, res, next) {
 
     var userId = req.params.id;
     User.findById(userId)
-      .select('-hashedPassword -scores')
+      .select('-hashedPassword -salt -scores')
       .exec(function(err, user) {
         if (err) return res.send(500, err);
         usrScore.user = user;

@@ -4,9 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var LimitLikeSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  code: String
 });
 
 module.exports = mongoose.model('LimitLike', LimitLikeSchema);
