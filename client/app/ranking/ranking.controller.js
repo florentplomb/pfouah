@@ -52,7 +52,7 @@ angular.module('transmedApp')
 				};
 
 				$scope.datas = data;
-				$log.debug($scope.datas);
+				//$log.debug($scope.datas);
 
 				// Default sort options
 				$scope.predicate = 'posTot';

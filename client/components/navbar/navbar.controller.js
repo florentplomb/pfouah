@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('transmedApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -20,9 +20,9 @@ angular.module('transmedApp')
     }];
 
     $scope.isCollapsed = true;
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
+    //$scope.isLoggedIn = Auth.isLoggedIn;
+    //$scope.isAdmin = Auth.isAdmin;
+    //$scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.logout = function() {
       Auth.logout();
