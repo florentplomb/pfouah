@@ -12,4 +12,15 @@ angular.module('transmedApp')
 			}
 		);
 
+
+		var bearerToken = function(){
+		    var consumerKey = encodeURIComponent('dXQ5VccrbKbQVvFFuDR1igBxi');
+		    var consumerSecret = encodeURIComponent('oNcCuayrTLcx1cmn9F1OVmo19p3i0AIOtUFdYaloVhN79UZymj');
+		    var credentials = btoa(consumerKey + ':' + consumerSecret);
+
+		    return credentials;
+		};
+
+		$log.debug('Basic ' + bearerToken());
+
 	});

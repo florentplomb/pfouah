@@ -25,6 +25,29 @@ angular.module('transmedApp')
 				}).error(function (data){
 					errorCallback(data);
 				});				
+			},
+
+			getCode: function(callback, errorCallback){
+				$http({
+					method: 'GET',
+					url: ApiUrl + 'api/limitLikes'
+				}).success(function (data){
+					callback(data);
+				}).error(function (data){
+					errorCallback(data);
+				});	
+			},
+
+			likeImage: function(id, vote, callback, errorCallback){
+				$http({
+					method: 'POST',
+					url: ApiUrl + 'api/images/' + id + '/liked',
+					data: vote
+				}).success(function (data){
+					callback(data);
+				}).error(function (data){
+					errorCallback(data);
+				});	
 			}
 		}
 	})
@@ -50,6 +73,18 @@ angular.module('transmedApp')
 				}).error(function (data){
 					errorCallback(data);
 				});				
+			}
+
+			getCode: function(errorCallback, errorCallback){
+				$http({
+					method: 'GET',
+					url: 'http://pfouah2015.herokuapp.com/api/limitLikes'
+				}).success(function (data){
+					// renvoie data.code = 'eai031429712519415eai03' par ex.
+					callback(data);
+				}).error(function (data){
+					errorCallback(data);
+				});	
 			}
 		}
 	});

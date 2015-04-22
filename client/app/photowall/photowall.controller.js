@@ -55,9 +55,17 @@ angular.module('transmedApp')
 
 			if($scope.res == null){
 				addItem(photo._id, photo._id);
-				photo.like--;
-				$scope.error = 'vote comptabilisé !!!';
-				// Update DB
+				//photo.like--;
+				
+				ApiService.likeImage(photo._id, 'p'
+					function(data){
+						$scope.datas.like = data.like;
+						$scope.error = 'Vote comptabilisé.';
+					},
+					function(error){
+						$scope.error = 'Une erreur s\'est produite.';
+					}
+				);
 			}else{
 				$scope.error = 'Vous avez déjà voté pour cette image auparavant!';
 			}
