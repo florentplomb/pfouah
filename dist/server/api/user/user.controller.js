@@ -29,7 +29,7 @@ exports.index = function(req, res) {
     .select('-salt -hashedPassword -scores')
     .exec(function(err, users) {
       if (err) return res.send(500, err);
-       if (users.length === 0) return res.status(400).json({
+      if (users.length === 0) return res.status(400).json({
         message: 'users empty'
       }).end();
       return res.json(200, users);
@@ -177,12 +177,6 @@ function scoreUsersData(req, res, next, callback) {
       if (err) {
         return next(err);
       }
-      if (scores.length === 0) {
-        return res.json({
-          code: 204,
-          message: "Score is Empty"
-        }).end();
-      }
 
       for (var i = 0; i < scores.length; i++) {
         scoreTot = scores[i].pts + scoreTot;
@@ -299,7 +293,6 @@ exports.userScore = function(req, res, next) {
 
 
 
-
 }
 
 
@@ -313,19 +306,16 @@ exports.login = function(req, res, next) {
     message: 'need password'
   }).end();
 
-  User
-    .find()
-    .and({
+  User.findOne({
       pseudo: req.body.pseudo
     })
-    .exec(function(err, userFound) {
-      if (userFound.length === 0) {
-        res.status(422).json({
-          message: 'wrong pseudo'
-        }).end();
+    .then(function(user) {
+      if (!user) {
+        return res.status(422).json({
+            message: 'wrong pseudo'
+          }).end();
       }
-
-      bcrypt.compare(req.body.hashedPassword, userFound[0].hashedPassword, function(err, isMatch) {
+      bcrypt.compare(req.body.hashedPassword, user.hashedPassword, function(err, isMatch) {
         if (err) {
           return res.status(422).json({
             message: 'wrong password'
@@ -337,7 +327,7 @@ exports.login = function(req, res, next) {
             message: 'wrong password'
           }).end();
         }
-        var userId = userFound[0].id;
+        var userId = user.id;
         req.params.id = userId;
         var usrScore = {};
         var callback = function(tab) {
@@ -352,10 +342,14 @@ exports.login = function(req, res, next) {
         }
         scoreUsersData(req, res, next, callback);
 
-
       });
 
+    }).catch(function (err) {
+        return res.status(422).json({
+          message: err
+        }).end();
     });
+
 };
 
 /**
@@ -368,8 +362,8 @@ exports.show = function(req, res, next) {
     .populate('scores')
     .exec(function(err, user) {
       if (!user) return res.status(400).json({
-    message: 'user undefined'
-  }).end();
+        message: 'user undefined'
+      }).end();
       if (err) return res.send(500, err);
       return res.json(200, user.profile);
     })

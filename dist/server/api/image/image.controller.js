@@ -16,12 +16,14 @@ function handleError(res, err) {
 
 // Get list of images
 exports.index = function(req, res) {
-  Image.find(function(err, images) {
+  Image.find()
+  .select('-data')
+  .exec(function(err, images) {
     if (err) {
       return handleError(res, err);
     }
     return res.json(200, images);
-  });
+  })
 };
 
 
@@ -44,16 +46,15 @@ exports.liked = function(req, res) {
       return handleError(res, err);
     }
 
-    Limitlike.find()
-    .and({
+    Limitlike.findOne({
       code: req.body.check
     })
-    .exec(function(err, limiteLike) {
+    .then(function(limiteLike) {
       if (err) {
       return handleError(res, err);
     }
 
-      if (limiteLike.length === 0) {
+      if (!limiteLike) {
         return res.json({
           code: 204,
           message: "Code wrong"
@@ -83,7 +84,11 @@ exports.liked = function(req, res) {
       if (err) return validationError(res, err);
       return res.json(img.like);
     });
-  });
+  }).catch(function (err) {
+        return res.status(422).json({
+          message: err
+        }).end();
+    });
   });
 };
 
