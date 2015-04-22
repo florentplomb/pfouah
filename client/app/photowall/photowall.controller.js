@@ -28,11 +28,11 @@ angular.module('transmedApp')
 				$scope.datas = data;
 
 				for (var i = $scope.datas.length - 1; i >= 0; i--) {
-					$scope.datas[i].imgUrl = 'http://pfouah2015.herokuapp.com/api/images/' + data[i].imgId;
+					$scope.datas[i].imgUrl = 'http://localhost:9000/api/images/' + data[i].imgId._id;
 					$log.debug($scope.datas[i].imgUrl);
 				};
 
-				console.log($scope.datas);
+				console.log($scope.datas[0]);
 			},
 			function(error){
 				$scope.error = error;
