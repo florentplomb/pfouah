@@ -3,6 +3,14 @@
 var _ = require('lodash');
 var LimitLike = require('./limitLike.model');
 
+var validationError = function(res, err) {
+  return res.json(422, err);
+};
+
+function handleError(res, err) {
+  return res.send(500, err);
+}
+
 function makeid() {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
