@@ -49,7 +49,7 @@ angular.module('transmedApp')
 					errorCallback(data);
 				});	
 			}
-		}
+		};
 	})
 
 	.factory('StaticService', function($http){
@@ -98,5 +98,5 @@ angular.module('transmedApp')
 					errorCallback(data);
 				});	
 			}
-		}
+		};
 	});

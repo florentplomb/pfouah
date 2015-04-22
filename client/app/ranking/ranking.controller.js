@@ -9,47 +9,47 @@ angular.module('transmedApp')
 				var positions = [];
 				for (var i = data.length; i >= 0; i--) {
 					positions.push(i);
-				};
+				}
 
 				// Tri par scores totaux
 				data.sort(function(a, b){
 					return a.scores.scoreTot-b.scores.scoreTot;
 				});
-				for (var i = data.length - 1; i >= 0; i--) {
-					data[i].posTot = positions[i];
-				};	
+				for (var j = data.length - 1; j >= 0; j--) {
+					data[j].posTot = positions[j];
+				}
 
 				// Tri par scores cumulés
 				data.sort(function(a, b){
 					return a.scores.totalHs-b.scores.totalHs;
 				});
-				for (var i = data.length - 1; i >= 0; i--) {
-					data[i].posCumul = positions[i];
-				};	
+				for (var k = data.length - 1; k >= 0; k--) {
+					data[k].posCumul = positions[k];
+				}
 
 				// Tri par scores wash
 				data.sort(function(a, b){
 					return a.scores.hsWash-b.scores.hsWash;
 				});
-				for (var i = data.length - 1; i >= 0; i--) {
-					data[i].posWash = positions[i];
-				};
+				for (var l = data.length - 1; l >= 0; l--) {
+					data[l].posWash = positions[l];
+				}
 
 				// Tri par scores wash
 				data.sort(function(a, b){
 					return a.scores.hsFlash-b.scores.hsFlash;
 				});
-				for (var i = data.length - 1; i >= 0; i--) {
-					data[i].posFlash = positions[i];
-				};	
+				for (var m = data.length - 1; m >= 0; m--) {
+					data[m].posFlash = positions[m];
+				}	
 
 				// Tri par scores trash
 				data.sort(function(a, b){
 					return a.scores.hsTrash-b.scores.hsTrash;
 				});
-				for (var i = data.length - 1; i >= 0; i--) {
-					data[i].posTrash = positions[i];
-				};
+				for (var n = data.length - 1; n >= 0; n--) {
+					data[n].posTrash = positions[n];
+				}
 
 				$scope.datas = data;
 				//$log.debug($scope.datas);

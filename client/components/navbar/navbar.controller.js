@@ -25,7 +25,7 @@ angular.module('transmedApp')
     //$scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.logout = function() {
-      Auth.logout();
+      // Auth.logout();
       $location.path('/login');
     };
 

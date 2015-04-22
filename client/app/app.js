@@ -10,11 +10,12 @@ angular.module('transmedApp', [
   'LocalStorageModule'
 ])
 
-.filter("toArray", function(){
+.filter('toArray', function(){
     return function(obj) {
         var result = [];
         angular.forEach(obj, function(val, key) {
             result.push(val);
+            console.log(key);
         });
         return result;
     };
@@ -28,7 +29,7 @@ angular.module('transmedApp', [
     localStorageServiceProvider
       .setPrefix('pfouah')
       .setStorageType('localStorage')
-      .setNotify(true, true)
+      .setNotify(true, true);
   })
 
   .config(['$httpProvider', function($httpProvider) {

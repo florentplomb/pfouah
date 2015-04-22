@@ -16,11 +16,11 @@ angular.module('transmedApp')
 
 	  	$scope.getItem = function(key) {
 	  		return localStorageService.get(key);
-	  	}
+	  	};
 
-	  	function removeItem(key) {
-   			return localStorageService.remove(key);
-  		}
+	  	// function removeItem(key) {
+   	// 		return localStorageService.remove(key);
+  		// }
 
 	  	// Page loading
 		ApiService.getUsers(
@@ -30,7 +30,7 @@ angular.module('transmedApp')
 				for (var i = $scope.datas.length - 1; i >= 0; i--) {
 					$scope.datas[i].imgUrl = 'http://localhost:9000/api/images/' + data[i].imgId._id;
 					$log.debug($scope.datas[i].imgUrl);
-				};
+				}
 
 				console.log($scope.datas[0]);
 			},
@@ -42,7 +42,7 @@ angular.module('transmedApp')
 		$scope.likePlayer = function(photo){
 			$scope.res = getItem(photo._id);
 
-			if($scope.res == null){
+			if($scope.res === null){
 				addItem(photo._id, photo._id);
 				photo.like ++;
 				$scope.error = 'vote comptabilisé !!!';
@@ -50,12 +50,12 @@ angular.module('transmedApp')
 			}else{
 				$scope.error = 'Vous avez déjà voté pour cette image auparavant!';
 			}
-		}
+		};
 
 		$scope.dislikePlayer = function(photo){
 			$scope.res = getItem(photo._id);
 
-			if($scope.res == null){
+			if($scope.res === null){
 				addItem(photo._id, photo._id);
 				//photo.like--;
 				
@@ -64,12 +64,12 @@ angular.module('transmedApp')
 						$scope.datas.like = data.like;
 						$scope.error = 'Vote comptabilisé.';
 					},
-					function(error){
+					function(){
 						$scope.error = 'Une erreur s\'est produite.';
 					}
 				);
 			}else{
 				$scope.error = 'Vous avez déjà voté pour cette image auparavant!';
 			}
-		}
+		};
 	});

@@ -14,5 +14,5 @@ angular.module('transmedApp')
 					errorCallback(data);
 				});
 			}
-		}
+		};
 	});

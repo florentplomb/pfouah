@@ -42,9 +42,9 @@ angular.module('transmedApp')
   		if (answer.length < 1 || answer.length >= 140) {
   			answer = undefined;
   			$scope.feedback = 'Il n\'y a rien à envoyer.';
-  		};
+  		}
 
   		ngDialog.close();
-  	}
+  	};
 
 });
