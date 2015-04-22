@@ -24,15 +24,16 @@ function makeid() {
 // Get list of limitLikes
 exports.index = function(req, res) {
 
+
   var date = Date.now();
   var text = makeid();
   var cookie = text + date + text;
   var limitLike = new LimitLike();
-  limitLike.code = cookie;
+  limitLike.coookie = cookie;
   limitLike.save(function(err, limitLike) {
     if (err) return validationError(res, err);
     res.json({
-      code : limitLike.code
+      limitLike: limitLike
     });
   });
 
