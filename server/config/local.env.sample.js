@@ -6,7 +6,7 @@
 // You will need to set these on the server you deploy to.
 
 module.exports = {
-  DOMAIN:           'http://pfouah2015.herokuapp.com',
+  DOMAIN:           'http://localhost:9000',
   SESSION_SECRET:   'transmed-secret',
 
   GOOGLE_ID:        'app-id',

@@ -28,9 +28,11 @@ angular.module('transmedApp')
 				$scope.datas = data;
 
 				for (var i = $scope.datas.length - 1; i >= 0; i--) {
-					$scope.datas[i].imgUrl = 'http://pfouah2015.herokuapp.com/' + data[i].imgUrl;
+					$scope.datas[i].imgUrl = 'http://pfouah2015.herokuapp.com/api/images/' + data[i].imgId;
 					$log.debug($scope.datas[i].imgUrl);
 				};
+
+				console.log($scope.datas);
 			},
 			function(error){
 				$scope.error = error;
@@ -57,7 +59,7 @@ angular.module('transmedApp')
 				addItem(photo._id, photo._id);
 				//photo.like--;
 				
-				ApiService.likeImage(photo._id, 'p'
+				ApiService.likeImage(photo._id, 'p',
 					function(data){
 						$scope.datas.like = data.like;
 						$scope.error = 'Vote comptabilisé.';

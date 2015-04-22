@@ -85,9 +85,9 @@ angular.module('transmedApp')
 				}).error(function (data){
 					errorCallback(data);
 				});				
-			}
+			},
 
-			getCode: function(errorCallback, errorCallback){
+			getCode: function(callback, errorCallback){
 				$http({
 					method: 'GET',
 					url: 'http://pfouah2015.herokuapp.com/api/limitLikes'

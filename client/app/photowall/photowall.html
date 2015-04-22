@@ -6,7 +6,7 @@
 
 	<div deckgrid class="deckgrid" source="photos" ng-repeat="photo in datas | toArray | orderBy:'-like' ">
 	    <div class="img-box">
-	        <img class="img-wall" src="http://img0.gtsstatic.com/hybride/le-chat-de-savannah-tient-du-chat-domestique-et-d-un-chat-sauvage-africain_21040_wide.jpg"/>
+	        <img class="img-wall" ng-src="{{photo.imgUrl}}"/>
 	        <div class="content-over">
 	        	<!-- bouton dislike -->
 	        	<div  type="button" ng-show="getItem(photo._id) == null"
