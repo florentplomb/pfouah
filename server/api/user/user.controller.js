@@ -64,14 +64,8 @@ exports.create = function(req, res, next) {
   newUser.hashedPassword = bcrypt.hashSync(req.body.hashedPassword, 8);
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    // var token = jwt.sign({
-    //   _id: user._id
-    // }, config.secrets.session, {
-    //   expiresInMinutes: 60 * 5
-    // });
     res.json({
       user: user.profile
-        // token: token
     });
   });
 };
@@ -348,7 +342,7 @@ exports.login = function(req, res, next) {
         var usrScore = {};
         var callback = function(tab) {
           User.findById(userId)
-            .select('-hashedPassword -scores -salt')
+            .select('-hashedPassword -scores ')
             .exec(function(err, user) {
               if (err) return res.send(500, err);
               usrScore.user = user;

@@ -63,7 +63,6 @@ exports.create = function(req, res) {
 
 
 
-
   if (!req.body.gameName) return res.send(400, "need game");
   Game.findOne({
     name: req.body.gameName
