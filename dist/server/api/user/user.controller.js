@@ -80,7 +80,6 @@ exports.create = function(req, res, next) {
 exports.score = function(req, res, next) {
   var usersScore = [];
   User.find()
-    .select('-salt -hashedPassword')
     .populate('scores')
     .exec(function(err, users) {
       if (users.length === 0) {
