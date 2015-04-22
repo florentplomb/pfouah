@@ -43,9 +43,6 @@ exports.index = function(req, res) {
  * Creates a new user
  */
 exports.create = function(req, res, next) {
-  if (!req.body.email) return res.status(400).json({
-    message: 'need email'
-  }).end();
   if (!req.body.pseudo) return res.status(400).json({
     message: 'need pseudo'
   }).end();
@@ -57,7 +54,7 @@ exports.create = function(req, res, next) {
   }).end();
 
   var newUser = new User();
-  newUser.email = req.body.email;
+
   newUser.pseudo = req.body.pseudo;
   newUser.imgId = req.body.imgId;
   newUser.salt = getRandomInt();
@@ -130,7 +127,6 @@ exports.score = function(req, res, next) {
           };
           user.id = users[i].id;
           user.pseudo = users[i].pseudo;
-          user.email = users[i].email;
           user.imgUrl = users[i].imgUrl;
           user.like = users[i].like;
           user.scores = tab;
