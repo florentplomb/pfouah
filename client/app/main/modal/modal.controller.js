@@ -37,7 +37,7 @@ angular.module('transmedApp')
   	$scope.submitForm = function (answer){
 
   		$log.debug(answer);
-  		
+
   		// answer control
   		if (answer.length <= 2 || answer.length >= 140) {
   			answer = undefined;
