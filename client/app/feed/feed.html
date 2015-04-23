@@ -1,3 +1,19 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
+<h1>Twitter Feeds</h1>
+<hr/>
 
-	 <a class="twitter-timeline" href="https://twitter.com/EVE_status" data-widget-id="590066890699046913">Tweets de @EVE_status</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
+<div class="block_project">
+	<div ng-repeat="tweet in tweetsProject" class="tweets_project">
+		<h4><a ng-href="https://twitter.com/{{twet.user.name}}">{{tweet.user.name}}</a> a publié {{tweet.created_at_readable}} :</h4>
+		<a ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">lien sur le tweet</a>
+		<p>{{tweet.text}}</p>
+	</div>
+</div>
+
+<div class="block_assoc1">
+	<div ng-repeat="tweet in tweetsAssoc1" class="tweets_assoc1">
+		<h4><a ng-href="https://twitter.com/{{twet.user.name}}">{{tweet.user.name}}</a> a publié {{tweet.created_at_readable}} :</h4>
+		<a ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">lien sur le tweet</a>
+		<p>{{tweet.text}}</p>
+	</div>
+</div>
