@@ -3,8 +3,6 @@
 angular.module('transmedApp')
 	.controller('WallCtrl', function ($scope, $http, $log, StaticService, ApiService, localStorageService){
 		$scope.error = '';
-		$scope.res = '';
-		var code = '';
 
 		// Local storage functions
 	  	function addItem(key, val) {
@@ -40,52 +38,65 @@ angular.module('transmedApp')
 			}
 		);
 
-		ApiService.getCode(
-			function(data){
-				code = data.code;
-			},
-			function(error){
-				$scope.error = error;
-			}
-		);
+		// Get code at page loading if doesn't exist previously
+		if (getItem('code') === null) {
+			ApiService.getCode(
+				function(data){
+					addItem('code', data.code);
+				},
+				function(error){
+					$scope.error = error;
+				}
+			);
+		};
 
 		$scope.likePlayer = function(photo){
-			$scope.res = getItem(photo._id);
+			var res = getItem(photo._id);
+			var code = getItem('code');
 
-			if($scope.res === null){
-				addItem(photo._id, photo._id);
-				//photo.like ++;
-				
-				ApiService.likeImage(photo._id, 'p',
-					function(data){
-						$scope.datas.like = data.like;
-						$scope.error = 'Vote comptabilisé.';
-					},
-					function(error){
-						$scope.error = 'Une erreur s\'est produite.';
-					}
-				);
+			if(res === null){
+				if (code !== null) {
+					addItem(photo._id, photo._id);
+					
+					ApiService.likeImage(photo._id, 'p', code,
+						function(data){
+							$scope.datas.like = data.like;
+							$scope.error = 'Vote comptabilisé.';
+						},
+						function(error){
+							$scope.error = 'Une erreur s\'est produite.';
+						}
+					);
+				}else{
+					$scope.error = 'Vous n\'avez pas les permissions requises pour voter. Veuillez recharger la page.';
+				}
+
 			}else{
 				$scope.error = 'Vous avez déjà voté pour cette image auparavant!';
 			}
 		};
 
 		$scope.dislikePlayer = function(photo){
-			$scope.res = getItem(photo._id);
+			var res = getItem(photo._id);
+			var code = getItem('code');
 
-			if($scope.res === null){
-				addItem(photo._id, photo._id);
-				//photo.like--;
-				
-				ApiService.likeImage(photo._id, 'n',
-					function(data){
-						$scope.datas.like = data.like;
-						$scope.error = 'Vote comptabilisé.';
-					},
-					function(error){
-						$scope.error = 'Une erreur s\'est produite.';
-					}
-				);
+			if(res === null){
+				if (code !== null) {
+					addItem(photo._id, photo._id);
+					
+					ApiService.likeImage(photo._id, 'n',
+						function(data){
+							$scope.datas.like = data.like;
+							$scope.error = 'Vote comptabilisé.';
+						},
+						function(error){
+							$scope.error = 'Une erreur s\'est produite.';
+						}
+					);
+				}else{
+					$scope.error = 'Vous n\'avez pas les permissions requises pour voter. Veuillez recharger la page.';
+				}
+
 			}else{
 				$scope.error = 'Vous avez déjà voté pour cette image auparavant!';
 			}
