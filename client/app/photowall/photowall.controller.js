@@ -4,22 +4,23 @@ angular.module('transmedApp')
 	.controller('WallCtrl', function ($scope, $http, $log, StaticService, ApiService, localStorageService){
 		$scope.error = '';
 		$scope.res = '';
+		var code = '';
 
 		// Local storage functions
 	  	function addItem(key, val) {
 	   		return localStorageService.set(key, val);
-	  	}
+	  	};
 
 	   	function getItem(key) {
 	   		return localStorageService.get(key);
-	  	}
+	  	};
 
 	  	$scope.getItem = function(key) {
 	  		return localStorageService.get(key);
 	  	};
 
 	  	// function removeItem(key) {
-   	// 		return localStorageService.remove(key);
+   		// 		return localStorageService.remove(key);
   		// }
 
 	  	// Page loading
@@ -39,14 +40,31 @@ angular.module('transmedApp')
 			}
 		);
 
+		ApiService.getCode(
+			function(data){
+				code = data.code;
+			},
+			function(error){
+				$scope.error = error;
+			}
+		);
+
 		$scope.likePlayer = function(photo){
 			$scope.res = getItem(photo._id);
 
 			if($scope.res === null){
 				addItem(photo._id, photo._id);
-				photo.like ++;
-				$scope.error = 'vote comptabilisé !!!';
-				// Update DB
+				//photo.like ++;
+				
+				ApiService.likeImage(photo._id, 'p',
+					function(data){
+						$scope.datas.like = data.like;
+						$scope.error = 'Vote comptabilisé.';
+					},
+					function(error){
+						$scope.error = 'Une erreur s\'est produite.';
+					}
+				);
 			}else{
 				$scope.error = 'Vous avez déjà voté pour cette image auparavant!';
 			}
@@ -59,12 +77,12 @@ angular.module('transmedApp')
 				addItem(photo._id, photo._id);
 				//photo.like--;
 				
-				ApiService.likeImage(photo._id, 'p',
+				ApiService.likeImage(photo._id, 'n',
 					function(data){
 						$scope.datas.like = data.like;
 						$scope.error = 'Vote comptabilisé.';
 					},
-					function(){
+					function(error){
 						$scope.error = 'Une erreur s\'est produite.';
 					}
 				);
