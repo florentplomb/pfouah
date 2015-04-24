@@ -1,7 +1,7 @@
 # Transmedia Project - MM/MIT 41
 
 GitHub du projet : https://github.com/florentplomb/pfouah
-Heroku Deployement : -
+Heroku Deployement : https://pfouah2015.herokuapp.com/
 
 ## Qu'est-ce que le projet Transmedia ?
 Le project transmedia est un projet des 3ème années en Ingénieurie des médias. Ce projet à pour but de réaliser un projet s'affichant dans un cadre multi-plateforme complémentaire et s'inscrivant dans un univers immersif.
