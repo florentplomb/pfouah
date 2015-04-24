@@ -38,7 +38,6 @@ angular.module('transmedApp')
 	  	};
 
 		// Initialisation Codebird
-	  	$log.debug($rootScope);
 	  	if ($rootScope.cb === undefined) {
 			var cb = new Codebird;
 		    cb.setConsumerKey(CodeBird.key, CodeBird.keyS);
@@ -51,7 +50,7 @@ angular.module('transmedApp')
 	  	}
 
 		// Call for timeline - Notre projet
-/*		cb.__call(
+		/*cb.__call(
 		    "statuses_userTimeline",
 		    {
 		    	"screen_name": TwitterUsername,
@@ -77,16 +76,17 @@ angular.module('transmedApp')
 				"result_type" : "realtime",
 				"count" : "3"
 			},
-			function (reply){
+			function (reply, rate_limit_status){
 		    	// Add created_at_readable and convert text
 		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
 					reply.statuses[i].created_at_readable = convertDate(reply.statuses[i].created_at);
 					reply.statuses[i].text = convertText(reply.statuses[i].text);
 		    	};
-		    	//$log.debug(reply);
+		    	$log.debug(rate_limit_status);
 		    	$scope.tweetsQ1 = reply.statuses;
 		    	$scope.$digest();
-			}
+			},
+			true
 		);
 
 		// Call for Q2
@@ -97,16 +97,17 @@ angular.module('transmedApp')
 				"result_type" : "realtime",
 				"count" : "3"
 			},
-			function (reply){
+			function (reply, rate_limit_status){
 		    	// Add created_at_readable and convert text
 		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
 					reply.statuses[i].created_at_readable = convertDate(reply.statuses[i].created_at);
 					reply.statuses[i].text = convertText(reply.statuses[i].text);
 		    	};
-		    	//$log.debug(reply);
+		    	$log.debug(rate_limit_status);
 		    	$scope.tweetsQ2 = reply.statuses;
 		    	$scope.$digest();
-			}
+			},
+			true
 		);
 
 		// Call for timeline - Race For Water
@@ -116,24 +117,16 @@ angular.module('transmedApp')
 		    	"screen_name": "RaceForWater",
 		    	"count": "5"
 			},
-		    function (reply) {
+		    function (reply, rate_limit_status) {
 		    	// Add created_at_readable and convert text
 		    	for (var i = reply.length - 1; i >= 0; i--) {
 					reply[i].created_at_readable = convertDate(reply[i].created_at);
 					reply[i].text = convertText(reply[i].text);
 		    	};
-		    	//$log.debug(reply);
+		    	$log.debug(rate_limit_status);
 		    	$scope.tweetsAssoc1 = reply;
 		    	$scope.$digest();
-		    }
-		);
-
-		// Call for Rate Limit Status
-		cb.__call(
-		    "application_rateLimitStatus",
-		    {},
-		    function (reply) {
-		        $log.debug(reply);
-		    }
+		    },
+		    true
 		);
 	});
