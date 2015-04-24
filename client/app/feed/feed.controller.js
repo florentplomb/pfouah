@@ -1,20 +1,23 @@
 'use strict';
 
 angular.module('transmedApp')
-	.controller('FeedCtrl', function ($scope, $rootScope, $http, $log, localStorageService){
+	.controller('FeedCtrl', function ($scope, $rootScope, $http, $log, localStorageService, TwitterUsername, CodeBird){
 		$scope.error = '';
 		$scope.datas = [];
 
-		// Local storage functions
+		// Local storage : add an item
 	  	function addItem(key, val) {
 	   		return localStorageService.set(key, val);
 	  	};
 
+	  	// Local storage : get an item
 	   	function getItem(key) {
 	   		return localStorageService.get(key);
 	  	};
 
-	  	function concertDate(tweet){
+	  	// Convert date to "xxx ago" format
+	  	function convertDate(tweet){
+	  		 moment().locale('fr');
 			 var now = new Date();
 			 var nowWrapper = moment(now);                  
 			 var pastDateWrapper = moment(new Date(tweet.created_at));
@@ -22,23 +25,44 @@ angular.module('transmedApp')
 			 return displayDate; 		
 	  	};
 
-	  	// Initialisation Codebird
-		var cb = new Codebird;
-		cb.setConsumerKey("dXQ5VccrbKbQVvFFuDR1igBxi", "oNcCuayrTLcx1cmn9F1OVmo19p3i0AIOtUFdYaloVhN79UZymj");
-		cb.setToken("3186273089-QByeigjencHbE65KXryOfo2fENJDyKow4rIsfwn", "YgpIr5iktLOmaavwtQCK8oUZ0tbRnap6eDTZX192BQvtR");
+	  	// Convert text : get rid of wrong format
+	  	function convertText(text){
+	  		var a = text;
+			//$log.debug(a);
+
+			var div = document.createElement('div');
+			div.innerHTML = a;
+			var decoded = div.firstChild.nodeValue;
+			//$log.debug(decoded);
+			return decoded;
+	  	};
+
+		// Initialisation Codebird
+	  	$log.debug($rootScope);
+	  	if ($rootScope.cb === undefined) {
+			var cb = new Codebird;
+		    cb.setConsumerKey(CodeBird.key, CodeBird.keyS);
+		    cb.setToken(CodeBird.tok, CodeBird.tokS);
+			$rootScope.cb = cb;
+	  		//$log.debug('from init');
+	  	}else{
+	  		var cb = $rootScope.cb;
+	  		//$log.debug('from rootscope');
+	  	}
 
 		// Call for timeline - Notre projet
 		cb.__call(
 		    "statuses_userTimeline",
-		    {},
+		    {
+		    	"screen_name": TwitterUsername,
+		    	"count": "10"
+			},
 		    function (reply) {
-
-		    	// Add created_at différence from now timestamp
+		    	// Add created_at_readable and convert text
 		    	for (var i = reply.length - 1; i >= 0; i--) {
-	    			var displayDate = concertDate(reply[i]);
-					reply[i].created_at_readable = displayDate;
+					reply[i].created_at_readable = convertDate(reply[i]);
+					reply[i].text = convertText(reply[i].text);
 		    	};
-
 		    	//$log.debug(reply);
 		    	$scope.tweetsProject = reply;
 		    	$scope.$digest();
@@ -50,17 +74,15 @@ angular.module('transmedApp')
 		    "statuses_userTimeline",
 		    {
 		    	"screen_name": "RaceForWater",
-		    	"count": "3"
+		    	"count": "5"
 			},
 		    function (reply) {
-
-		    	// Add created_at différence from now timestamp
+		    	// Add created_at_readable and convert text
 		    	for (var i = reply.length - 1; i >= 0; i--) {
-	    			var displayDate = concertDate(reply[i]);
-					reply[i].created_at_readable = displayDate;
+					reply[i].created_at_readable = convertDate(reply[i]);
+					reply[i].text = convertText(reply[i].text);
 		    	};
-		    	
-		    	$log.debug(reply);
+		    	//$log.debug(reply);
 		    	$scope.tweetsAssoc1 = reply;
 		    	$scope.$digest();
 		    }

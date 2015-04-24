@@ -26,23 +26,38 @@ angular.module('transmedApp')
 })
 
 // Second modal configs & actions
- .controller('SecondPopupCtrl', function ($scope, $log, ngDialog) {
+ .controller('SecondPopupCtrl', function ($scope, $log, ngDialog, $rootScope) {
 
  	$scope.feedback = '';
+  var cb = $rootScope.cb;
+  $log.debug(cb);
 
   	$scope.closeSecond = function () {
     	ngDialog.close();
   	};
 
-  	$scope.submitForm = function (answer){
+  	$scope.submitForm = function (answer, video){
 
-  		$log.debug(answer);
-
-  		// answer control double check -> normally Angular prevents the answer to be posted
-  		if (answer.length < 1 || answer.length >= 140) {
+  		if (answer.length < 1 || answer.length >= 120) {
   			answer = undefined;
   			$scope.feedback = 'Il n\'y a rien à envoyer.';
-  		}
+  		}else{
+        // Answer in params
+        var params = {
+          status: video.hashtag + ' ' + answer
+        };
+
+        $log.debug(params);
+        
+        // Tweet the answer
+        cb.__call(
+            "statuses_update",
+            params,
+            function (reply) {
+                // ...
+            }
+        );
+      }
 
   		ngDialog.close();
   	};

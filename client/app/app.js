@@ -21,9 +21,15 @@ angular.module('transmedApp', [
     };
 })
 
-  .constant('TwitterUrl', 'https://api.twitter.com/1.1/')
   // .constant('ApiUrl', 'http://pfouah2015.herokuapp.com/')
   .constant('ApiUrl', 'http://localhost:9000/')
+  .constant('TwitterUsername', 'eterna001')
+  .constant('CodeBird', {
+    'key': 'dXQ5VccrbKbQVvFFuDR1igBxi',
+    'keyS': 'oNcCuayrTLcx1cmn9F1OVmo19p3i0AIOtUFdYaloVhN79UZymj',
+    'tok': '3186273089-QByeigjencHbE65KXryOfo2fENJDyKow4rIsfwn',
+    'tokS': 'YgpIr5iktLOmaavwtQCK8oUZ0tbRnap6eDTZX192BQvtR'
+  })
 
   .config(function (localStorageServiceProvider) {
     localStorageServiceProvider
@@ -61,7 +67,7 @@ angular.module('transmedApp', [
       },
 
       // Intercept 401s and redirect you to login
-      responseError: function(response) {
+/*      responseError: function(response) {
         if(response.status === 401) {
           $location.path('/login');
           // remove any stale tokens
@@ -71,7 +77,7 @@ angular.module('transmedApp', [
         else {
           return $q.reject(response);
         }
-      }
+      }*/
     };
   })
 
