@@ -16,11 +16,11 @@ angular.module('transmedApp')
 	  	};
 
 	  	// Convert date to "xxx ago" format
-	  	function convertDate(tweet){
+	  	function convertDate(date){
 	  		 moment().locale('fr');
 			 var now = new Date();
 			 var nowWrapper = moment(now);                  
-			 var pastDateWrapper = moment(new Date(tweet.created_at));
+			 var pastDateWrapper = moment(new Date(date));
 			 var displayDate = pastDateWrapper.from(nowWrapper);
 			 return displayDate; 		
 	  	};
@@ -51,7 +51,7 @@ angular.module('transmedApp')
 	  	}
 
 		// Call for timeline - Notre projet
-		cb.__call(
+/*		cb.__call(
 		    "statuses_userTimeline",
 		    {
 		    	"screen_name": TwitterUsername,
@@ -67,6 +67,44 @@ angular.module('transmedApp')
 		    	$scope.tweetsProject = reply;
 		    	$scope.$digest();
 		    }
+		);*/
+
+		// Call for Q1
+		cb.__call(
+			"search_tweets",
+			{
+				"q": "#pfouahQ1 "+ TwitterUsername,
+				"result_type" : "realtime"
+			},
+			function (reply){
+		    	// Add created_at_readable and convert text
+		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
+					reply.statuses[i].created_at_readable = convertDate(reply.statuses[i].created_at);
+					reply.statuses[i].text = convertText(reply.statuses[i].text);
+		    	};
+		    	$log.debug(reply);
+		    	$scope.tweetsQ1 = reply.statuses;
+		    	$scope.$digest();
+			}
+		);
+
+		// Call for Q2
+		cb.__call(
+			"search_tweets",
+			{
+				"q": "#pfouahQ2 "+ TwitterUsername,
+				"result_type" : "realtime"
+			},
+			function (reply){
+		    	// Add created_at_readable and convert text
+		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
+					reply.statuses[i].created_at_readable = convertDate(reply.statuses[i].created_at);
+					reply.statuses[i].text = convertText(reply.statuses[i].text);
+		    	};
+		    	$log.debug(reply);
+		    	$scope.tweetsQ2 = reply.statuses;
+		    	$scope.$digest();
+			}
 		);
 
 		// Call for timeline - Race For Water
@@ -79,7 +117,7 @@ angular.module('transmedApp')
 		    function (reply) {
 		    	// Add created_at_readable and convert text
 		    	for (var i = reply.length - 1; i >= 0; i--) {
-					reply[i].created_at_readable = convertDate(reply[i]);
+					reply[i].created_at_readable = convertDate(reply[i].created_at);
 					reply[i].text = convertText(reply[i].text);
 		    	};
 		    	//$log.debug(reply);

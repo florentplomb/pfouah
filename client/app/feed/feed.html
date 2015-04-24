@@ -3,7 +3,14 @@
 <hr/>
 
 <div class="block_project">
-	<div ng-repeat="tweet in tweetsProject" class="tweets_project">
+	<h3>Q1</h3>
+	<div ng-repeat="tweet in tweetsQ1" class="tweets_project">
+		<h4><a ng-href="https://twitter.com/{{twet.user.name}}">{{tweet.user.name}}</a> a publié {{tweet.created_at_readable}} :</h4>
+		<a ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">lien sur le tweet</a>
+		<p>{{tweet.text}}</p>
+	</div>
+	<h3>Q2</h3>
+	<div ng-repeat="tweet in tweetsQ2" class="tweets_project">
 		<h4><a ng-href="https://twitter.com/{{twet.user.name}}">{{tweet.user.name}}</a> a publié {{tweet.created_at_readable}} :</h4>
 		<a ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">lien sur le tweet</a>
 		<p>{{tweet.text}}</p>
