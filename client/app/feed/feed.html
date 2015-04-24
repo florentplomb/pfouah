@@ -18,6 +18,7 @@
 </div>
 
 <div class="block_assoc1">
+	<h3>Nos partenaires</h3>
 	<div ng-repeat="tweet in tweetsAssoc1" class="tweets_assoc1">
 		<h4><a ng-href="https://twitter.com/{{twet.user.name}}">{{tweet.user.name}}</a> a publié {{tweet.created_at_readable}} :</h4>
 		<a ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">lien sur le tweet</a>

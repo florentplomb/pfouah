@@ -74,7 +74,8 @@ angular.module('transmedApp')
 			"search_tweets",
 			{
 				"q": "#pfouahQ1 "+ TwitterUsername,
-				"result_type" : "realtime"
+				"result_type" : "realtime",
+				"count" : "3"
 			},
 			function (reply){
 		    	// Add created_at_readable and convert text
@@ -82,7 +83,7 @@ angular.module('transmedApp')
 					reply.statuses[i].created_at_readable = convertDate(reply.statuses[i].created_at);
 					reply.statuses[i].text = convertText(reply.statuses[i].text);
 		    	};
-		    	$log.debug(reply);
+		    	//$log.debug(reply);
 		    	$scope.tweetsQ1 = reply.statuses;
 		    	$scope.$digest();
 			}
@@ -93,7 +94,8 @@ angular.module('transmedApp')
 			"search_tweets",
 			{
 				"q": "#pfouahQ2 "+ TwitterUsername,
-				"result_type" : "realtime"
+				"result_type" : "realtime",
+				"count" : "3"
 			},
 			function (reply){
 		    	// Add created_at_readable and convert text
@@ -101,7 +103,7 @@ angular.module('transmedApp')
 					reply.statuses[i].created_at_readable = convertDate(reply.statuses[i].created_at);
 					reply.statuses[i].text = convertText(reply.statuses[i].text);
 		    	};
-		    	$log.debug(reply);
+		    	//$log.debug(reply);
 		    	$scope.tweetsQ2 = reply.statuses;
 		    	$scope.$digest();
 			}
