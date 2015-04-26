@@ -2,17 +2,17 @@
 
 angular.module('transmedApp')
 
-// First modal configs & actions
-.controller('FirstPopupCtrl', function ($scope, $log, ngDialog) {
+// Video modal configs & actions
+.controller('VideoModalCtrl', function ($scope, $log, ngDialog) {
   	
   	$scope.openSecond = function (dataVideo) {
     	ngDialog.close();
 
 	   	ngDialog.open({
 		    // url from index.html at the root
-		    template: 'app/main/modal/modal2.html',
+		    template: 'app/main/modal/modalform.html',
 		    plain: false,
-		    controller: 'SecondPopupCtrl',
+		    controller: 'FormModalCtrl',
 		    className: 'ngdialog-theme-default',
 		    data: dataVideo,
 		    closeByEscape: false,
@@ -25,12 +25,12 @@ angular.module('transmedApp')
 
 })
 
-// Second modal configs & actions
- .controller('SecondPopupCtrl', function ($scope, $log, ngDialog, $rootScope) {
+// Form modal configs & actions
+ .controller('FormModalCtrl', function ($scope, $log, ngDialog, $rootScope) {
 
  	$scope.feedback = '';
   var cb = $rootScope.cb;
-  $log.debug(cb);
+  //$log.debug(cb);
 
   	$scope.closeSecond = function () {
     	ngDialog.close();
@@ -57,9 +57,9 @@ angular.module('transmedApp')
                 // ...
             }
         );
-      }
 
-  		ngDialog.close();
+        ngDialog.close();
+      }
   	};
 
 });

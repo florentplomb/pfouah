@@ -14,9 +14,9 @@ angular.module('transmedApp')
 
     ngDialog.open({
       // url from index.html at the root
-      template: 'app/main/modal/modal1.html',
+      template: 'app/main/modal/modalvideo.html',
       plain: false,
-      controller: 'FirstPopupCtrl',
+      controller: 'VideoModalCtrl',
       className: 'ngdialog-theme-default',
       data: dataVideo,
       closeByEscape: false,
