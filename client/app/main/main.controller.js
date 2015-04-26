@@ -38,7 +38,7 @@ angular.module('transmedApp')
       //data: dataVideo,
       closeByEscape: true,
       closeByDocument: true,
-      showClose: true,
+      showClose: false,
       cache: false
     });
 
