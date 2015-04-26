@@ -2,6 +2,8 @@
 
 <div class="container" ng-repeat= "video in videos">
   <div class="video">
-    <button type="button" ng-click="openDefault(video)">Regarder : {{video.title}}</button>
+    <button type="button" ng-click="openVideoModal(video)">Regarder : {{video.title}}</button>
   </div>
 </div>
+
+<button type="button" ng-click="openGamesModal()">Games</button>

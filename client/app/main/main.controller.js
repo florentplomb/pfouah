@@ -9,8 +9,8 @@ angular.module('transmedApp')
     {'title' : 'video 2', 'question' : 'question 2', 'hashtag' : '#pfouahQ2'}
   ];
 
-  // initial action button, open the first modal
-  $scope.openDefault = function (dataVideo) {
+  // initial action button, open the video modal
+  $scope.openVideoModal = function (dataVideo) {
 
     ngDialog.open({
       // url from index.html at the root
@@ -27,17 +27,33 @@ angular.module('transmedApp')
 
   };
 
-    // Initialisation Codebird
-    $log.debug($rootScope);
-    if ($rootScope.cb === undefined) {
-      var cb = new Codebird;
-      cb.setConsumerKey(CodeBird.key, CodeBird.keyS);
-      cb.setToken(CodeBird.tok, CodeBird.tokS);
-      $rootScope.cb = cb;
-      //$log.debug('from init');
-    }else{
-      var cb = $rootScope.cb;
-      //$log.debug('from rootscope');
-    }
+  $scope.openGamesModal = function () {
+
+    ngDialog.open({
+      // url from index.html at the root
+      template: 'app/main/modal/modalgames.html',
+      plain: false,
+      controller: 'GamesModalCtrl',
+      className: 'ngdialog-theme-games',
+      //data: dataVideo,
+      closeByEscape: true,
+      closeByDocument: true,
+      showClose: true,
+      cache: false
+    });
+
+  };
+
+  // Initialisation Codebird
+  if ($rootScope.cb === undefined) {
+    var cb = new Codebird;
+    cb.setConsumerKey(CodeBird.key, CodeBird.keyS);
+    cb.setToken(CodeBird.tok, CodeBird.tokS);
+    $rootScope.cb = cb;
+    //$log.debug('from init');
+  }else{
+    var cb = $rootScope.cb;
+    //$log.debug('from rootscope');
+  }
 
 });

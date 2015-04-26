@@ -32,7 +32,7 @@ angular.module('transmedApp')
   var cb = $rootScope.cb;
   //$log.debug(cb);
 
-  	$scope.closeSecond = function () {
+  	$scope.close = function () {
     	ngDialog.close();
   	};
 
@@ -61,5 +61,14 @@ angular.module('transmedApp')
         ngDialog.close();
       }
   	};
+
+})
+
+ // Video modal configs & actions
+.controller('GamesModalCtrl', function ($scope, $log, ngDialog) {
+    
+    $scope.close = function () {
+      ngDialog.close();
+    };
 
 });
