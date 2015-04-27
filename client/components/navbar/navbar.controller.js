@@ -17,6 +17,9 @@ angular.module('transmedApp')
     },{
       'title': 'Partners',
       'link': '/partner'
+    },{
+      'title': 'Games',
+      'link': '/game'
     }];
 
     $scope.isCollapsed = true;

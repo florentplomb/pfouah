@@ -63,12 +63,3 @@ angular.module('transmedApp')
   	};
 
 })
-
- // Video modal configs & actions
-.controller('GamesModalCtrl', function ($scope, $log, ngDialog) {
-    
-    $scope.close = function () {
-      ngDialog.close();
-    };
-
-});

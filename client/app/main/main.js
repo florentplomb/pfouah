@@ -27,5 +27,10 @@ angular.module('transmedApp')
         url: '/feed',
         templateUrl: 'app/feed/feed.html',
         controller: 'FeedCtrl'
+      })
+      .state('game', {
+        url: '/game',
+        templateUrl: 'app/game/game.html',
+        controller: 'GameCtrl'
       });
   });

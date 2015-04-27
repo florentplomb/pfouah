@@ -1,3 +1,29 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<p>partner</p>
+<div ng-repeat = "partner in partners" class="boxPartner">
+	<div class="leftContentPartner">
+		<img src="#">
+	</div>
+	<div class="rightContentPartner">
+		<h1>{{partner.name}}</h1>
+
+		<a ng-href="{{partner.site}}" ng-show="partner.site !== ''">
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-square-o fa-stack-2x"></i>
+				<i class="fa fa-external-link-square fa-stack-1x"></i>
+			</span>
+		</a>
+		<a ng-href="{{partner.twitter}}" ng-show="partner.twitter !== ''">
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-square-o fa-stack-2x"></i>
+				<i class="fa fa-twitter fa-stack-1x"></i>
+			</span>
+		</a>
+		<a ng-href="{{partner.facebook}}" ng-show="partner.facebook !== ''">
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-square-o fa-stack-2x"></i>
+				<i class="fa fa-facebook fa-stack-1x"></i>
+			</span>
+		</a>
+	</div>
+</div>

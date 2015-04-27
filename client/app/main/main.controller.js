@@ -27,23 +27,6 @@ angular.module('transmedApp')
 
   };
 
-  $scope.openGamesModal = function () {
-
-    ngDialog.open({
-      // url from index.html at the root
-      template: 'app/main/modal/modalgames.html',
-      plain: false,
-      controller: 'GamesModalCtrl',
-      className: 'ngdialog-theme-games',
-      //data: dataVideo,
-      closeByEscape: true,
-      closeByDocument: true,
-      showClose: false,
-      cache: false
-    });
-
-  };
-
   // Initialisation Codebird
   if ($rootScope.cb === undefined) {
     var cb = new Codebird;
