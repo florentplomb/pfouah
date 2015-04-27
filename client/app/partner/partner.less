@@ -1,3 +1,5 @@
+@left-width: 33%;
+
 .boxPartner{
 	position: relative;
 	width: 100%-20em;
@@ -9,14 +11,14 @@
 }
 
 .leftContentPartner{
-	width: 13%;
+	width: @left-width;
 	background-color: red;
 	float: left;
 }
 .rightContentPartner{
 	background-color: #7ABC87;
-	left: 13%;
-	width: 87%;
+	left: @left-width;
+	width: 100% - @left-width;
 	float: left;
 	padding-left: 4em;
 	padding-top: 0.5em;
