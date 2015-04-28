@@ -6,19 +6,19 @@ angular.module('transmedApp')
       'title': 'Home',
       'link': '/'
     },{
-      'title': 'Rankings',
+      'title': 'Classements',
       'link': '/ranking'
     }, {
-      'title': 'Photowall',
+      'title': 'Mur de selfies',
       'link': '/photowall'
     },{
       'title': 'Feeds',
       'link': '/feed'
     },{
-      'title': 'Partners',
+      'title': 'Partenaires',
       'link': '/partner'
     },{
-      'title': 'Games',
+      'title': 'Jeux',
       'link': '/game'
     }];
 
