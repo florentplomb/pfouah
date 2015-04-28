@@ -2,7 +2,7 @@
 
 <div ng-repeat = "partner in partners" class="boxPartner">
 	<div class="leftContentPartner">
-		<img class="logoPartner {{partner.style}}" ng-src="assets/images/{{partner.logo}}">
+		<img class="logoPartner {{partner.style}}" ng-src="assets/images/{{partner.logo}}" ng-show="partner.logo !== ''">
 	</div>
 	<div class="rightContentPartner">
 		<h1 id="partnerH1">{{partner.name}}</h1>
