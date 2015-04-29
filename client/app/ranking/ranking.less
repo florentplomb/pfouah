@@ -14,12 +14,32 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
 	background: #FFF
 }*/
-
+.container{
+	background-color: #eeeeee;
+}
 a:hover{
 	text-decoration: underline;
 	color: #DDD;
 };
+ 
+.filters{
+	width:100%;
+	text-align: center;
+	margin-top: 50px;
 
+	div{
+		width:15%;
+		background-color: #A0C5FA;
+		border:none;
+		line-height: 40px;
+		font-size: 1.5em;
+		font-weight: bold;
+		font-family: helsinkiregular;
+		&:hover{
+			background-color: #7A97BF;
+		}
+	}
+}
 /* unused */
 .table-text{
 	padding-top: 15px !important;
@@ -27,4 +47,54 @@ a:hover{
 
 .btn-ranking{
 	margin-right: 15px;
+}
+
+#washScore{
+	color:#9de7f9;
+}
+
+#trashScore{
+	color:#f9b995;
+}
+
+.gold{
+	background-color: #FFD700;
+}
+
+.argent{
+	
+}
+
+.bronze{
+	
+}
+
+#flashScore{
+	color:#89ce9a;
+}
+
+.tableHead{
+	background-color: #FAFAFA;
+}
+
+.table{
+	width:80%;
+	margin-left: 10%;
+	background-color: #eeeeee;
+	th{
+		text-align: center;
+		font-size: 1.5em;
+		color:black;
+		a{
+			text-align: center;
+			color:black;
+		}
+	}
+	td{
+		line-height: 60px;
+		text-align: center;
+		font-size: 1.3em;
+		font-weight: bold; 
+		color:#333333;
+	}
 }

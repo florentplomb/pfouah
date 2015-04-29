@@ -1,15 +1,15 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
-
-	<div class="btn btn-primary btn-ranking" ng-repeat="tab in tabs" ng-click="showTab(tab.id)">{{tab.title}}</div>
-
+	<div class="filters">
+		<div class="btn btn-primary btn-ranking" ng-repeat="tab in tabs" ng-click="showTab(tab.id)">{{tab.title}}</div>
+	</div>
 		<hr/>
-		<h3 ng-show="activeTab == 1">Tableau des scores</h3>
+		<!-- <h3 ng-show="activeTab == 1">Tableau des scores</h3> -->
 		<!--<pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>-->
 
-		<table class="table table-striped">
-			<tr>
+		<table class="table table-hover">
+			<tr class="tableHead">
 				<th ng-show="activeTab == 1"><a ng-click="predicate = 'posTot'; reverse=!reverse">Position</a></th>
 				<th ng-show="activeTab == 2"><a ng-click="predicate = 'posCumul'; reverse=!reverse">Position</a></th>
 				<th ng-show="activeTab == 3"><a ng-click="predicate = 'posWash'; reverse=!reverse">Position</a></th>
@@ -18,12 +18,12 @@
 				<th><a ng-click="predicate = 'pseudo'; reverse=!reverse">Joueurs</a></th>
 				<th ng-show="activeTab == 1">Total</th>
 				<th ng-show="activeTab == 2">Cumul</th>
-				<th ng-show="activeTab == 3">Wash</th>
-				<th ng-show="activeTab == 4">Trash</th>
-				<th ng-show="activeTab == 5">Flash</th>
+				<th ng-show="activeTab == 3" id="washScore">Wash</th>
+				<th ng-show="activeTab == 4" id="trashScore">Trash</th>
+				<th ng-show="activeTab == 5" id="flashScore">Flash</th>
 				<th>Avatars</th>
 			</tr>
-		   	<tr ng-repeat="player in datas | orderBy: predicate :-reverse">
+		   	<tr ng-repeat="(index,player) in datas | orderBy: predicate :-reverse" ng-class="{0:'gold', 1:'argent', 2:'bronze'}[index]">
 		   		<!-- position : juste one at time -->
 		   		<td class="" ng-show="activeTab == 1">{{player.posTot}}</td>
 		   		<td class="" ng-show="activeTab == 2">{{player.posCumul}}</td>

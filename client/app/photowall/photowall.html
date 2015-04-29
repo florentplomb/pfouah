@@ -1,38 +1,62 @@
+<!-- <div ng-include="'components/navbar/navbar.html'"></div> -->
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
 	<!-- <h1>photowall</h1>
 	<p>Like or dislike your friends !</p> -->
+		
+	<div class="bestImg" ng-repeat="(key, photo) in datas | toArray | orderBy:'-imgId.like' | limitTo:3">
+		<div ng-class="{0:'premier', 1:'deuxieme', 2:'troisieme'}[key]" >
+			<img ng-class="{0:'un', 1:'deux', 2:'trois'}[key]" ng-src="{{photo.imgUrl}}" >
+		</div>
 
-	<div deckgrid class="deckgrid" source="photos" ng-repeat="photo in datas | toArray | orderBy:'-like' ">
-	    <div class="img-box">
-	        <img class="img-wall" ng-src="{{photo.imgUrl}}"/>
-	        <div class="content-over">
-	        	<!-- bouton dislike -->
-	        	<div  type="button" ng-show="getItem(photo._id) == null"
-	        	ng-click="likePlayer(photo)" class="like button">
-	        		<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-	        	</div>
-	        	<!-- bouton dislike -->
-	        	<div type="button" ng-show="getItem(photo._id) == null"
-	        	ng-click="dislikePlayer(photo)" class="dislike button">
-	        		<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-	        	</div>
-
-	        	<!-- compteur de like -->
-	        	<!-- <p class="p-cpt likes label label-primary label-as-badge" ng-show="photo.like >= 2"> {{photo.like}} likes</p>
-	        	<p class="p-cpt likes label label-primary label-as-badge" ng-show="photo.like == 0 || photo.like == 1">{{photo.like}} like</p>
-	        	<p class="p-cpt likes label label-primary label-as-badge" ng-show="photo.like == -1">{{photo.like}} dislike</p>
-	        	<p class="p-cpt likes label label-primary label-as-badge" ng-show="photo.like <= -2">{{photo.like}} dislikes</p> -->
-	        </div>
-	        <div class="likesContainer">
-	        	<p class="likes" ng-show="photo.like >= 2"> {{photo.like}} likes</p>
-	        	<p class="likes" ng-show="photo.like == 0 || photo.like == 1">{{photo.like}} like</p>
-	        	<p class="likes" ng-show="photo.like == -1">{{photo.like}} dislike</p>
-	        	<p class="likes" ng-show="photo.like <= -2">{{photo.like}} dislikes</p>
-	        </div>
-	    </div>
+			
+	
+		
+		
 	</div>
+
+<!-- 	<div class="banniere">
+		<h2 class="titre">Vendredi 1er Mai</h2>
+		<h3><img class="winner" src="assets/images/winner.png" alt="">remise des prix <img class="winner" src="assets/images/winner.png" alt=""></h3>
+
+		<h4>10h - CMC - Centre St-Roch</h4>
+		
+		<h3><img class="googleplay" src="assets/images/google_play.png" alt="">: pfouah!</h3>
+	</div>	 -->
+
+	<div class="podium">
+		
+		
+	</div>
+
+	
+	<div class="img-box deckgrid" ng-repeat="photo in datas | toArray | orderBy:'-imgId.like'">
+
+		<img data-ng-src="{{photo.imgUrl}}" alt="" class="img-wall" />
+		<div>
+			 <img src="assets/images/like.png" alt="" ng-show="getItem(photo._id) == null" ng-click="likePlayer(photo)" class="button like"/>
+		</div>
+       
+       <div>
+       		<img src="assets/images/dislike.png" alt="" ng-show="getItem(photo._id) == null" ng-click="dislikePlayer(photo)" class="button dislike"/>
+       </div>
+
+       <div>
+       		<h1 ng-show="getItem(photo._id)" class="likesH1 button">{{photo.imgId.like}}</h1>
+       </div>
+        
+		
+		
+		
+	</div>
+
+
+	<!-- <div class="containerTest">
+		<img class="imgTest" src="assets/images/poussin.jpg" alt="">
+		<div class="divTest">Hello</div>
+	</div> -->
+
 
 	<p>{{error}}</p>
 </div>

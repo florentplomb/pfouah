@@ -4,12 +4,44 @@
 		"selected_items":
 		[
 			[
-				"bac",
-				"background-color"
+				"fon",
+				"font-family"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"marg",
+				"margin-left"
 			],
 			[
 				"mar",
-				"margin-top"
+				"margin-left"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"over",
+				"overflow-y"
+			],
+			[
+				"z-",
+				"z-index"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"bac",
+				"background-color"
 			],
 			[
 				"padd",
@@ -32,20 +64,8 @@
 				"pseudoId"
 			],
 			[
-				"font",
-				"font-size"
-			],
-			[
-				"marg",
-				"margin-bottom"
-			],
-			[
 				"text",
 				"text-align"
-			],
-			[
-				"fon",
-				"font-size"
 			],
 			[
 				"coun",
@@ -62,10 +82,6 @@
 			[
 				"paf",
 				"padding-left"
-			],
-			[
-				"margin",
-				"margin-top"
 			],
 			[
 				"paddin",
@@ -113,10 +129,6 @@
 			],
 			[
 				"backgroun",
-				"background-color"
-			],
-			[
-				"back",
 				"background-color"
 			],
 			[
@@ -312,10 +324,45 @@
 			}
 		},
 		{
+			"file": "client/app/ranking/ranking.html",
+			"settings":
+			{
+				"buffer_size": 2350,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "client/app/ranking/ranking.less",
+			"settings":
+			{
+				"buffer_size": 1089,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "client/app/main/main.less",
 			"settings":
 			{
-				"buffer_size": 422,
+				"buffer_size": 2290,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "client/app/photowall/photowall.controller.js",
+			"settings":
+			{
+				"buffer_size": 3353,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "'use strict';\n\nangular.module('transmedApp')\n\n.controller('MainCtrl', function ($scope, $log, ngDialog, $rootScope, CodeBird) {\n\n  $scope.videos = [\n    {'title' : 'video 1', 'question' : 'question 1', 'hashtag' : '#pfouahQ1'},\n    {'title' : 'video 2', 'question' : 'question 2', 'hashtag' : '#pfouahQ2'}\n  ];\n\n  // initial action button, open the video modal\n  $scope.openVideoModal = function (dataVideo) {\n\n    ngDialog.open({\n      // url from index.html at the root\n      template: 'app/main/modal/modalvideo.html',\n      plain: false,\n      controller: 'VideoModalCtrl',\n      className: 'ngdialog-theme-default',\n      data: dataVideo,\n      closeByEscape: false,\n      closeByDocument: false,\n      showClose: false,\n      cache: false\n    });\n\n  };\n\n  $http\n\n  $scope.totalFlash = 323;\n\n  // Initialisation Codebird\n  if ($rootScope.cb === undefined) {\n    var cb = new Codebird;\n    cb.setConsumerKey(CodeBird.key, CodeBird.keyS);\n    cb.setToken(CodeBird.tok, CodeBird.tokS);\n    $rootScope.cb = cb;\n    //$log.debug('from init');\n  }else{\n    var cb = $rootScope.cb;\n    //$log.debug('from rootscope');\n  }\n\n});",
+			"file": "client/app/main/main.controller.js",
+			"file_size": 1115,
+			"file_write_time": 1430313404000000,
+			"settings":
+			{
+				"buffer_size": 1124,
 				"line_ending": "Unix"
 			}
 		},
@@ -339,7 +386,47 @@
 			"file": "client/app/photowall/photowall.html",
 			"settings":
 			{
-				"buffer_size": 1906,
+				"buffer_size": 1709,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "client/app/main/main.html",
+			"settings":
+			{
+				"buffer_size": 1108,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "client/app/photowall/photowall.less",
+			"settings":
+			{
+				"buffer_size": 5564,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bower.json",
+			"settings":
+			{
+				"buffer_size": 711,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "client/app/main/modal/modalvideo.html",
+			"settings":
+			{
+				"buffer_size": 363,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "client/app/main/modal/modal.less",
+			"settings":
+			{
+				"buffer_size": 5830,
 				"line_ending": "Unix"
 			}
 		}
@@ -383,7 +470,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 575.0
+		"width": 405.0
 	},
 	"console":
 	{
@@ -400,6 +487,8 @@
 	},
 	"file_history":
 	[
+		"/Users/Matthieu/Documents/comem/transmedia/pfouah/bower.json",
+		"/Users/Matthieu/Documents/comem/transmedia/pfouah/client/app/main/main.less",
 		"/Applications/MAMP/htdocs/chiotte/app/scripts/directives/windowheight.js",
 		"/Applications/MAMP/htdocs/chiotte/app/views/main.html",
 		"/Applications/MAMP/htdocs/chiotte/app/index.html",
@@ -525,9 +614,7 @@
 		"/Users/Matthieu/Documents/comem/webservice/Teaching-HEIGVD-CM_WEBS-2015-Labo-Express/app/controllers/issue.js",
 		"/Users/Matthieu/Documents/comem/webservice/Teaching-HEIGVD-CM_WEBS-2015-Labo-Express/app/models/issue.js",
 		"/Users/Matthieu/Documents/comem/webservice/Teaching-HEIGVD-CM_WEBS-2015-Labo-Express/app/controllers/user.js",
-		"/Users/Matthieu/Documents/comem/webservice/Teaching-HEIGVD-CM_WEBS-2015-Labo-Express/app/models/user.js",
-		"/Users/Matthieu/Documents/comem/webservice/Teaching-HEIGVD-CM_WEBS-2015-Labo-Express/app/models/comment.js",
-		"/Users/Matthieu/Documents/comem/webservice/Teaching-HEIGVD-CM_WEBS-2015-Labo-Doc/templates/css/app.styl"
+		"/Users/Matthieu/Documents/comem/webservice/Teaching-HEIGVD-CM_WEBS-2015-Labo-Express/app/models/user.js"
 	],
 	"find":
 	{
@@ -578,7 +665,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -604,7 +691,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 568.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -627,7 +714,8 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/LESS/LESS.tmLanguage"
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -637,18 +725,71 @@
 				},
 				{
 					"buffer": 2,
-					"file": "client/app/main/main.less",
+					"file": "client/app/ranking/ranking.html",
 					"settings":
 					{
-						"buffer_size": 422,
+						"buffer_size": 2350,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								33,
-								33
+								427,
+								436
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "client/app/ranking/ranking.less",
+					"settings":
+					{
+						"buffer_size": 1089,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								569,
+								569
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "client/app/main/main.less",
+					"settings":
+					{
+						"buffer_size": 2290,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								31,
+								46
 							]
 						],
 						"settings":
@@ -662,15 +803,70 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "client/app/photowall/photowall.controller.js",
+					"settings":
+					{
+						"buffer_size": 3353,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "client/app/main/main.controller.js",
+					"settings":
+					{
+						"buffer_size": 1124,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								767,
+								767
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
-					"buffer": 3,
+					"buffer": 7,
 					"file": "client/components/navbar/navbar.html",
 					"settings":
 					{
@@ -698,7 +894,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 8,
 					"file": "client/components/navbar/navbar.controller.js",
 					"settings":
 					{
@@ -726,11 +922,91 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 9,
 					"file": "client/app/photowall/photowall.html",
 					"settings":
 					{
-						"buffer_size": 1906,
+						"buffer_size": 1709,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								856,
+								508
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "client/app/main/main.html",
+					"settings":
+					{
+						"buffer_size": 1108,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								490,
+								490
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "client/app/photowall/photowall.less",
+					"settings":
+					{
+						"buffer_size": 5564,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								845,
+								303
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "bower.json",
+					"settings":
+					{
+						"buffer_size": 711,
 						"regions":
 						{
 						},
@@ -743,11 +1019,66 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "client/app/main/modal/modalvideo.html",
+					"settings":
+					{
+						"buffer_size": 363,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								108,
+								151
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "client/app/main/modal/modal.less",
+					"settings":
+					{
+						"buffer_size": 5830,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1743,
+								1743
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1048.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -783,7 +1114,7 @@
 		"cols":
 		[
 			0.0,
-			0.338179749016,
+			0.418921444365,
 			1.0
 		],
 		"rows":
@@ -894,6 +1225,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 226.0,
+	"side_bar_width": 203.0,
 	"status_bar_visible": true
 }

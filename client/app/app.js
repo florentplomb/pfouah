@@ -21,6 +21,12 @@ angular.module('transmedApp', [
     };
 })
 
+.filter('trustThisUrl', ['$sce', function($sce) {
+    return function(val) {
+        return $sce.trustAsResourceUrl(val);
+    };
+}])
+
   // .constant('ApiUrl', 'http://pfouah2015.herokuapp.com/')
   .constant('ApiUrl', 'http://localhost:9000/')
   .constant('TwitterUsername', 'eterna001')

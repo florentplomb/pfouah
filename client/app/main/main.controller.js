@@ -2,11 +2,11 @@
 
 angular.module('transmedApp')
 
-.controller('MainCtrl', function ($scope, $log, ngDialog, $rootScope, CodeBird) {
+.controller('MainCtrl', function ($scope, $log, ngDialog, $rootScope, $http, CodeBird) {
 
   $scope.videos = [
-    {'title' : 'video 1', 'question' : 'question 1', 'hashtag' : '#pfouahQ1'},
-    {'title' : 'video 2', 'question' : 'question 2', 'hashtag' : '#pfouahQ2'}
+    {'title' : 'video 1', 'question' : 'question 1', 'hashtag' : '#pfouahQ1', 'youtubeUrl': 'https://www.youtube.com/embed/OgGbNJdMaTY'},
+    {'title' : 'video 2', 'question' : 'question 2', 'hashtag' : '#pfouahQ2', 'youtubeUrl': 'https://www.youtube.com/embed/3CsGVF336qs'}
   ];
 
   // initial action button, open the video modal
@@ -26,6 +26,20 @@ angular.module('transmedApp')
     });
 
   };
+
+  // $http({
+  //   method: 'GET',
+  //   // url: 'http://localhost:9000/api/images/' +photo.imgId._id + '/liked',
+  //   url: 'http://pfouah.comem.ch/api/images/'
+  // }).success(function (data){
+
+    
+    
+  // }).error(function (data){
+    
+  // }); 
+
+  $scope.totalFlash = 323;
 
   // Initialisation Codebird
   if ($rootScope.cb === undefined) {
