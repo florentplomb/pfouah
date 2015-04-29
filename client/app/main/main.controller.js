@@ -2,12 +2,11 @@
 
 angular.module('transmedApp')
 
-.controller('MainCtrl', function ($scope, $log, ngDialog, $rootScope, $http, CodeBird) {
 
-  $scope.videos = [
-    {'title' : 'video 1', 'question' : 'question 1', 'hashtag' : '#pfouahQ1', 'youtubeUrl': 'https://www.youtube.com/embed/OgGbNJdMaTY'},
-    {'title' : 'video 2', 'question' : 'question 2', 'hashtag' : '#pfouahQ2', 'youtubeUrl': 'https://www.youtube.com/embed/3CsGVF336qs'}
-  ];
+.controller('MainCtrl', function ($scope, $log, ngDialog, $rootScope, CodeBird, DataService) {
+
+  $scope.videos = DataService.getVideos();
+
 
   // initial action button, open the video modal
   $scope.openVideoModal = function (dataVideo) {

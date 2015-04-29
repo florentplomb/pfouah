@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('transmedApp')
-	.controller('FeedCtrl', function ($scope, $rootScope, $http, $log, localStorageService, TwitterUsername, CodeBird){
+	.controller('FeedCtrl', function ($scope, $rootScope, $http, $log, localStorageService, TwitterUsername, CodeBird, DataService){
 		$scope.error = '';
-		$scope.datas = [];
+		//$scope.datas = [];
+		$scope.videos = DataService.getVideos();
+		//$log.debug($scope.videos);
 
 		// Local storage : add an item
 	  	function addItem(key, val) {
@@ -74,7 +76,7 @@ angular.module('transmedApp')
 			{
 				"q": "#pfouahQ1 "+ TwitterUsername,
 				"result_type" : "realtime",
-				"count" : "3"
+				"count" : "5"
 			},
 			function (reply, rate_limit_status){
 		    	// Add created_at_readable and convert text
@@ -95,7 +97,7 @@ angular.module('transmedApp')
 			{
 				"q": "#pfouahQ2 "+ TwitterUsername,
 				"result_type" : "realtime",
-				"count" : "3"
+				"count" : "5"
 			},
 			function (reply, rate_limit_status){
 		    	// Add created_at_readable and convert text
@@ -115,7 +117,7 @@ angular.module('transmedApp')
 		    "statuses_userTimeline",
 		    {
 		    	"screen_name": "RaceForWater",
-		    	"count": "5"
+		    	"count": "9"
 			},
 		    function (reply, rate_limit_status) {
 		    	// Add created_at_readable and convert text

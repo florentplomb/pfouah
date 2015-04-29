@@ -1,2 +1,15 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
+<div class="gamesBox" ng-repeat = "game in games">
+	<div class="{{game.title}}">
+		<h1>{{game.title}}</h1>
+		<div class="imageGame">
+			<img src="{{game.logo}}">
+		</div>
+		<p>{{game.description}}</p>
+
+		<p>sponsorisé par :</p>
+		<h3>{{game.partner}}</h3>
+		<img src="assets/images/{{game.logoPartner}}" id="logoPartner">
+	</div>
+</div>
