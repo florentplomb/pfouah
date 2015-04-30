@@ -7,22 +7,22 @@
 		<div class="question_block">
 			<h4 class="question">“ {{videos[0].question}} ”</h4>
 			<div ng-repeat="tweet in tweetsQ1" class="tweets_project blue_border">
-				<h4>
+				<!--<p>
 					<a ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}"><i class="fa fa-twitter"></i></a> 
 					<a class="author_tweets" ng-href="https://twitter.com/{{twet.user.name}}">{{tweet.user.name}}</a> a publié {{tweet.created_at_readable}} :
-				</h4>
-				<a class="tweet_link" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
+				</p>-->
+				<a class="tweet_link answers" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
 			</div>
 		</div>
 
 		<div class="question_block">
 			<h4 class="question">“ {{videos[1].question}} ”</h4>
 			<div ng-repeat="tweet in tweetsQ2" class="tweets_project blue_border">
-				<h4>
+				<!--<h4>
 					<a ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}"><i class="fa fa-twitter"></i></a> 
 					<a class="author_tweets" ng-href="https://twitter.com/{{twet.user.name}}">{{tweet.user.name}}</a> a publié {{tweet.created_at_readable}} :
-				</h4>
-				<a class="tweet_link" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
+				</h4>-->
+				<a class="tweet_link answers" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
 			</div>
 		</div>
 
