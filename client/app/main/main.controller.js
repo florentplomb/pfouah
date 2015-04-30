@@ -3,9 +3,10 @@
 angular.module('transmedApp')
 
 
-.controller('MainCtrl', function ($scope, $log, ngDialog, $rootScope, CodeBird, DataService) {
+.controller('MainCtrl', function ($scope, $window, $interval, $log, ngDialog, $http, $rootScope, CodeBird, DataService) {
 
   $scope.videos = DataService.getVideos();
+  $scope.Math = window.Math;
 
 
   // initial action button, open the video modal
@@ -26,17 +27,66 @@ angular.module('transmedApp')
 
   };
 
-  // $http({
-  //   method: 'GET',
-  //   // url: 'http://localhost:9000/api/images/' +photo.imgId._id + '/liked',
-  //   url: 'http://pfouah.comem.ch/api/images/'
-  // }).success(function (data){
+  $interval($scope.callAtTimeout, 2000);
+
+  $scope.callAtTimeout = function(){
+    console.log('time');
+    $http({
+    method: 'GET',
+    url: 'http://localhost:9000/api/scores'
+   
+    // url: 'http://pfouah.comem.ch/api/images/'
+  }).success(function (data){
+    $scope.totalTrash = 0;
+    $scope.totalFlash = 0;
+    $scope.totalWash = 0;
+    console.log(data);
+    angular.forEach(data, function(score, key){
+      if(score.gameName === "trash"){
+        $scope.totalTrash = $scope.totalTrash + score.pts;
+      }else if(score.gameName === "flash"){
+        $scope.totalFlash = $scope.totalFlash + score.pts;
+
+      }else{
+        $scope.totalWash = $scope.totalWash + score.pts;
+        
+      };
+    })
 
     
     
-  // }).error(function (data){
+  }).error(function (data){
     
-  // }); 
+  });
+  }
+  $http({
+    method: 'GET',
+    url: 'http://localhost:9000/api/scores'
+   
+    // url: 'http://pfouah.comem.ch/api/images/'
+  }).success(function (data){
+    $scope.totalTrash = 0;
+    $scope.totalFlash = 0;
+    $scope.totalWash = 0;
+    console.log(data);
+    angular.forEach(data, function(score, key){
+      if(score.gameName === "trash"){
+        $scope.totalTrash = $scope.totalTrash + (score.pts * 1.4);
+      }else if(score.gameName === "flash"){
+        $scope.totalFlash = $scope.totalFlash + score.pts;
+
+      }else{
+        $scope.totalWash = $scope.totalWash + (score.pts * 3.75);
+        
+      };
+    })
+
+    
+    
+  }).error(function (data){
+    
+  }); 
+  
 
   $scope.totalFlash = 323;
 
@@ -53,3 +103,8 @@ angular.module('transmedApp')
   }
 
 });
+
+function callAtTimeout(){
+
+
+}

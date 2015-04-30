@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('transmedApp')
-	.controller('RankingCtrl', function ($scope, $http, $log, StaticService){
+	.controller('RankingCtrl', function ($scope, $http, $log, ApiService){
 
-		StaticService.getScores (
+		ApiService.getScores (
 			function(data){
 
 				var positions = [];
@@ -52,6 +52,7 @@ angular.module('transmedApp')
 				}
 
 				$scope.datas = data;
+				console.log($scope.datas);
 				//$log.debug($scope.datas);
 
 				// Default sort options

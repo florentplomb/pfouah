@@ -79,8 +79,8 @@ angular.module('transmedApp')
 					      
 						$http({
 							method: 'POST',
-							// url: 'http://localhost:9000/api/images/' +photo.imgId._id + '/liked',
-							url: 'http://pfouah.comem.ch/api/images/' +photo.imgId._id + '/liked',
+							url: 'http://localhost:9000/api/images/' +photo.imgId._id + '/liked',
+							// url: 'http://pfouah.comem.ch/api/images/' +photo.imgId._id + '/liked',
 							// url: 'http://pfouah2015.herokuapp.com/api/images/' +photo.imgId._id + '/liked',
 							data: vote
 						}).success(function (data){
@@ -121,8 +121,8 @@ angular.module('transmedApp')
 					      }
 						$http({
 							method: 'POST',
-							url: 'http://pfouah.comem.ch/api/images/' +photo.imgId._id + '/liked',
-							// url: 'http://pfouah2015.herokuapp.com/api/images/' +photo.imgId._id + '/liked',
+							// url: 'http://pfouah.comem.ch/api/images/' +photo.imgId._id + '/liked',
+							url: 'http://localhost:9000/api/images/' +photo.imgId._id + '/liked',
 							data: vote
 						}).success(function (data){
 							

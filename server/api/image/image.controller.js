@@ -3,28 +3,71 @@
 var _ = require('lodash');
 var Image = require('./image.model');
 var Player = require('../user/user.model');
-var Limitlike = require('../limitLike/limitLike.model');
 var fs = require('fs');
+
+var lwip = require('node-lwip');
 
 var validationError = function(res, err) {
   return res.json(422, err);
 };
+
 function handleError(res, err) {
   return res.send(500, err);
 }
 
+exports.show = function(req, res) {
+
+
+  var minPath = 'img/' + req.params.id + 'min.png';
+  if (!fs.existsSync(minPath)) {
+
+    Image.findById(req.params.id, function(err, image) {
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!image) {
+        return res.send(404);
+      }
+      var newPath = 'img/' + image.id + '.png';
+      var minPath = 'img/' + image.id + 'min.png';
+
+      newPath.toString();
+      minPath.toString();
+
+      fs.writeFileSync(newPath, image.data);
+      console.log("ici");
+
+      lwip.open(newPath, function(err, image) {
+        image.resize(200, 200, 'lanczos', function(err, imageresize) {
+          imageresize.writeFile(minPath, function(err) {
+
+            return res.sendfile(minPath);
+          });
+
+        });
+
+      });
+
+    });
+
+  } else {
+    return res.sendfile(minPath);
+  };
+};
 
 // Get list of images
 exports.index = function(req, res) {
   Image.find()
-  .select('-data')
-  .exec(function(err, images) {
-    if (err) {
-      return handleError(res, err);
-    }
-    return res.json(200, images);
-  })
+    .select('-data')
+    .exec(function(err, images) {
+      if (err) {
+        return validationError(res, err);
+      }
+      return res.json(200, images);
+    })
 };
+
+
 
 
 exports.liked = function(req, res) {
@@ -40,30 +83,21 @@ exports.liked = function(req, res) {
 
   Image.findById(req.params.id, function(err, image) {
     if (err) {
-      return handleError(res, err);
+      return validationError(res, err);
     }
     if (!image) {
-      return handleError(res, err);
+      return res.json({
+        code: 204,
+        message: "Image id wrong"
+      }).end();
     }
 
-    Limitlike.findOne({
-      code: req.body.check
-    })
-    .then(function(limiteLike) {
-      if (err) {
-      return handleError(res, err);
-    }
-
-      if (!limiteLike) {
-        return res.json({
-          code: 204,
-          message: "Code wrong"
-        }).end();
-      }
-
+    var checkString = req.body.check.toString();
     for (var i = 0; i < image.likeBy.length; i++) {
 
-      if (image.likeBy[i] === req.body.check) {
+
+
+      if (image.likeBy[i] === checkString) {
         return res.status(400).json({
           message: 'Vote already set'
         }).end();
@@ -75,35 +109,23 @@ exports.liked = function(req, res) {
     } else if (req.body.like === "n") {
       image.like = image.like - 1;
     } else {
-       return res.status(400).json({
-          message: 'like invalide'
-        }).end();
+      return res.status(400).json({
+        message: 'like invalide'
+      }).end();
     }
+
     image.likeBy.push(req.body.check);
     image.save(function(err, img) {
       if (err) return validationError(res, err);
       return res.json(img.like);
     });
-  }).catch(function (err) {
-        return res.status(422).json({
-          message: err
-        }).end();
-    });
-  });
-};
 
-// Get a single image
-exports.show = function(req, res) {
-  Image.findById(req.params.id, function(err, image) {
-    if (err) {
-      return handleError(res, err);
-    }
-    if (!image) {
-      return res.send(404);
-    }
-    return res.end(image.data, 'binary');
+
+
   });
 };
+// Get a single image
+
 
 // Creates a new image in the DB.
 exports.create = function(req, res) {
@@ -140,7 +162,7 @@ exports.update = function(req, res) {
     var updated = _.merge(image, req.body);
     updated.save(function(err) {
       if (err) {
-        return handleError(res, err);
+        return validationError(res, err);
       }
       return res.json(200, image);
     });

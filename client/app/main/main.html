@@ -13,9 +13,9 @@
 
 </div> -->
 <div  class="liveScores">
-	<div class="flashLive"><img src="assets/images/flash.png" alt="">  {{totalFlash}}</div>
-	<div class="trashLive"><img src="assets/images/trash.png" alt=""> 323</div>
-	<div class="washLive"><img src="assets/images/wash.png" alt=""> 343</div>
+	<div class="flashLive"><img src="assets/images/flash.png" alt="">  {{totalFlash | number:0}}</div>
+	<div class="trashLive"><img src="assets/images/trash.png" alt=""> {{totalTrash | number:0}}</div>
+	<div class="washLive"><img src="assets/images/wash.png" alt=""> {{totalWash | number:0}}</div>
 </div>
 
 <div class="container">
