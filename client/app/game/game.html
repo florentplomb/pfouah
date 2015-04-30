@@ -2,14 +2,12 @@
 
 <div class="gamesBox" ng-repeat = "game in games">
 	<div class="{{game.title}}">
-		<h1>{{game.title}}</h1>
-		<div class="imageGame">
-			<img src="{{game.logo}}">
-		</div>
-		<p>{{game.description}}</p>
+		<h1 class="game_title text_center helsinki">{{game.title}}</h1>
+		<img id="logo" src="assets/images/{{game.logo}}">
+		
+		<p class="alright_light text_center">{{game.description}}</p>
 
-		<p>sponsorisé par :</p>
-		<h3>{{game.partner}}</h3>
-		<img src="assets/images/{{game.logoPartner}}" id="logoPartner">
+		<p class="text_center alright_bold">{{game.partner}}</p>
+		<p class="text_center"><a class="alright_light">{{game.url}}</a></p>
 	</div>
 </div>

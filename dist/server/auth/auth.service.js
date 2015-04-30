@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
 var config = require('../config/environment');
-var jwt = require('jsonwebtoken');
+
 var expressJwt = require('express-jwt');
 var compose = require('composable-middleware');
 var User = require('../api/user/user.model');
@@ -22,7 +22,6 @@ function isAuthenticated() {
   return compose()
 
   .use(function(req, res, next) {
-
 
 
     if (!req.headers['salt']) return res.status(400).json({

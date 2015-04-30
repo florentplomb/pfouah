@@ -39,6 +39,13 @@ angular.module('transmedApp')
 			return decoded;
 	  	};
 
+	  	// Remove the hashtags from the answer
+	  	function removeHashtag(text, hashtag){
+	  		var string = text;
+	  		string = string.replace(hashtag + ' ', '');
+	  		return string;
+	  	}
+
 		// Initialisation Codebird
 	  	if ($rootScope.cb === undefined) {
 			var cb = new Codebird;
@@ -51,24 +58,6 @@ angular.module('transmedApp')
 	  		//$log.debug('from rootscope');
 	  	}
 
-		// Call for timeline - Notre projet
-		/*cb.__call(
-		    "statuses_userTimeline",
-		    {
-		    	"screen_name": TwitterUsername,
-		    	"count": "10"
-			},
-		    function (reply) {
-		    	// Add created_at_readable and convert text
-		    	for (var i = reply.length - 1; i >= 0; i--) {
-					reply[i].created_at_readable = convertDate(reply[i]);
-					reply[i].text = convertText(reply[i].text);
-		    	};
-		    	//$log.debug(reply);
-		    	$scope.tweetsProject = reply;
-		    	$scope.$digest();
-		    }
-		);*/
 
 		// Call for Q1
 		cb.__call(
@@ -79,10 +68,9 @@ angular.module('transmedApp')
 				"count" : "5"
 			},
 			function (reply, rate_limit_status){
-		    	// Add created_at_readable and convert text
 		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
-					reply.statuses[i].created_at_readable = convertDate(reply.statuses[i].created_at);
 					reply.statuses[i].text = convertText(reply.statuses[i].text);
+					reply.statuses[i].text = removeHashtag(reply.statuses[i].text, '#pfouahQ1');
 		    	};
 		    	$log.debug(rate_limit_status);
 		    	$scope.tweetsQ1 = reply.statuses;
@@ -100,13 +88,32 @@ angular.module('transmedApp')
 				"count" : "5"
 			},
 			function (reply, rate_limit_status){
-		    	// Add created_at_readable and convert text
 		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
-					reply.statuses[i].created_at_readable = convertDate(reply.statuses[i].created_at);
 					reply.statuses[i].text = convertText(reply.statuses[i].text);
+					reply.statuses[i].text = removeHashtag(reply.statuses[i].text, '#pfouahQ2');
 		    	};
-		    	$log.debug(rate_limit_status);
+		    	//$log.debug(rate_limit_status);
 		    	$scope.tweetsQ2 = reply.statuses;
+		    	$scope.$digest();
+			},
+			true
+		);
+
+		// Call for Q3
+		cb.__call(
+			"search_tweets",
+			{
+				"q": "#pfouahQ3 "+ TwitterUsername,
+				"result_type" : "realtime",
+				"count" : "5"
+			},
+			function (reply, rate_limit_status){
+		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
+					reply.statuses[i].text = convertText(reply.statuses[i].text);
+					reply.statuses[i].text = removeHashtag(reply.statuses[i].text, '#pfouahQ3');
+		    	};
+		    	//$log.debug(rate_limit_status);
+		    	$scope.tweetsQ3 = reply.statuses;
 		    	$scope.$digest();
 			},
 			true
@@ -125,7 +132,7 @@ angular.module('transmedApp')
 					reply[i].created_at_readable = convertDate(reply[i].created_at);
 					reply[i].text = convertText(reply[i].text);
 		    	};
-		    	$log.debug(rate_limit_status);
+		    	//$log.debug(rate_limit_status);
 		    	$scope.tweetsAssoc1 = reply;
 		    	$scope.$digest();
 		    },

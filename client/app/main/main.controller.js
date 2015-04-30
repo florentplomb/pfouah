@@ -33,7 +33,8 @@ angular.module('transmedApp')
     console.log('time');
     $http({
     method: 'GET',
-    url: 'http://localhost:9000/api/scores'
+    // url: 'http://localhost:9000/api/scores'
+    url: 'http://pfouah.comem.ch/api/scores'
    
     // url: 'http://pfouah.comem.ch/api/images/'
   }).success(function (data){
@@ -61,7 +62,8 @@ angular.module('transmedApp')
   }
   $http({
     method: 'GET',
-    url: 'http://localhost:9000/api/scores'
+    // url: 'http://localhost:9000/api/scores'
+     url: 'http://pfouah.comem.ch/api/scores'
    
     // url: 'http://pfouah.comem.ch/api/images/'
   }).success(function (data){
@@ -88,7 +90,7 @@ angular.module('transmedApp')
   }); 
   
 
-  $scope.totalFlash = 323;
+  
 
   // Initialisation Codebird
   if ($rootScope.cb === undefined) {

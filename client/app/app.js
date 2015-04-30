@@ -27,14 +27,14 @@ angular.module('transmedApp', [
     };
 }])
 
-  // .constant('ApiUrl', 'http://pfouah2015.herokuapp.com/')
-  .constant('ApiUrl', 'http://localhost:9000/')
-  .constant('TwitterUsername', 'eterna001')
+  .constant('ApiUrl', 'http://pfouah.comem.ch/')
+  // .constant('ApiUrl', 'http://localhost:9000/')
+  .constant('TwitterUsername', 'pfouah')
   .constant('CodeBird', {
-    'key': 'dXQ5VccrbKbQVvFFuDR1igBxi',
-    'keyS': 'oNcCuayrTLcx1cmn9F1OVmo19p3i0AIOtUFdYaloVhN79UZymj',
-    'tok': '3186273089-QByeigjencHbE65KXryOfo2fENJDyKow4rIsfwn',
-    'tokS': 'YgpIr5iktLOmaavwtQCK8oUZ0tbRnap6eDTZX192BQvtR'
+    'key': '2BU0yP2xHLrvqNwyeQ0MnXF2g',
+    'keyS': 'RJFCyoZGeAJE0AuYl6dNgbI3kduGo4JQO9uBh3hBg2Dx1FPpnX',
+    'tok': '3159237031-NnsDgBYpGGHJaALByOdkCmJs3vNEg31aGTUtmsF',
+    'tokS': 'JERCG0TTHwDgimYQ0bHmjYhH3uz0KvwTXOys7PddjZhbn'
   })
 
   .config(function (localStorageServiceProvider) {

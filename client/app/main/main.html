@@ -1,16 +1,18 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-<div class="logo">
-	<img src="assets/images/logo.png" alt="">
-</div>
+<div class="main_wrapper">
+	<div ng-include="'components/navbar/navbar.html'"></div>
+	<div class="logo">
+		<img src="assets/images/logo.png" alt="">
+	</div>
 
-<div class="goutte">
-	<img src="assets/images/goutte.png" alt="">
-</div>
-<!-- <div class="container" ng-repeat= "video in videos">
-  <div class="video">
-    <button type="button" ng-click="openVideoModal(video)">Regarder : {{video.title}}</button>
-  </div>
+	<div class="goutte">
+		<img src="assets/images/goutte.png" alt="">
+	</div>
+	<!-- <div class="container" ng-repeat= "video in videos">
+	  <div class="video">
+	    <button type="button" ng-click="openVideoModal(video)">Regarder : {{video.title}}</button>
+	  </div>
 
+<<<<<<< HEAD
 </div> -->
 <div  class="liveScores">
 	<div class="flashLive"><img src="assets/images/flash.png" alt="">  {{totalFlash | number:0}}</div>
@@ -18,17 +20,19 @@
 	<div class="washLive"><img src="assets/images/wash.png" alt=""> {{totalWash | number:0}}</div>
 </div>
 
-<div class="container">
-	<div class="videos">
-		<div ng-click="openVideoModal(videos[0])" class="video video1">
-			<img src="assets/images/histoire1.png" alt="">
+
+	<div class="container">
+		<div class="videos">
+			<div ng-click="openVideoModal(videos[0])" class="video video1">
+				<img src="assets/images/histoire1.png" alt="">
+			</div>
+			<div ng-click="openVideoModal(videos[1])" class="video video2">
+				<img src="assets/images/histoire2.png" alt="">
+			</div>
+			<div ng-click="openVideoModal(videos[2])" class="video video3">
+				<img src="assets/images/histoire3.png" alt="">
+			</div>
 		</div>
-		<div ng-click="openVideoModal(videos[1])" class="video video2">
-			<img src="assets/images/histoire2.png" alt="">
-		</div>
-		<div ng-click="openVideoModal(videos[2])" class="video video3">
-			<img src="assets/images/histoire3.png" alt="">
-		</div>
+		
 	</div>
-	
 </div>

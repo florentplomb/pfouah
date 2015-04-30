@@ -38,7 +38,7 @@ angular.module('transmedApp')
 
   	$scope.submitForm = function (answer, video){
 
-  		if (answer.length < 1 || answer.length >= 120) {
+  		if (answer.length < 1 || answer.length > 120) {
   			answer = undefined;
   			$scope.feedback = 'Il n\'y a rien à envoyer.';
   		}else{
