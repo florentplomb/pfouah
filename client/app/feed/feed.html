@@ -2,39 +2,39 @@
 
 <div class="feed_wrapper">
 	<div class="block_project">
-		<h1>Twitter Feeds</h1>
+		<h1 class="alright_bold">Twitter Feeds</h1>
 
-		<div class="question_block">
+		<div class="question_block alright_bold">
 			<h4 class="question">“ {{videos[0].question}} ”</h4>
 			<div ng-repeat="tweet in tweetsQ1" class="tweets_project blue_border">
-				<a class="tweet_link answers" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
+				<a class="tweet_link answers alright_light" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
 			</div>
 		</div>
 
-		<div class="question_block">
+		<div class="question_block alright_bold">
 			<h4 class="question">“ {{videos[1].question}} ”</h4>
 			<div ng-repeat="tweet in tweetsQ2" class="tweets_project blue_border">
-				<a class="tweet_link answers" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
+				<a class="tweet_link answers alright_light" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
 			</div>
 		</div>
 
-		<div class="question_block">
+		<div class="question_block alright_bold">
 			<h4 class="question">“ {{videos[2].question}} ”</h4>
 			<div ng-repeat="tweet in tweetsQ3" class="tweets_project blue_border">
-				<a class="tweet_link answers" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
+				<a class="tweet_link answers alright_light" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
 			</div>
 		</div>
 
 	</div>
 
 	<div class="block_assoc1">
-		<h3>Nos partenaires</h3>
+		<h3 class="alright_bold">Nos partenaires</h3>
 		<div ng-repeat="tweet in tweetsAssoc1" class="tweets_assoc1 blue_border">
-			<h4>
+			<h4 class="alright_bold">
 				<a ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}"><i class="fa fa-twitter"></i></a> 
 				<a class="author_tweets" ng-href="https://twitter.com/{{twet.user.name}}">{{tweet.user.name}}</a> a publié {{tweet.created_at_readable}} :
 			</h4>
-			<a class="tweet_link" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
+			<a class="tweet_link alright_light" ng-href="https://twitter.com/{{tweet.user.name}}/status/{{tweet.id_str}}">{{tweet.text}}</a>
 		</div>
 	</div>
 </div>
