@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="app/4635f242.vendor.css"/>
-    <link rel="stylesheet" href="app/794b323e.app.css"/>
+    <link rel="stylesheet" href="app/0335a992.app.css"/>
   </head>
   <body ng-app="transmedApp">
     <!--[if lt IE 7]>
@@ -37,8 +37,24 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    <script src="app/269582f9.vendor.js"></script>
+    <script src="app/19e5eba2.vendor.js"></script>
 
-        <script src="app/0fa96d64.app.js"></script>
+        <!-- build:js({.tmp,client}) app/app.js -->
+        <script src="app/4280f66d.app.js"></script>
+          <!-- injector:js -->
+          <script src="app/feed/feed.controller.js"></script>
+          <script src="app/game/game.controller.js"></script>
+          <script src="app/main/main.controller.js"></script>
+          <script src="app/main/main.js"></script>
+          <script src="app/main/modal/modal.controller.js"></script>
+          <script src="app/partner/partner.controller.js"></script>
+          <script src="app/photowall/photowall.controller.js"></script>
+          <script src="app/ranking/ranking.controller.js"></script>
+          <script src="components/mongoose-error/mongoose-error.directive.js"></script>
+          <script src="components/navbar/navbar.controller.js"></script>
+          <script src="components/services/api.service.js"></script>
+          <script src="components/services/staticData.service.js"></script>
+          <!-- endinjector -->
+        <!-- endbuild -->
 </body>
 </html>

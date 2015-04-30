@@ -17,7 +17,7 @@ angular.module('transmedApp')
 	   		return localStorageService.get(key);
 	  	};
 
-	  	// Convert date to "xxx ago" format
+	  	// Convert date to 'xxx ago' format
 	  	function convertDate(date){
 	  		 moment().locale('fr');
 			 var now = new Date();
@@ -61,11 +61,11 @@ angular.module('transmedApp')
 
 		// Call for Q1
 		cb.__call(
-			"search_tweets",
+			'search_tweets',
 			{
-				"q": "#pfouahQ1 "+ TwitterUsername,
-				"result_type" : "realtime",
-				"count" : "5"
+				'q': '#pfouahQ1 '+ TwitterUsername,
+				'result_type' : 'realtime',
+				'count' : '5'
 			},
 			function (reply, rate_limit_status){
 		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
@@ -81,11 +81,11 @@ angular.module('transmedApp')
 
 		// Call for Q2
 		cb.__call(
-			"search_tweets",
+			'search_tweets',
 			{
-				"q": "#pfouahQ2 "+ TwitterUsername,
-				"result_type" : "realtime",
-				"count" : "5"
+				'q': '#pfouahQ2 '+ TwitterUsername,
+				'result_type' : 'realtime',
+				'count' : '5'
 			},
 			function (reply, rate_limit_status){
 		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
@@ -101,11 +101,11 @@ angular.module('transmedApp')
 
 		// Call for Q3
 		cb.__call(
-			"search_tweets",
+			'search_tweets',
 			{
-				"q": "#pfouahQ3 "+ TwitterUsername,
-				"result_type" : "realtime",
-				"count" : "5"
+				'q': '#pfouahQ3 '+ TwitterUsername,
+				'result_type' : 'realtime',
+				'count' : '5'
 			},
 			function (reply, rate_limit_status){
 		    	for (var i = reply.statuses.length - 1; i >= 0; i--) {
@@ -121,10 +121,10 @@ angular.module('transmedApp')
 
 		// Call for timeline - Race For Water
 		cb.__call(
-		    "statuses_userTimeline",
+		    'statuses_userTimeline',
 		    {
-		    	"screen_name": "RaceForWater",
-		    	"count": "9"
+		    	'screen_name': 'RaceForWater',
+		    	'count': '9'
 			},
 		    function (reply, rate_limit_status) {
 		    	// Add created_at_readable and convert text
