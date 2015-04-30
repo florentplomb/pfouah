@@ -12,9 +12,23 @@
   </div>
 
 </div> -->
+<div  class="liveScores">
+	<div class="flashLive"><img src="assets/images/flash.png" alt="">  {{totalFlash}}</div>
+	<div class="trashLive"><img src="assets/images/trash.png" alt=""> 323</div>
+	<div class="washLive"><img src="assets/images/wash.png" alt=""> 343</div>
+</div>
 
-<div class="container videos">
-	<div class="video video1"></div>
-	<div class="video video2"></div>
-	<div class="video video3"></div>
+<div class="container">
+	<div class="videos">
+		<div ng-click="openVideoModal(videos[0])" class="video video1">
+			<img src="assets/images/histoire1.png" alt="">
+		</div>
+		<div ng-click="openVideoModal(videos[1])" class="video video2">
+			<img src="assets/images/histoire2.png" alt="">
+		</div>
+		<div ng-click="openVideoModal(videos[2])" class="video video3">
+			<img src="assets/images/histoire3.png" alt="">
+		</div>
+	</div>
+	
 </div>

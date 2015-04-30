@@ -27,11 +27,14 @@ angular.module('transmedApp')
 				$scope.datas = data;
 
 				for (var i = $scope.datas.length - 1; i >= 0; i--) {
+					// $scope.datas[i].imgUrl = 'http://pfouah.comem.ch/api/images/' + data[i].imgId._id;
 					$scope.datas[i].imgUrl = 'http://localhost:9000/api/images/' + data[i].imgId._id;
-					$log.debug($scope.datas[i].imgUrl);
+					// $scope.datas[i].imgUrl = 'http://pfouah2015.herokuapp.com/api/images/' + data[i].imgId._id;
+					// $log.debug($scope.datas[i].imgUrl);
+				
 				}
 
-				console.log($scope.datas[0]);
+				
 			},
 			function(error){
 				$scope.error = error;
@@ -50,23 +53,47 @@ angular.module('transmedApp')
 			);
 		};
 
+		 var fingerprint = new Fingerprint({
+		       ie_activex: true,
+		       screen_resolution: true,
+		       canvas: true
+		      }).get();
+		      
 		$scope.likePlayer = function(photo){
 			var res = getItem(photo._id);
-			var code = getItem('code');
+			
+
+			
+
 
 			if(res === null){
-				if (code !== null) {
+				if (fingerprint !== null) {
 					addItem(photo._id, photo._id);
+
+
+						var vote = {
+					       "like": "p",
+					       "check": fingerprint
+					      }
+
+					      
+						$http({
+							method: 'POST',
+							// url: 'http://localhost:9000/api/images/' +photo.imgId._id + '/liked',
+							url: 'http://pfouah.comem.ch/api/images/' +photo.imgId._id + '/liked',
+							// url: 'http://pfouah2015.herokuapp.com/api/images/' +photo.imgId._id + '/liked',
+							data: vote
+						}).success(function (data){
+
+							photo.imgId.like ++;
+							
+						}).error(function (data){
+							
+						});	
+
+				
+
 					
-					ApiService.likeImage(photo._id, 'p', code,
-						function(data){
-							$scope.datas.like = data.like;
-							$scope.error = 'Vote comptabilisé.';
-						},
-						function(error){
-							$scope.error = 'Une erreur s\'est produite.';
-						}
-					);
 				}else{
 					$scope.error = 'Vous n\'avez pas les permissions requises pour voter. Veuillez recharger la page.';
 				}
@@ -74,6 +101,10 @@ angular.module('transmedApp')
 			}else{
 				$scope.error = 'Vous avez déjà voté pour cette image auparavant!';
 			}
+
+			$scope.marginStyle = {
+			    'margin-bottom' : '0px'
+			};
 		};
 
 		$scope.dislikePlayer = function(photo){
@@ -81,18 +112,30 @@ angular.module('transmedApp')
 			var code = getItem('code');
 
 			if(res === null){
-				if (code !== null) {
+				if (fingerprint !== null) {
 					addItem(photo._id, photo._id);
+
+						var vote = {
+					       "like": "n",
+					       "check": fingerprint
+					      }
+						$http({
+							method: 'POST',
+							url: 'http://pfouah.comem.ch/api/images/' +photo.imgId._id + '/liked',
+							// url: 'http://pfouah2015.herokuapp.com/api/images/' +photo.imgId._id + '/liked',
+							data: vote
+						}).success(function (data){
+							
+
+							photo.imgId.like --;
+							
+						}).error(function (data){
+							
+						});	
+
+				
+
 					
-					ApiService.likeImage(photo._id, 'n',
-						function(data){
-							$scope.datas.like = data.like;
-							$scope.error = 'Vote comptabilisé.';
-						},
-						function(error){
-							$scope.error = 'Une erreur s\'est produite.';
-						}
-					);
 				}else{
 					$scope.error = 'Vous n\'avez pas les permissions requises pour voter. Veuillez recharger la page.';
 				}

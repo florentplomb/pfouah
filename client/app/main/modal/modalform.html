@@ -1,10 +1,10 @@
 <div class="ngdialog-message">
-	<h4>{{ngDialogData.question}}</h4>
+	<h4 class="videoh4">{{ngDialogData.question}}</h4>
 
 	<form name="myForm">
 		<label>
-		   <input type="text" name="answer" class="ngdialog-content" ng-model="answer"
-		   ng-maxlength="120" ng-minlength="1" placeholder="votre réponse">
+		   <input id="inputTweet" type="text" name="answer" class="ngdialog-content" ng-model="answer"
+		   maxlength="120" ng-minlength="1" placeholder="votre réponse">
 		</label>
 		 <span class="form-help">
 		 	{{120-answer.length}} charactères restants
@@ -17,7 +17,7 @@
 	</form>
 </div>
 
-<div class="ngdialog-buttons">
-	<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="close()">Fermer</button>
-	<button type="submit" class="ngdialog-button ngdialog-button-secondary" ng-click="submitForm(answer, ngDialogData)" ng-disabled="myForm.$invalid || myForm.$pristine">Envoyer</button>
+<div id="btnCtn" class="ngdialog-buttons">
+	<button type="button" id="modalBtn1" class="ngdialog-button ngdialog-button-primary" ng-click="close()">Fermer</button>
+	<button type="submit" id="modalBtn" class="ngdialog-button ngdialog-button-secondary" ng-click="submitForm(answer, ngDialogData)" ng-disabled="myForm.$invalid || myForm.$pristine">Envoyer</button>
 </div>

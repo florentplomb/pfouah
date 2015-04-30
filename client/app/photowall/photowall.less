@@ -8,49 +8,229 @@
 @nbrPhotosMoyenPetit: 33.3333333333334%;
 @nbrPhotosPetit: 50%;
 
+@tailleImage: 200px;
 
 
-.img-box{
-	display: block;
-	float: left;
-	width:10%;
+@font-face {
+    font-family: 'helsinkiregular';
+    src: url('../assets/fonts/helsinki-webfont.eot');
+    src: url('../assets/fonts/helsinki-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../assets/fonts/helsinki-webfont.woff2') format('woff2'),
+         url('../assets/fonts/helsinki-webfont.woff') format('woff'),
+         url('../assets/fonts/helsinki-webfont.ttf') format('truetype'),
+         url('../assets/fonts/helsinki-webfont.svg#helsinkiregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 
+
+
+html{
+	// background-color: #7abc87;
+}
 
 .container{
 	width:100%;
 	padding:0;
+	// background-color: #7abc87;
+	
+}
+*{
+	
+	// overflow-x:hidden;
 }
 
-.content-over{
-	width: 100%;
-	position: relative;
-	bottom: 30px;
-	color: white;
-}
 
-.img-wall, .img-box{
+.podium{
 	width:100%;
-	margin-bottom: -30px;
+	height:500px;
+ 	z-index: 400;
+	background:url('../assets/images/podium.png');
+	// background:url('../assets/images/yeoman.png');
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	
+	
+	
+}
 
-	/* unused */
-	min-width: 100px;
-	// max-width: 400px;
-	// min-height: 100px;
-	max-height: 800px;
+.bestImg{
+	// position: fixed;
+	top:0;
+	width:1000px;
+	// background-color: blue;
+	height: 400px;
+	left:0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 2;
+	position: absolute;
+
+	img{
+		height:200px;
+		width:200px;
+		// margin-left:800px;
+		// background-color: red;
+		border-radius: 15px;
+		border:6px solid #575757;
+		&:hover{
+			z-index:-4;
+		}
+		// position:relative;
+		// margin-left:30%;
+		
+
+	}
+	.premier{
+		overflow-y: hidden;
+		
+		margin-top: 36px;
+		margin-left: 401px;
+	}
+	.deuxieme{
+		
+		 
+		// border:2px solid black;
+		margin-left: 60px;
+		margin-top:105px;
+		
+		overflow-y: hidden;
+	}
+	.troisieme{
+		
+		z-index:300;
+		margin-top: 137px;
+		margin-left: 740px;
+		overflow-y: hidden;
+
+	}
+
+}
+
+.winner{
+	width:40px;
+}
+
+// .content-over{
+// 	// width: 100%;
+	
+// 	// position:relative;
+// 	height: 60px;
+// 	width: 100%;
+// 	// sopacity: 0;
+	
+// 	bottom:50px;
+// 	// overflow: hidden;
+
+	
+	
+	
+
+	
+	
+// }
+
+
+
+.googleplay{
+	width:50%;
+	text-align: left;
+
+}
+
+.banniere{
+	position: absolute;
+	top:0;
+	right:0;
+	z-index: 1;
+	width:320px;
+	height: 250px;
+	background-color: #ee7967;
+	border-bottom-left-radius: 2em;
+	color:white;
+	font-family: helsinkiregular;
+	text-align: center;
+	-webkit-box-shadow: -6px 4px 7px -2px rgba(0,0,0,0.18);
+	-moz-box-shadow: -6px 4px 7px -2px rgba(0,0,0,0.18);
+	box-shadow: -6px 4px 7px -2px rgba(0,0,0,0.18);
+	&:hover{
+		z-index:400;
+	}
+	h2{
+		overflow-y: hidden;
+	}
+	.titre{
+		margin-top: 25px;
+		text-decoration: underline;
+	}
+
+}
+
+
+
+.img-box{
+	width:100%;
+	position:relative;
+	// border-top: 10px solid white;
+	.img-wall{
+		width:100%;
+		
+		background-size: 100%;
+	}	
+		
+	.button{
+		position: absolute;
+		bottom:0px;
+		width:50%;
+		height: 60px;
+		float:left;
+		opacity: 0.6;
+
+		&:hover{
+			opacity: 1;
+		}
+	}
+	.dislike{
+		left:60%;
+		cursor:pointer;
+		height: auto;
+		width: 20%;
+		bottom:10px;
+
+	}
+
+	.like{
+		cursor:pointer;
+		height: auto;
+		width: 20%;
+		bottom:10px;
+		left:15%;
+	}
+
+	.likesH1{
+		opacity: 0.8;
+		color:white;
+		text-align: center;
+		width:100%;
+		bottom:0px;
+		vertical-align: middle;
+		line-height: 60px;
+		font-family: helsinkiregular;
+	}
+		
+	
 }
 
 .like{
-	background-color: #8FCFFF;
-	// background-image:url('../assets/images/like.png');
-	// background-repeat: none;
-	// background-repeat: no-repeat;
-	// background-size: 20px;
+
+
 }
 
 .dislike{
-	background-color: #FF7E70;
+
 }
 
 .likesContainer{
@@ -59,35 +239,11 @@
 	color:white;
 }
 
-.button{
-	opacity: 0.3;
-	height:60px;
-	width:50%;
-	&:hover{
-		opacity: 0.8;
-		cursor:pointer;
-	}
-	float:left;
-	margin:0;
-	text-align: center;
-	vertical-align: middle;
-	line-height: 60px;
-	font-size: 1.5em;
-}
 
 
 
-// .label-as-badge {
-//     border-radius: 0.85em;
-// }
 
-// .btn-as-badge{
-// 	border-radius: 1.1em !important;
-// }
 
-// .p-cpt{
-// 	margin-left: 30px;
-// }
 
 /* Portrait iphone 4 and 4s*/ 
 @media only screen 
@@ -100,6 +256,18 @@
 			width: @nbrPhotosPetit;
 			float:left;
 		}
+
+		.podium{
+			display:none;
+		}
+		.bestImg{
+			display: none;
+		}
+		.banniere{
+			display:none;
+		}
+
+
 
 }
 
@@ -114,6 +282,18 @@
 			width: @nbrPhotosPetit;
 			float:left;
 		}
+
+		.podium{
+			display:none;
+		}
+
+		.bestImg{
+			display: none;
+		}
+
+		.banniere{
+			display:none;
+		}
 }
 
 
@@ -126,6 +306,18 @@
 			width: @nbrPhotosPetit;
 			float:left;
 		}
+
+		.podium{
+			display:none;
+		}
+
+		.bestImg{
+			display: none;
+		}
+
+		.banniere{
+			display:none;
+		}
 	
 }
 
@@ -134,6 +326,18 @@
 			width: @nbrPhotosPetit;
 			float:left;
 		}
+
+		.podium{
+			display:none;
+		}
+
+		.bestImg{
+			display: none;
+		}
+
+		.banniere{
+			display:none;
+		}
 }
 
 @media screen and (min-width : 500px) and (max-width : 700px) {
@@ -141,12 +345,35 @@
 			width: @nbrPhotosMoyenPetit;
 			float:left;
 		}
+
+		.podium{
+			display:none;
+		}
+
+		.bestImg{
+			display: none;
+		}
+
+		.banniere{
+			display:none;
+		}
 }
 
 @media screen and (min-width : 700px) and (max-width : 1000px) {
 		.deckgrid{
 			width: @nbrPhotosMoyen;
 			float:left;
+		}
+		.podium{
+			display:none;
+		}
+
+		.bestImg{
+			display: none;
+		}
+
+		.banniere{
+			display:none;
 		}
 }
 
@@ -162,4 +389,27 @@
 			width: @nbrPhotosGrand;
 			float:left;
 		}
+}
+
+
+
+
+
+
+
+
+
+.containerTest{
+	z-index:200;
+	position:relative;
+	.imgTest{
+		width:200px;
+		
+	}
+	.divTest{
+		position:absolute;
+		background-color: red;
+		width:50px;
+		bottom:20px;
+	}
 }
